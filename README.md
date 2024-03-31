@@ -1,7 +1,7 @@
 # Information
 ## GeckoLib Example Mod - NeoForge - 1.20.4
 
-This is an example implementation of <a href="https://github.com/bernie-g/geckolib">GeckoLib</a> on NeoForge 1.20.4
+This is an example of a mod using <a href="https://github.com/bernie-g/geckolib">GeckoLib</a> on NeoForge 1.20.4
 
 This template is created on the following basis:
 1. Start with a clean NeoForge MDK
