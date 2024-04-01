@@ -10,24 +10,24 @@ import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
 
 @Mod.EventBusSubscriber(modid = ExampleMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class EntityRegistry {
 	public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(Registries.ENTITY_TYPE, ExampleMod.MODID);
 
-	public static final DeferredHolder<EntityType<?>, EntityType<BatEntity>> BAT = register("bat", BatEntity::new, 0.7f, 1.3f, 0x1F1F1F, 0x0D0D0D);
-	public static final DeferredHolder<EntityType<?>, EntityType<BikeEntity>> BIKE = register("bike", BikeEntity::new, 0.5f, 0.6f, 0xD3E3E6, 0xE9F1F5);
-	public static final DeferredHolder<EntityType<?>, EntityType<RaceCarEntity>> RACE_CAR = register("race_car", RaceCarEntity::new, 1.5f, 1.5f, 0x9E1616, 0x595959);
-	public static final DeferredHolder<EntityType<?>, EntityType<ParasiteEntity>> PARASITE = register("parasite", ParasiteEntity::new, 1.5f, 1.5f, 0x302219, 0xACACAC);
-	public static final DeferredHolder<EntityType<?>, EntityType<DynamicExampleEntity>> MUTANT_ZOMBIE = register("mutant_zombie", DynamicExampleEntity::new, 0.5f, 1.9f, 0x3C6236, 0x579989);
-	public static final DeferredHolder<EntityType<?>, EntityType<FakeGlassEntity>> FAKE_GLASS = register("fake_glass", FakeGlassEntity::new, 1, 1, 0xDD0000, 0xD8FFF7);
-	public static final DeferredHolder<EntityType<?>, EntityType<CoolKidEntity>> COOL_KID = register("cool_kid", CoolKidEntity::new, 0.45f, 1f, 0x5F2A31, 0x6F363E);
-    public static final DeferredHolder<EntityType<?>, EntityType<DynamicExampleEntity>> GREMLIN = register("gremlin", DynamicExampleEntity::new, 0.5f, 1.9f, 0x505050, 0x606060);
+	public static final RegistryObject<EntityType<BatEntity>> BAT = register("bat", BatEntity::new, 0.7f, 1.3f, 0x1F1F1F, 0x0D0D0D);
+	public static final RegistryObject<EntityType<BikeEntity>> BIKE = register("bike", BikeEntity::new, 0.5f, 0.6f, 0xD3E3E6, 0xE9F1F5);
+	public static final RegistryObject<EntityType<RaceCarEntity>> RACE_CAR = register("race_car", RaceCarEntity::new, 1.5f, 1.5f, 0x9E1616, 0x595959);
+	public static final RegistryObject<EntityType<ParasiteEntity>> PARASITE = register("parasite", ParasiteEntity::new, 1.5f, 1.5f, 0x302219, 0xACACAC);
+	public static final RegistryObject<EntityType<DynamicExampleEntity>> MUTANT_ZOMBIE = register("mutant_zombie", DynamicExampleEntity::new, 0.5f, 1.9f, 0x3C6236, 0x579989);
+	public static final RegistryObject<EntityType<FakeGlassEntity>> FAKE_GLASS = register("fake_glass", FakeGlassEntity::new, 1, 1, 0xDD0000, 0xD8FFF7);
+	public static final RegistryObject<EntityType<CoolKidEntity>> COOL_KID = register("cool_kid", CoolKidEntity::new, 0.45f, 1f, 0x5F2A31, 0x6F363E);
+    public static final RegistryObject<EntityType<DynamicExampleEntity>> GREMLIN = register("gremlin", DynamicExampleEntity::new, 0.5f, 1.9f, 0x505050, 0x606060);
 
 	@SubscribeEvent
 	public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
@@ -55,7 +55,7 @@ public final class EntityRegistry {
 		event.put(EntityRegistry.PARASITE.get(), genericMonsterAttribs.build());
 	}
 
-	private static <T extends Mob> DeferredHolder<EntityType<?>, EntityType<T>> register(String name, EntityType.EntityFactory<T> entity, float width, float height, int primaryEggColor, int secondaryEggColor) {
+	private static <T extends Mob> RegistryObject<EntityType<T>> register(String name, EntityType.EntityFactory<T> entity, float width, float height, int primaryEggColor, int secondaryEggColor) {
 		return ENTITIES.register(name, () -> EntityType.Builder.of(entity, MobCategory.CREATURE).sized(width, height).build(name));
 	}
 }

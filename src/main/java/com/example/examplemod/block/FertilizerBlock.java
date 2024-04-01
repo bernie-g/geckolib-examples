@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * Example animated block using GeckoLib animations.<br>
  * There's nothing to see here since the {@link Block} class itself has little to do with animations
- * @see software.bernie.example.client.model.block.FertilizerModel
+ * @see com.example.examplemod.client.model.block.FertilizerModel FertilizerModel
  * @see FertilizerBlockEntity
  * @see FertilizerBlockRenderer
  */
