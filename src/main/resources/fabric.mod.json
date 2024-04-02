@@ -3,7 +3,7 @@
 	"id": "examplemod",
 	"version": "${version}",
 	"name": "GeckoLib Example Mod",
-	"description": "GeckoLib test mod for NeoForge",
+	"description": "GeckoLib test mod for Fabric",
 	"authors": [
 		"Tslat"
 	],
