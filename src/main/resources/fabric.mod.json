@@ -1,0 +1,32 @@
+{
+	"schemaVersion": 1,
+	"id": "examplemod",
+	"version": "${version}",
+	"name": "GeckoLib Example Mod",
+	"description": "GeckoLib test mod for NeoForge",
+	"authors": [
+		"Tslat"
+	],
+	"license": "MIT",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+          "com.example.examplemod.ExampleMod"
+		],
+		"client": [
+          "com.example.examplemod.ExampleModClient"
+		]
+	},
+	"mixins": [
+	],
+	"depends": {
+		"fabricloader": ">=0.15.7",
+		"minecraft": "~1.20.4",
+		"java": ">=17",
+		"fabric-api": "*",
+		"geckolib": ">=4.5"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
