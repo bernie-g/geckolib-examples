@@ -22,7 +22,7 @@ public class GeckoHabitatBlockEntity extends BlockEntity implements GeoBlockEnti
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
 	public GeckoHabitatBlockEntity(BlockPos pos, BlockState state) {
-		super(BlockEntityRegistry.GECKO_HABITAT.get(), pos, state);
+		super(BlockEntityRegistry.GECKO_HABITAT, pos, state);
 	}
 
 	// We just want a permanent idle animation happening here

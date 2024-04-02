@@ -13,10 +13,10 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoItem;
+import software.bernie.geckolib.animatable.client.RenderProvider;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
@@ -28,6 +28,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.Set;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 /**
  * Example {@link GeoAnimatable GeoAnimatable} {@link ArmorItem} implementation
@@ -36,25 +37,23 @@ import java.util.function.Consumer;
  */
 public final class GeckoArmorItem extends ArmorItem implements GeoItem {
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+	private final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
 
 	public GeckoArmorItem(ArmorMaterial armorMaterial, Type type, Properties properties) {
 		super(armorMaterial, type, properties);
 	}
 
-	// Create our armor model/renderer for forge and return it
+	// Create our armor model/renderer for Fabric and return it
 	@Override
-	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-		consumer.accept(new IClientItemExtensions() {
+	public void createRenderer(Consumer<Object> consumer) {
+		consumer.accept(new RenderProvider() {
 			private GeoArmorRenderer<?> renderer;
 
 			@Override
-			public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
-				if (this.renderer == null)
+			public <T extends LivingEntity, A extends HumanoidModel<T>> HumanoidModel<T> getGeckolibArmorModel(@Nullable T livingEntity, ItemStack itemStack, @Nullable EquipmentSlot equipmentSlot, @Nullable A original) {
+				if(this.renderer == null)
 					this.renderer = new GeckoArmorRenderer();
-
-				// This prepares our GeoArmorRenderer for the current render frame.
-				// These parameters may be null however, so we don't do anything further with them
-				this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
+				// Defer creation of our renderer then cache it so that it doesn't get instantiated too early
 
 				return this.renderer;
 			}
@@ -91,10 +90,10 @@ public final class GeckoArmorItem extends ArmorItem implements GeoItem {
 
 			// Check each of the pieces match our set
 			boolean isFullSet = wornArmor.containsAll(ObjectArrayList.of(
-					ItemRegistry.GECKO_ARMOR_BOOTS.get(),
-					ItemRegistry.GECKO_ARMOR_LEGGINGS.get(),
-					ItemRegistry.GECKO_ARMOR_CHESTPLATE.get(),
-					ItemRegistry.GECKO_ARMOR_HELMET.get()));
+					ItemRegistry.GECKO_ARMOR_BOOTS,
+					ItemRegistry.GECKO_ARMOR_LEGGINGS,
+					ItemRegistry.GECKO_ARMOR_CHESTPLATE,
+					ItemRegistry.GECKO_ARMOR_HELMET));
 
 			// Play the animation if the full set is being worn, otherwise stop
 			return isFullSet ? PlayState.CONTINUE : PlayState.STOP;

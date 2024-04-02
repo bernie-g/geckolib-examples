@@ -43,7 +43,7 @@ public class FertilizerBlock extends DirectionalBlock implements EntityBlock {
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return BlockEntityRegistry.FERTILIZER_BLOCK.get().create(pos, state);
+		return BlockEntityRegistry.FERTILIZER_BLOCK.create(pos, state);
 	}
 
 	@Override

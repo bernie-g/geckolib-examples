@@ -1,19 +1,17 @@
 package com.example.examplemod;
 
 import com.example.examplemod.registry.*;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.common.Mod;
+import net.fabricmc.api.ModInitializer;
 
-@Mod(ExampleMod.MODID)
-public class ExampleMod {
-    public static final String MODID = "examplemod";
+public class ExampleMod implements ModInitializer {
+	public static final String MODID = "examplemod";
 
-    public ExampleMod(IEventBus modEventBus) {
-        EntityRegistry.ENTITIES.register(modEventBus);
-        ItemRegistry.ITEMS.register(modEventBus);
-        ItemRegistry.TABS.register(modEventBus);
-        BlockEntityRegistry.BLOCK_ENTITIES.register(modEventBus);
-        BlockRegistry.BLOCKS.register(modEventBus);
-        SoundRegistry.SOUNDS.register(modEventBus);
-    }
+	@Override
+	public void onInitialize() {
+		BlockRegistry.init();
+		EntityRegistry.init();
+		ItemRegistry.init();
+		BlockEntityRegistry.init();
+		SoundRegistry.init();
+	}
 }

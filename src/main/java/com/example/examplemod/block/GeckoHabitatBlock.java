@@ -61,7 +61,7 @@ public class GeckoHabitatBlock extends BaseEntityBlock implements EntityBlock {
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-		return BlockEntityRegistry.GECKO_HABITAT.get().create(blockPos, blockState);
+		return BlockEntityRegistry.GECKO_HABITAT.create(blockPos, blockState);
 	}
 
 	@Override

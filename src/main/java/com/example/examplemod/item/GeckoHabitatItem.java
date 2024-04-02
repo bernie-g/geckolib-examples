@@ -5,8 +5,8 @@ import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import software.bernie.geckolib.animatable.GeoItem;
+import software.bernie.geckolib.animatable.client.RenderProvider;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.model.DefaultedBlockGeoModel;
@@ -24,14 +24,15 @@ public class GeckoHabitatItem extends BlockItem implements GeoItem {
 
 	// Utilise the existing forge hook to define our custom renderer (which we created in createRenderer)
 	@Override
-	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-		consumer.accept(new IClientItemExtensions() {
-			private GeoItemRenderer<GeckoHabitatItem> renderer = null;
+	public void createRenderer(Consumer<Object> consumer) {
+		consumer.accept(new RenderProvider() {
+			private GeoItemRenderer<GeckoHabitatItem> renderer;
 
 			@Override
-			public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+			public BlockEntityWithoutLevelRenderer getItemRenderer() {
 				if (this.renderer == null)
 					this.renderer = new GeoItemRenderer<>(new DefaultedBlockGeoModel<>(new ResourceLocation(ExampleMod.MODID, "gecko_habitat")));
+				// Defer creation of our renderer then cache it so that it doesn't get instantiated too early
 
 				return this.renderer;
 			}

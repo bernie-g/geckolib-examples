@@ -10,9 +10,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
+import software.bernie.geckolib.animatable.client.RenderProvider;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
@@ -40,14 +40,15 @@ public final class JackInTheBoxItem extends Item implements GeoItem {
 
 	// Utilise the existing forge hook to define our custom renderer (which we created in createRenderer)
 	@Override
-	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-		consumer.accept(new IClientItemExtensions() {
+	public void createRenderer(Consumer<Object> consumer) {
+		consumer.accept(new RenderProvider() {
 			private JackInTheBoxRenderer renderer;
 
 			@Override
-			public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+			public BlockEntityWithoutLevelRenderer getItemRenderer() {
 				if (this.renderer == null)
 					this.renderer = new JackInTheBoxRenderer();
+				// Defer creation of our renderer then cache it so that it doesn't get instantiated too early
 
 				return this.renderer;
 			}
@@ -65,7 +66,7 @@ public final class JackInTheBoxItem extends Item implements GeoItem {
 					Player player = ClientUtil.getClientPlayer();
 
 					if (player != null)
-						player.playSound(SoundRegistry.JACK_MUSIC.get(), 1, 1);
+						player.playSound(SoundRegistry.JACK_MUSIC, 1, 1);
 				}));
 	}
 

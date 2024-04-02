@@ -1,13 +1,14 @@
 # Information
-## GeckoLib Example Mod - NeoForge - 1.20.4
+## GeckoLib Example Mod - Fabric - 1.20.4
 
-This is an example of a mod using <a href="https://github.com/bernie-g/geckolib">GeckoLib</a> on NeoForge 1.20.4
+This is an example of a mod using <a href="https://github.com/bernie-g/geckolib">GeckoLib</a> on Fabric 1.20.4
 
 This template is created on the following basis:
-1. Start with a clean NeoForge MDK
-2. Update NeoForge to be the current latest version
+1. Start with a clean Fabric MDK
+2. Update Fabric to be the current latest version
 3. Trim the template down to the bare minimum required to run (for ease of use)
-4. Implement GeckoLib example objects
+4. Change to Mojmap + Parchment
+5. Implement GeckoLib example objects
 
 The ideology behind this is that it should be as close as practical to a default mod for best real-world conditions, but still be cleaned up enough for educational use
 

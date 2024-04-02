@@ -5,28 +5,27 @@ import com.example.examplemod.client.renderer.block.GeckoHabitatBlockRenderer;
 import com.example.examplemod.client.renderer.entity.*;
 import com.example.examplemod.registry.BlockEntityRegistry;
 import com.example.examplemod.registry.EntityRegistry;
+import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.world.entity.EntityType;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
-@Mod.EventBusSubscriber(modid = ExampleMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-public class ExampleModClient {
-    @SubscribeEvent
-    public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
-            event.registerEntityRenderer(EntityRegistry.BAT.get(), BatRenderer::new);
-            event.registerEntityRenderer(EntityRegistry.BIKE.get(), BikeRenderer::new);
-            event.registerEntityRenderer(EntityRegistry.RACE_CAR.get(), RaceCarRenderer::new);
-            event.registerEntityRenderer(EntityRegistry.PARASITE.get(), ParasiteRenderer::new);
-            event.registerEntityRenderer(EntityRegistry.COOL_KID.get(), CoolKidRenderer::new);
-            event.registerEntityRenderer(EntityRegistry.MUTANT_ZOMBIE.get(), MutantZombieRenderer::new);
-            event.registerEntityRenderer(EntityRegistry.GREMLIN.get(), GremlinRenderer::new);
-            event.registerEntityRenderer(EntityRegistry.FAKE_GLASS.get(), FakeGlassRenderer::new);
+public class ExampleModClient implements ClientModInitializer {
+    @Override
+    public void onInitializeClient() {
+        EntityRendererRegistry.register(EntityRegistry.BAT, BatRenderer::new);
+        EntityRendererRegistry.register(EntityRegistry.BIKE, BikeRenderer::new);
+        EntityRendererRegistry.register(EntityRegistry.RACE_CAR, RaceCarRenderer::new);
+        EntityRendererRegistry.register(EntityRegistry.PARASITE, ParasiteRenderer::new);
+        EntityRendererRegistry.register(EntityRegistry.COOL_KID, CoolKidRenderer::new);
+        EntityRendererRegistry.register(EntityRegistry.MUTANT_ZOMBIE, MutantZombieRenderer::new);
+        EntityRendererRegistry.register(EntityRegistry.GREMLIN, GremlinRenderer::new);
+        EntityRendererRegistry.register(EntityRegistry.FAKE_GLASS, FakeGlassRenderer::new);
 
-            event.registerEntityRenderer(EntityType.CREEPER, ReplacedCreeperRenderer::new);
+        EntityRendererRegistry.register(EntityType.CREEPER, ReplacedCreeperRenderer::new);
 
-            event.registerBlockEntityRenderer(BlockEntityRegistry.GECKO_HABITAT.get(), context -> new GeckoHabitatBlockRenderer());
-            event.registerBlockEntityRenderer(BlockEntityRegistry.FERTILIZER_BLOCK.get(), context -> new FertilizerBlockRenderer());
+        BlockEntityRenderers.register(BlockEntityRegistry.GECKO_HABITAT, context -> new GeckoHabitatBlockRenderer());
+        BlockEntityRenderers.register(BlockEntityRegistry.FERTILIZER_BLOCK, context -> new FertilizerBlockRenderer());
     }
 }
