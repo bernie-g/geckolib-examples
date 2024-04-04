@@ -13,10 +13,10 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoItem;
+import software.bernie.geckolib.animatable.client.RenderProvider;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
@@ -43,18 +43,14 @@ public final class GeckoArmorItem extends ArmorItem implements GeoItem {
 
 	// Create our armor model/renderer for forge and return it
 	@Override
-	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-		consumer.accept(new IClientItemExtensions() {
-			private GeoArmorRenderer<?> renderer;
+	public void createRenderer(Consumer<RenderProvider> consumer) {
+		consumer.accept(new RenderProvider() {
+			private GeoArmorRenderer<GeckoArmorItem> renderer;
 
 			@Override
-			public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+			public <T extends LivingEntity, A extends HumanoidModel<T>> HumanoidModel<?> getGeckolibArmorModel(@Nullable T livingEntity, ItemStack itemStack, @Nullable EquipmentSlot equipmentSlot, @Nullable A original) {
 				if (this.renderer == null)
 					this.renderer = new GeckoArmorRenderer();
-
-				// This prepares our GeoArmorRenderer for the current render frame.
-				// These parameters may be null however, so we don't do anything further with them
-				this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
 
 				return this.renderer;
 			}
