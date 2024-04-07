@@ -3,6 +3,7 @@ package com.example.examplemod;
 import com.example.examplemod.client.renderer.block.FertilizerBlockRenderer;
 import com.example.examplemod.client.renderer.block.GeckoHabitatBlockRenderer;
 import com.example.examplemod.client.renderer.entity.*;
+import com.example.examplemod.client.renderer.entity.*;
 import com.example.examplemod.registry.BlockEntityRegistry;
 import com.example.examplemod.registry.EntityRegistry;
 import net.minecraft.world.entity.EntityType;

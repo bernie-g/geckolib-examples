@@ -1,7 +1,5 @@
 package com.example.examplemod.entity;
 
-import com.example.examplemod.client.model.entity.FakeGlassModel;
-import com.example.examplemod.client.renderer.entity.FakeGlassRenderer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.level.Level;
@@ -13,10 +11,10 @@ import software.bernie.geckolib.renderer.DynamicGeoEntityRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 /**
- * Example {@link GeoAnimatable} implementation of an entity that uses the texture-per-bone feature of
- * {@link DynamicGeoEntityRenderer}
- * @see FakeGlassModel
- * @see FakeGlassRenderer
+ * Example {@link GeoAnimatable} implementation of an entity that uses the texture-per-bone feature of {@link DynamicGeoEntityRenderer}
+ *
+ * @see com.example.examplemod.client.model.entity.FakeGlassModel FakeGlassModel
+ * @see com.example.examplemod.client.renderer.entity.FakeGlassRenderer FakeGlassRenderer
  */
 public class FakeGlassEntity extends PathfinderMob implements GeoEntity {
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);

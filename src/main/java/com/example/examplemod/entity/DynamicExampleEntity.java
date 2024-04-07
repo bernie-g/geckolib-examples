@@ -1,7 +1,6 @@
 package com.example.examplemod.entity;
 
 import com.example.examplemod.ExampleMod;
-import com.example.examplemod.client.renderer.entity.MutantZombieRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -18,14 +17,13 @@ import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.*;
 import software.bernie.geckolib.constant.DefaultAnimations;
-import software.bernie.geckolib.renderer.DynamicGeoEntityRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 /**
  * Example extended-support entity for GeckoLib advanced rendering
  *
- * @see DynamicGeoEntityRenderer
- * @see MutantZombieRenderer
+ * @see software.bernie.geckolib.renderer.DynamicGeoEntityRenderer DynamicGeoEntityRenderer
+ * @see com.example.examplemod.client.renderer.entity.MutantZombieRenderer MutantZombieRenderer
  * @see com.example.examplemod.client.renderer.entity.GremlinRenderer GremlinRenderer
  */
 public class DynamicExampleEntity extends PathfinderMob implements GeoEntity {

@@ -16,14 +16,13 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoItem;
-import software.bernie.geckolib.animatable.client.RenderProvider;
+import software.bernie.geckolib.animatable.client.GeoRenderProvider;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.constant.DefaultAnimations;
-import software.bernie.geckolib.renderer.GeoArmorRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.Set;
@@ -43,12 +42,12 @@ public final class GeckoArmorItem extends ArmorItem implements GeoItem {
 
 	// Create our armor model/renderer for forge and return it
 	@Override
-	public void createRenderer(Consumer<RenderProvider> consumer) {
-		consumer.accept(new RenderProvider() {
-			private GeoArmorRenderer<GeckoArmorItem> renderer;
+	public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
+		consumer.accept(new GeoRenderProvider() {
+			private GeckoArmorRenderer renderer;
 
 			@Override
-			public <T extends LivingEntity, A extends HumanoidModel<T>> HumanoidModel<?> getGeckolibArmorModel(@Nullable T livingEntity, ItemStack itemStack, @Nullable EquipmentSlot equipmentSlot, @Nullable A original) {
+			public <T extends LivingEntity> HumanoidModel<?> getGeoArmorRenderer(@Nullable T livingEntity, ItemStack itemStack, @Nullable EquipmentSlot equipmentSlot, @Nullable HumanoidModel<T> original) {
 				if (this.renderer == null)
 					this.renderer = new GeckoArmorRenderer();
 

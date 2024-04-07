@@ -18,7 +18,7 @@ repositories {
 }
 
 base {
-    archivesName = mod_id
+    archivesName = "geckolib-examples-neoforge"
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)

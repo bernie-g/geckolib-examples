@@ -2,7 +2,6 @@ package com.example.examplemod.block;
 
 import com.example.examplemod.ExampleMod;
 import com.example.examplemod.block.entity.FertilizerBlockEntity;
-import com.example.examplemod.client.renderer.block.FertilizerBlockRenderer;
 import com.example.examplemod.registry.BlockEntityRegistry;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
@@ -28,7 +27,7 @@ import java.util.List;
  *
  * @see com.example.examplemod.client.model.block.FertilizerModel FertilizerModel
  * @see FertilizerBlockEntity
- * @see FertilizerBlockRenderer
+ * @see com.example.examplemod.client.renderer.block.FertilizerBlockRenderer FertilizerBlockRenderer
  */
 public class FertilizerBlock extends DirectionalBlock implements EntityBlock {
 	public FertilizerBlock() {

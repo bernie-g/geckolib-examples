@@ -1,6 +1,7 @@
 package com.example.examplemod.client.renderer.entity.layer;
 
 import com.example.examplemod.ExampleMod;
+import com.example.examplemod.client.renderer.entity.CoolKidRenderer;
 import com.example.examplemod.entity.CoolKidEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -15,7 +16,7 @@ import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 /**
  * Example implementation of a {@link GeoRenderLayer}.<br>
  * Renders a pair of glasses over the {@link CoolKidEntity} example entity
- * @see com.example.examplemod.client.renderer.entity.CoolKidRenderer CoolKidRenderer
+ * @see CoolKidRenderer CoolKidRenderer
  */
 public class CoolKidGlassesLayer extends GeoRenderLayer<CoolKidEntity> {
     private static final ResourceLocation TEXTURE = new ResourceLocation(ExampleMod.MODID, "textures/entity/cool_kid_glasses.png");

@@ -28,8 +28,8 @@ public class BatEntity extends PathfinderMob implements GeoEntity {
 
 	private boolean isFlying = false;
 
-	public BatEntity(EntityType<? extends PathfinderMob> type, Level worldIn) {
-		super(type, worldIn);
+	public BatEntity(EntityType<? extends PathfinderMob> type, Level level) {
+		super(type, level);
 	}
 
 	// Have the bat look at the player

@@ -1,6 +1,5 @@
 package com.example.examplemod.entity;
 
-import com.example.examplemod.client.renderer.entity.BikeRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
@@ -23,7 +22,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 /**
  * Example {@link GeoAnimatable} implementation of an entity
- * @see BikeRenderer
+ * @see com.example.examplemod.client.renderer.entity.BikeRenderer BikeRenderer
  * @see com.example.examplemod.client.model.entity.BikeModel BikeModel
  */
 public class BikeEntity extends Animal implements GeoEntity {
