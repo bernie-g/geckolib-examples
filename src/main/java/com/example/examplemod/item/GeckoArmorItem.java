@@ -40,7 +40,7 @@ public final class GeckoArmorItem extends ArmorItem implements GeoItem {
 		super(armorMaterial, type, properties);
 	}
 
-	// Create our armor model/renderer for forge and return it
+	// Create our armor model/renderer and return it
 	@Override
 	public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
 		consumer.accept(new GeoRenderProvider() {
@@ -50,6 +50,7 @@ public final class GeckoArmorItem extends ArmorItem implements GeoItem {
 			public <T extends LivingEntity> HumanoidModel<?> getGeoArmorRenderer(@Nullable T livingEntity, ItemStack itemStack, @Nullable EquipmentSlot equipmentSlot, @Nullable HumanoidModel<T> original) {
 				if (this.renderer == null)
 					this.renderer = new GeckoArmorRenderer();
+				// Defer creation of our renderer then cache it so that it doesn't get instantiated too early
 
 				return this.renderer;
 			}
