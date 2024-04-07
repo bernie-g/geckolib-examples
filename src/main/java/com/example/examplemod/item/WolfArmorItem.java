@@ -16,7 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoItem;
-import software.bernie.geckolib.animatable.client.RenderProvider;
+import software.bernie.geckolib.animatable.client.GeoRenderProvider;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
@@ -43,12 +43,12 @@ public final class WolfArmorItem extends ArmorItem implements GeoItem {
 
 	// Create our armor model/renderer for Fabric and return it
 	@Override
-	public void createRenderer(Consumer<Object> consumer) {
-		consumer.accept(new RenderProvider() {
+	public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
+		consumer.accept(new GeoRenderProvider() {
 			private GeoArmorRenderer<?> renderer;
 
 			@Override
-			public <T extends LivingEntity, A extends HumanoidModel<T>> HumanoidModel<T> getGeckolibArmorModel(@Nullable T livingEntity, ItemStack itemStack, @Nullable EquipmentSlot equipmentSlot, @Nullable A original) {
+			public <T extends LivingEntity> HumanoidModel<?> getGeoArmorRenderer(@Nullable T livingEntity, ItemStack itemStack, @Nullable EquipmentSlot equipmentSlot, @Nullable HumanoidModel<T> original) {
 				if(this.renderer == null)
 					this.renderer = new WolfArmorRenderer();
 				// Defer creation of our renderer then cache it so that it doesn't get instantiated too early
