@@ -10,9 +10,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
+import software.bernie.geckolib.animatable.client.GeoRenderProvider;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
@@ -38,16 +39,18 @@ public final class JackInTheBoxItem extends Item implements GeoItem {
 		SingletonGeoAnimatable.registerSyncedAnimatable(this);
 	}
 
-	// Utilise the existing forge hook to define our custom renderer (which we created in createRenderer)
+	// Create our armor model/renderer and return it
 	@Override
-	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-		consumer.accept(new IClientItemExtensions() {
+	public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
+		consumer.accept(new GeoRenderProvider() {
 			private JackInTheBoxRenderer renderer;
 
 			@Override
-			public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+			@Nullable
+			public BlockEntityWithoutLevelRenderer getGeoItemRenderer() {
 				if (this.renderer == null)
 					this.renderer = new JackInTheBoxRenderer();
+				// Defer creation of our renderer then cache it so that it doesn't get instantiated too early
 
 				return this.renderer;
 			}
