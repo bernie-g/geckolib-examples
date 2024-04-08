@@ -18,7 +18,7 @@ import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.*;
 import software.bernie.geckolib.constant.DefaultAnimations;
-import software.bernie.geckolib.renderer.DynamicGeoEntityRenderer;
+import software.bernie.geckolib.renderer.specialty.DynamicGeoEntityRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 /**
