@@ -43,8 +43,6 @@ public final class ItemRegistry {
 			.icon(() -> new ItemStack(ItemRegistry.JACK_IN_THE_BOX))
 			.displayItems((enabledFeatures, entries) -> {
 				entries.accept(ItemRegistry.JACK_IN_THE_BOX);
-				entries.accept(ItemRegistry.FERTILIZER);
-				entries.accept(ItemRegistry.GECKO_HABITAT);
 				entries.accept(ItemRegistry.GECKO_ARMOR_HELMET);
 				entries.accept(ItemRegistry.GECKO_ARMOR_CHESTPLATE);
 				entries.accept(ItemRegistry.GECKO_ARMOR_LEGGINGS);
@@ -53,6 +51,8 @@ public final class ItemRegistry {
 				entries.accept(ItemRegistry.WOLF_ARMOR_CHESTPLATE);
 				entries.accept(ItemRegistry.WOLF_ARMOR_LEGGINGS);
 				entries.accept(ItemRegistry.WOLF_ARMOR_BOOTS);
+				entries.accept(ItemRegistry.GECKO_HABITAT);
+				entries.accept(ItemRegistry.FERTILIZER);
 				entries.accept(ItemRegistry.BAT_SPAWN_EGG);
 				entries.accept(ItemRegistry.BIKE_SPAWN_EGG);
 				entries.accept(ItemRegistry.RACE_CAR_SPAWN_EGG);
