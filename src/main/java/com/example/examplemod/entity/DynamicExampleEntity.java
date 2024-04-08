@@ -22,7 +22,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 /**
  * Example extended-support entity for GeckoLib advanced rendering
  *
- * @see software.bernie.geckolib.renderer.DynamicGeoEntityRenderer DynamicGeoEntityRenderer
+ * @see software.bernie.geckolib.renderer.specialty.DynamicGeoEntityRenderer DynamicGeoEntityRenderer
  * @see com.example.examplemod.client.renderer.entity.MutantZombieRenderer MutantZombieRenderer
  * @see com.example.examplemod.client.renderer.entity.GremlinRenderer GremlinRenderer
  */
