@@ -37,6 +37,10 @@ subprojects {
 			name = 'GeckoLib'
 			url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
         }
+        maven {
+            name = 'Parchment'
+            url = 'https://maven.parchmentmc.org'
+        }
     }
 
     tasks.withType(JavaCompile).configureEach {
