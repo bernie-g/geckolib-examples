@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.5-SNAPSHOT'
+	id 'fabric-loom' version '1.6-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -16,6 +16,10 @@ repositories {
         name = 'GeckoLib'
         url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
     }
+	maven {
+		name = 'Parchment'
+		url = 'https://maven.parchmentmc.org'
+	}
 }
 
 dependencies {
