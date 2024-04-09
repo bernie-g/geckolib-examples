@@ -1,5 +1,6 @@
 package com.example.examplemod;
 
+import com.example.examplemod.registry.EntityRegistry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
@@ -9,6 +10,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 @Mod(ExampleModCommon.MODID)
@@ -27,6 +29,7 @@ public final class ExampleModNeoForge {
         ENTITIES.register(modEventBus);
         CREATIVE_TABS.register(modEventBus);
         ITEMS.register(modEventBus);
+        modEventBus.<EntityAttributeCreationEvent>addListener(event -> EntityRegistry.registerEntityAttributes(event::put));
 
         ExampleModCommon.doRegistrations();
     }
