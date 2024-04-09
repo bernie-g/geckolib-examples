@@ -22,7 +22,7 @@ public final class EntityRegistry {
 	public static final Supplier<EntityType<CoolKidEntity>> COOL_KID = registerEntity("cool_kid", CoolKidEntity::new, 0.45f, 1f, 0x5F2A31, 0x6F363E);
     public static final Supplier<EntityType<DynamicExampleEntity>> GREMLIN = registerEntity("gremlin", DynamicExampleEntity::new, 0.5f, 1.9f, 0x505050, 0x606060);
 
-	public static void registerEntityAttributes(BiConsumer<EntityType<? extends Entity>, AttributeSupplier> registrar) {
+	public static void registerEntityAttributes(BiConsumer<EntityType<? extends LivingEntity>, AttributeSupplier> registrar) {
 		AttributeSupplier.Builder genericAttribs = PathfinderMob.createMobAttributes()
 				.add(Attributes.FOLLOW_RANGE, 16)
 				.add(Attributes.MAX_HEALTH, 1);
