@@ -6,7 +6,7 @@ plugins {
 }
 
 base {
-    archivesName = "geckolib-examples-ml-neoforge"
+    archivesName = "geckolib-examples-ml-neoforge-${minecraft_version}"
 }
 
 runs {
@@ -46,4 +46,37 @@ tasks.named("sourcesJar", Jar) {
 
 tasks.withType(ProcessResources).matching(notNeoTask).configureEach {
     from project(":common").sourceSets.main.resources
+}
+
+// Don't copy this for your mod, this is for GeckoLib internal handling only
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            groupId "software.bernie.geckolib"
+            artifactId base.archivesName.get()
+
+            pom.withXml {
+                asNode().dependencies.'*'.findAll() {
+                    it.artifactId.text() == "geckolib-neoforge-${minecraft_version}"
+                }.each() {
+                    it.parent().remove(it)
+                }
+            }
+        }
+    }
+
+    repositories {
+        if (System.getenv("cloudUsername") == null && System.getenv("cloudPassword") == null) {
+            mavenLocal()
+        }
+        else maven {
+            name = "cloudsmith"
+            url = "https://maven.cloudsmith.io/geckolib3/geckolib/"
+            credentials {
+                username = System.getenv("cloudUsername")
+                password = System.getenv("cloudPassword")
+            }
+        }
+    }
 }

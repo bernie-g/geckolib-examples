@@ -2,11 +2,11 @@ plugins {
     id 'java'
     id 'idea'
     id 'maven-publish'
-    id 'fabric-loom' version '1.5-SNAPSHOT'
+    id 'fabric-loom' version '1.6-SNAPSHOT'
 }
 
 base {
-    archivesName = "geckolib-examples-ml-fabric"
+    archivesName = "geckolib-examples-ml-fabric-${minecraft_version}"
 }
 
 dependencies {
@@ -54,4 +54,37 @@ tasks.named("sourcesJar", Jar) {
 
 processResources {
     from project(":common").sourceSets.main.resources
+}
+
+// Don't copy this for your mod, this is for GeckoLib internal handling only
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            groupId "software.bernie.geckolib"
+            artifactId base.archivesName.get()
+
+            pom.withXml {
+                asNode().dependencies.'*'.findAll() {
+                    it.artifactId.text() == "geckolib-fabric-${minecraft_version}"
+                }.each() {
+                    it.parent().remove(it)
+                }
+            }
+        }
+    }
+
+    repositories {
+        if (System.getenv("cloudUsername") == null && System.getenv("cloudPassword") == null) {
+            mavenLocal()
+        }
+        else maven {
+            name = "cloudsmith"
+            url = "https://maven.cloudsmith.io/geckolib3/geckolib/"
+            credentials {
+                username = System.getenv("cloudUsername")
+                password = System.getenv("cloudPassword")
+            }
+        }
+    }
 }

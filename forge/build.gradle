@@ -7,7 +7,7 @@ plugins {
 }
 
 base {
-    archivesName = "geckolib-examples-ml-forge"
+    archivesName = "geckolib-examples-ml-forge-${minecraft_version}"
 }
 
 minecraft {
@@ -75,4 +75,38 @@ sourceSets.each {
     def dir = layout.buildDirectory.dir("sourcesSets/$it.name")
     it.output.resourcesDir = dir
     it.java.destinationDirectory = dir
+}
+
+// Don't copy this for your mod, this is for GeckoLib internal handling only
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            groupId "software.bernie.geckolib"
+            artifactId base.archivesName.get()
+
+            pom.withXml {
+                asNode().dependencies.'*'.findAll() {
+                    it.artifactId.text() == "geckolib-forge-${minecraft_version}" ||
+                    it.artifactId.text() == "forge"
+                }.each() {
+                    it.parent().remove(it)
+                }
+            }
+        }
+    }
+
+    repositories {
+        if (System.getenv("cloudUsername") == null && System.getenv("cloudPassword") == null) {
+            mavenLocal()
+        }
+        else maven {
+            name = "cloudsmith"
+            url = "https://maven.cloudsmith.io/geckolib3/geckolib/"
+            credentials {
+                username = System.getenv("cloudUsername")
+                password = System.getenv("cloudPassword")
+            }
+        }
+    }
 }
