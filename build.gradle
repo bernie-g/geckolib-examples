@@ -74,8 +74,4 @@ subprojects {
 		
         inputs.properties(expandProps)
     }
-
-    tasks.withType(GenerateModuleMetadata).configureEach {
-        enabled = false
-    }
 }
