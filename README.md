@@ -1,19 +1,24 @@
-# Information
-## GeckoLib Example Mod - NeoForge - 1.20.4
+# GeckoLib Examples
+## What is this?
+This is a repository containing officially managed example mods set up using various [GeckoLib](https://github.com/bernie-g/geckolib) features.
 
-This is an example of a mod using <a href="https://github.com/bernie-g/geckolib">GeckoLib</a> on NeoForge 1.20.4
-
-This template is created on the following basis:
-1. Start with a clean NeoForge MDK
-2. Update NeoForge to be the current latest version
-3. Trim the template down to the bare minimum required to run (for ease of use)
+Each example is held in its own self-contained branch. Each deployment follows the following ideology:
+1. Obtain the most recent MDK for the given platform
+2. Ensure all toolchain values (gradle, parchment, etc) are up to date
+3. Trim the template down to the bare minimum required to run
 4. Implement GeckoLib example objects
 
-The ideology behind this is that it should be as close as practical to a default mod for best real-world conditions, but still be cleaned up enough for educational use
+This allows for each deployment to be a working mod built just like anyone else might start their mod
 
-### NOTE
-This mod is <u>NOT</u> intended for real-world use. This mod is only for testing and exemplifying GeckoLib use cases
+You can browse the available example mods via the branches menu [here](https://github.com/bernie-g/geckolib-examples/branches/all)
 
-Questions?
+## What if I want to check these out in dev?
+You can either clone the branch of this repo you are interested in and go from there, or you can do a dependency in your dev space
+on the example mod, which is hosted in the same maven repository as GeckoLib itself.
 
-<a href="https://discord.gg/pPEqBgJtZW"><img src="https://img.shields.io/discord/730912704776110121?color=green&label=Discord&logo=Discord&logoColor=green&style=for-the-badge" alt="Discord"/></a>
+E.G. `implementation("software.bernie.geckolib:geckolib-examples-ml-neoforge-${minecraft_version}:1.0.0`
+
+NOTE: If you publish your mod to a maven, you will want to disable the dependency prior to publishing, otherwise the example mod may end up being published as a dependency of your mod
+
+## Questions?
+Jump in our [Discord](https://discord.gg/pPEqBgJtZW)!

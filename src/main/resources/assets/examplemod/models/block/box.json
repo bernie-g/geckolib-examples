@@ -1,7 +1,0 @@
-{
-  "parent": "examplemod:block/default_box",
-  "textures": {
-    "1": "examplemod:block/botarium_side",
-    "particle": "examplemod:block/botarium_side"
-  }
-}
