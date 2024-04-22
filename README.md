@@ -2,6 +2,9 @@
 ## What is this?
 This is a repository containing officially managed example mods set up using various [GeckoLib](https://github.com/bernie-g/geckolib) features.
 
+The aim is to have an example mod deployment for each major loader on each appropriately major version of Minecraft.
+If a branch is not present for the Minecraft version of your choice, then the next highest version branch will be the most relevant to you.
+
 Each example is held in its own self-contained branch. Each deployment follows the following ideology:
 1. Obtain the most recent MDK for the given platform
 2. Ensure all toolchain values (gradle, parchment, etc) are up to date
