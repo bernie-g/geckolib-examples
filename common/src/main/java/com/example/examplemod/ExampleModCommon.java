@@ -18,6 +18,7 @@ public final class ExampleModCommon {
         BlockRegistry.init();
         BlockEntityRegistry.init();
         EntityRegistry.init();
+        ArmorMaterialRegistry.init();
         ItemRegistry.init();
     }
 }

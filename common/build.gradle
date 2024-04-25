@@ -18,7 +18,7 @@ minecraft {
 
 dependencies {
     compileOnly group:'org.spongepowered', name:'mixin', version:'0.8.5'
-    implementation "software.bernie.geckolib:geckolib-common-1.20.4:${geckolib_version}"
+    implementation "software.bernie.geckolib:geckolib-common-${minecraft_version}:${geckolib_version}"
 }
 
 // Don't copy this for your mod, this is for GeckoLib internal handling only

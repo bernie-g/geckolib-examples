@@ -9,6 +9,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -103,5 +104,10 @@ public class BikeEntity extends Animal implements GeoEntity {
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob partner) {
 		return null;
+	}
+
+	@Override
+	public boolean isFood(ItemStack stack) {
+		return false;
 	}
 }
