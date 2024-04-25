@@ -5,6 +5,7 @@ import com.example.examplemod.registry.ItemRegistry;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.core.Holder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -37,7 +38,7 @@ import java.util.function.Consumer;
 public final class WolfArmorItem extends ArmorItem implements GeoItem {
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-	public WolfArmorItem(ArmorMaterial armorMaterial, Type type, Properties properties) {
+	public WolfArmorItem(Holder<ArmorMaterial> armorMaterial, Type type, Properties properties) {
 		super(armorMaterial, type, properties);
 	}
 
@@ -71,14 +72,14 @@ public final class WolfArmorItem extends ArmorItem implements GeoItem {
 			Entity entity = state.getData(DataTickets.ENTITY);
 
 			// We'll just have ArmorStands always animate, so we can return here
-			if (entity instanceof ArmorStand)
+			if (entity instanceof ArmorStand || !(entity instanceof LivingEntity owner))
 				return PlayState.CONTINUE;
 
 			// For this example, we only want the animation to play if the entity is wearing all pieces of the armor
 			// Let's collect the armor pieces the entity is currently wearing
 			Set<Item> wornArmor = new ObjectOpenHashSet<>();
 
-			for (ItemStack stack : entity.getArmorSlots()) {
+			for (ItemStack stack : owner.getArmorSlots()) {
 				// We can stop immediately if any of the slots are empty
 				if (stack.isEmpty())
 					return PlayState.STOP;

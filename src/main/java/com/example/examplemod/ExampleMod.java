@@ -10,6 +10,7 @@ public class ExampleMod implements ModInitializer {
 	public void onInitialize() {
 		BlockRegistry.init();
 		EntityRegistry.init();
+		ArmorMaterialRegistry.init();
 		ItemRegistry.init();
 		BlockEntityRegistry.init();
 		SoundRegistry.init();

@@ -18,15 +18,15 @@ public final class ItemRegistry {
 
 	public static final JackInTheBoxItem JACK_IN_THE_BOX = register("jack_in_the_box", new JackInTheBoxItem(new Item.Properties()));
 
-	public static final WolfArmorItem WOLF_ARMOR_HELMET = register("wolf_armor_helmet", new WolfArmorItem(ArmorMaterials.DIAMOND, ArmorItem.Type.HELMET, new Item.Properties()));
-	public static final WolfArmorItem WOLF_ARMOR_CHESTPLATE = register("wolf_armor_chestplate", new WolfArmorItem(ArmorMaterials.DIAMOND, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
-	public static final WolfArmorItem WOLF_ARMOR_LEGGINGS = register("wolf_armor_leggings", new WolfArmorItem(ArmorMaterials.DIAMOND, ArmorItem.Type.LEGGINGS, new Item.Properties()));
-	public static final WolfArmorItem WOLF_ARMOR_BOOTS = register("wolf_armor_boots", new WolfArmorItem(ArmorMaterials.DIAMOND, ArmorItem.Type.BOOTS, new Item.Properties()));
+	public static final WolfArmorItem WOLF_ARMOR_HELMET = register("wolf_armor_helmet", new WolfArmorItem(ArmorMaterialRegistry.WOLF_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Properties()));
+	public static final WolfArmorItem WOLF_ARMOR_CHESTPLATE = register("wolf_armor_chestplate", new WolfArmorItem(ArmorMaterialRegistry.WOLF_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+	public static final WolfArmorItem WOLF_ARMOR_LEGGINGS = register("wolf_armor_leggings", new WolfArmorItem(ArmorMaterialRegistry.WOLF_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+	public static final WolfArmorItem WOLF_ARMOR_BOOTS = register("wolf_armor_boots", new WolfArmorItem(ArmorMaterialRegistry.WOLF_ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties()));
 
-	public static final GeckoArmorItem GECKO_ARMOR_HELMET = register("gecko_armor_helmet", new GeckoArmorItem(ArmorMaterials.DIAMOND, ArmorItem.Type.HELMET, new Item.Properties()));
-	public static final GeckoArmorItem GECKO_ARMOR_CHESTPLATE = register("gecko_armor_chestplate", new GeckoArmorItem(ArmorMaterials.DIAMOND, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
-	public static final GeckoArmorItem GECKO_ARMOR_LEGGINGS = register("gecko_armor_leggings", new GeckoArmorItem(ArmorMaterials.DIAMOND, ArmorItem.Type.LEGGINGS, new Item.Properties()));
-	public static final GeckoArmorItem GECKO_ARMOR_BOOTS = register("gecko_armor_boots", new GeckoArmorItem(ArmorMaterials.DIAMOND, ArmorItem.Type.BOOTS, new Item.Properties()));
+	public static final GeckoArmorItem GECKO_ARMOR_HELMET = register("gecko_armor_helmet", new GeckoArmorItem(ArmorMaterialRegistry.GECKO_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Properties()));
+	public static final GeckoArmorItem GECKO_ARMOR_CHESTPLATE = register("gecko_armor_chestplate", new GeckoArmorItem(ArmorMaterialRegistry.GECKO_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+	public static final GeckoArmorItem GECKO_ARMOR_LEGGINGS = register("gecko_armor_leggings", new GeckoArmorItem(ArmorMaterialRegistry.GECKO_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+	public static final GeckoArmorItem GECKO_ARMOR_BOOTS = register("gecko_armor_boots", new GeckoArmorItem(ArmorMaterialRegistry.GECKO_ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties()));
     
     public static final SpawnEggItem BAT_SPAWN_EGG = register("bat_spawn_egg", new SpawnEggItem(EntityRegistry.BAT, 0x1F1F1F, 0x0D0D0D, new Item.Properties()));
     public static final SpawnEggItem BIKE_SPAWN_EGG = register("bike_spawn_egg", new SpawnEggItem(EntityRegistry.BIKE, 0xD3E3E6, 0xE9F1F5, new Item.Properties()));
