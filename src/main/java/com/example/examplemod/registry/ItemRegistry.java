@@ -12,6 +12,8 @@ import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.List;
+
 public final class ItemRegistry {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registries.ITEM, ExampleMod.MODID);
 	public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, ExampleMod.MODID);
@@ -21,15 +23,15 @@ public final class ItemRegistry {
 
 	public static final DeferredHolder<Item, JackInTheBoxItem> JACK_IN_THE_BOX = ITEMS.register("jack_in_the_box", () -> new JackInTheBoxItem(new Item.Properties()));
 
-	public static final DeferredHolder<Item, WolfArmorItem> WOLF_ARMOR_HELMET = ITEMS.register("wolf_armor_helmet", () -> new WolfArmorItem(ArmorMaterials.DIAMOND, ArmorItem.Type.HELMET, new Item.Properties()));
-	public static final DeferredHolder<Item, WolfArmorItem> WOLF_ARMOR_CHESTPLATE = ITEMS.register("wolf_armor_chestplate", () -> new WolfArmorItem(ArmorMaterials.DIAMOND, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
-	public static final DeferredHolder<Item, WolfArmorItem> WOLF_ARMOR_LEGGINGS = ITEMS.register("wolf_armor_leggings", () -> new WolfArmorItem(ArmorMaterials.DIAMOND, ArmorItem.Type.LEGGINGS, new Item.Properties()));
-	public static final DeferredHolder<Item, WolfArmorItem> WOLF_ARMOR_BOOTS = ITEMS.register("wolf_armor_boots", () -> new WolfArmorItem(ArmorMaterials.DIAMOND, ArmorItem.Type.BOOTS, new Item.Properties()));
+	public static final DeferredHolder<Item, WolfArmorItem> WOLF_ARMOR_HELMET = ITEMS.register("wolf_armor_helmet", () -> new WolfArmorItem(ArmorMaterialRegistry.WOLF_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Properties()));
+	public static final DeferredHolder<Item, WolfArmorItem> WOLF_ARMOR_CHESTPLATE = ITEMS.register("wolf_armor_chestplate", () -> new WolfArmorItem(ArmorMaterialRegistry.WOLF_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+	public static final DeferredHolder<Item, WolfArmorItem> WOLF_ARMOR_LEGGINGS = ITEMS.register("wolf_armor_leggings", () -> new WolfArmorItem(ArmorMaterialRegistry.WOLF_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+	public static final DeferredHolder<Item, WolfArmorItem> WOLF_ARMOR_BOOTS = ITEMS.register("wolf_armor_boots", () -> new WolfArmorItem(ArmorMaterialRegistry.WOLF_ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties()));
 
-	public static final DeferredHolder<Item, GeckoArmorItem> GECKO_ARMOR_HELMET = ITEMS.register("gecko_armor_helmet", () -> new GeckoArmorItem(ArmorMaterials.DIAMOND, ArmorItem.Type.HELMET, new Item.Properties()));
-	public static final DeferredHolder<Item, GeckoArmorItem> GECKO_ARMOR_CHESTPLATE = ITEMS.register("gecko_armor_chestplate", () -> new GeckoArmorItem(ArmorMaterials.DIAMOND, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
-	public static final DeferredHolder<Item, GeckoArmorItem> GECKO_ARMOR_LEGGINGS = ITEMS.register("gecko_armor_leggings", () -> new GeckoArmorItem(ArmorMaterials.DIAMOND, ArmorItem.Type.LEGGINGS, new Item.Properties()));
-	public static final DeferredHolder<Item, GeckoArmorItem> GECKO_ARMOR_BOOTS = ITEMS.register("gecko_armor_boots", () -> new GeckoArmorItem(ArmorMaterials.DIAMOND, ArmorItem.Type.BOOTS, new Item.Properties()));
+	public static final DeferredHolder<Item, GeckoArmorItem> GECKO_ARMOR_HELMET = ITEMS.register("gecko_armor_helmet", () -> new GeckoArmorItem(ArmorMaterialRegistry.GECKO_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Properties()));
+	public static final DeferredHolder<Item, GeckoArmorItem> GECKO_ARMOR_CHESTPLATE = ITEMS.register("gecko_armor_chestplate", () -> new GeckoArmorItem(ArmorMaterialRegistry.GECKO_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+	public static final DeferredHolder<Item, GeckoArmorItem> GECKO_ARMOR_LEGGINGS = ITEMS.register("gecko_armor_leggings", () -> new GeckoArmorItem(ArmorMaterialRegistry.GECKO_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+	public static final DeferredHolder<Item, GeckoArmorItem> GECKO_ARMOR_BOOTS = ITEMS.register("gecko_armor_boots", () -> new GeckoArmorItem(ArmorMaterialRegistry.GECKO_ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties()));
     
     public static final DeferredHolder<Item, DeferredSpawnEggItem> BAT_SPAWN_EGG = ITEMS.register("bat_spawn_egg", () -> new DeferredSpawnEggItem(EntityRegistry.BAT, 0x1F1F1F, 0x0D0D0D, new Item.Properties()));
     public static final DeferredHolder<Item, DeferredSpawnEggItem> BIKE_SPAWN_EGG = ITEMS.register("bike_spawn_egg", () -> new DeferredSpawnEggItem(EntityRegistry.BIKE, 0xD3E3E6, 0xE9F1F5, new Item.Properties()));
@@ -65,4 +67,10 @@ public final class ItemRegistry {
 				entries.accept(ItemRegistry.COOL_KID_SPAWN_EGG.get());
 			})
 			.build());
+
+	private static ArmorMaterial dummyArmorMaterial() {
+		ArmorMaterial diamond = ArmorMaterials.DIAMOND.value();
+
+		return new ArmorMaterial(diamond.defense(), diamond.enchantmentValue(), diamond.equipSound(), diamond.repairIngredient(), List.of(), diamond.toughness(), diamond.knockbackResistance());
+	}
 }

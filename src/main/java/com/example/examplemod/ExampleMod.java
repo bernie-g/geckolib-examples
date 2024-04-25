@@ -10,6 +10,7 @@ public class ExampleMod {
 
     public ExampleMod(IEventBus modEventBus) {
         EntityRegistry.ENTITIES.register(modEventBus);
+        ArmorMaterialRegistry.ARMOR_MATERIALS.register(modEventBus);
         ItemRegistry.ITEMS.register(modEventBus);
         ItemRegistry.TABS.register(modEventBus);
         BlockEntityRegistry.BLOCK_ENTITIES.register(modEventBus);

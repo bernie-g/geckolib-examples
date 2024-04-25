@@ -6,6 +6,7 @@ import com.example.examplemod.registry.BlockEntityRegistry;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -61,9 +62,9 @@ public class FertilizerBlock extends DirectionalBlock implements EntityBlock {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, BlockGetter blockGetter, List<Component> tooltip, TooltipFlag tooltipFlag) {
+	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
 		tooltip.add(Component.translatable("block." + ExampleMod.MODID + ".fertilizer.tooltip"));
 
-		super.appendHoverText(stack, blockGetter, tooltip, tooltipFlag);
+		super.appendHoverText(stack, context, tooltip, tooltipFlag);
 	}
 }
