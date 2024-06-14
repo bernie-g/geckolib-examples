@@ -14,6 +14,7 @@ minecraft {
     mappings("parchment", "${parchment_version}-${minecraft_version}")
 
     copyIdeResources = true
+    reobf = false
 
     runs {
         client {
@@ -50,9 +51,10 @@ sourceSets.main.resources.srcDir 'src/generated/resources'
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-1.20.4:${geckolib_version}")
+    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-1.20.6:4.5.4.1")
     compileOnly project(":common")
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
+    implementation('net.sf.jopt-simple:jopt-simple:5.0.4') { version { strictly '5.0.4' } }
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -68,8 +70,6 @@ tasks.named("sourcesJar", Jar) {
 processResources {
     from project(":common").sourceSets.main.resources
 }
-
-jar.finalizedBy('reobfJar')
 
 sourceSets.each {
     def dir = layout.buildDirectory.dir("sourcesSets/$it.name")
