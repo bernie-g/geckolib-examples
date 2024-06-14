@@ -70,7 +70,7 @@ public class ExampleModFabricPlatform implements ExampleModPlatform {
      * Quick wrapper to make the individual registration lines cleaner but still return the multiloader-compatible supplier
      */
     private static <T, R extends Registry<? super T>> Supplier<T> registerSupplier(R registry, String id, Supplier<T> object) {
-        final T registeredObject = Registry.register((Registry<T>)registry, new ResourceLocation(ExampleModCommon.MODID, id), object.get());
+        final T registeredObject = Registry.register((Registry<T>)registry, ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, id), object.get());
 
         return () -> registeredObject;
     }
@@ -79,6 +79,6 @@ public class ExampleModFabricPlatform implements ExampleModPlatform {
      * Quick wrapper to make the individual registration lines cleaner but still return the multiloader-compatible supplier
      */
     private static <T, R extends Registry<? super T>> Holder<T> registerHolder(R registry, String id, Supplier<T> object) {
-        return Registry.registerForHolder((Registry<T>)registry, new ResourceLocation(ExampleModCommon.MODID, id), object.get());
+        return Registry.registerForHolder((Registry<T>)registry, ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, id), object.get());
     }
 }

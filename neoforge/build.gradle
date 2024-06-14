@@ -9,6 +9,13 @@ base {
     archivesName = "geckolib-examples-ml-neoforge-${minecraft_version}"
 }
 
+subsystems {
+    parchment {
+        minecraftVersion = project.parchment_mc_version
+        mappingsVersion = project.parchment_version
+    }
+}
+
 runs {
     configureEach {
         modSource project.sourceSets.main

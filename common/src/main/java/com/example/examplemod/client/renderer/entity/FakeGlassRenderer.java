@@ -15,7 +15,7 @@ import software.bernie.geckolib.renderer.specialty.DynamicGeoEntityRenderer;
  */
 public class FakeGlassRenderer extends DynamicGeoEntityRenderer<FakeGlassEntity> {
 	private static final ResourceLocation WHITE_STAINED_GLASS_TEXTURE =
-			new ResourceLocation("textures/block/white_stained_glass.png");
+			ResourceLocation.withDefaultNamespace("textures/block/white_stained_glass.png");
 
 	public FakeGlassRenderer(EntityRendererProvider.Context renderManager) {
 		super(renderManager, new FakeGlassModel());

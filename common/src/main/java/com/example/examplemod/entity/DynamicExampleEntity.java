@@ -6,7 +6,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.player.Player;
@@ -163,7 +162,7 @@ public class DynamicExampleEntity extends PathfinderMob implements GeoEntity {
 		if (this.level().isClientSide() || stack.isEmpty())
 			return super.mobInteract(player, hand);
 
-		EquipmentSlot slot = LivingEntity.getEquipmentSlotForItem(stack);
+		EquipmentSlot slot = getEquipmentSlotForItem(stack);
 
 		setItemSlot(slot, stack.copy());
 		player.sendSystemMessage(Component.translatable("entity." + ExampleModCommon.MODID + ".mutant_zombie.equip", stack.getDisplayName()));

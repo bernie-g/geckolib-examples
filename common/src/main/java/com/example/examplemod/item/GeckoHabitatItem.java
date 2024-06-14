@@ -32,7 +32,7 @@ public class GeckoHabitatItem extends BlockItem implements GeoItem {
 			@Nullable
 			public BlockEntityWithoutLevelRenderer getGeoItemRenderer() {
 				if (this.renderer == null)
-					this.renderer = new GeoItemRenderer<>(new DefaultedBlockGeoModel<>(new ResourceLocation(ExampleModCommon.MODID, "gecko_habitat")));
+					this.renderer = new GeoItemRenderer<>(new DefaultedBlockGeoModel<>(ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, "gecko_habitat")));
 				// Defer creation of our renderer then cache it so that it doesn't get instantiated too early
 
 				return this.renderer;

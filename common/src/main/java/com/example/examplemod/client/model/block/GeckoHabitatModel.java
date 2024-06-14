@@ -15,7 +15,7 @@ import software.bernie.geckolib.model.GeoModel;
  */
 public class GeckoHabitatModel extends DefaultedBlockGeoModel<GeckoHabitatBlockEntity> {
 	public GeckoHabitatModel() {
-		super(new ResourceLocation(ExampleModCommon.MODID, "gecko_habitat"));
+		super(ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, "gecko_habitat"));
 	}
 
 	@Override

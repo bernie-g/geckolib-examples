@@ -29,7 +29,7 @@ public class BatRenderer extends GeoEntityRenderer<BatEntity> {
 
 	// Add some particles around the ear when rendering
 	@Override
-	public void renderFinal(PoseStack poseStack, BatEntity animatable, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+	public void renderFinal(PoseStack poseStack, BatEntity animatable, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay, int colour) {
 		if (this.currentTick < 0 || this.currentTick != animatable.tickCount) {
 			this.currentTick = animatable.tickCount;
 
@@ -48,6 +48,6 @@ public class BatRenderer extends GeoEntityRenderer<BatEntity> {
 			});
 		}
 
-		super.renderFinal(poseStack, animatable, model, bufferSource, buffer, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
+		super.renderFinal(poseStack, animatable, model, bufferSource, buffer, partialTick, packedLight, packedOverlay, colour);
 	}
 }

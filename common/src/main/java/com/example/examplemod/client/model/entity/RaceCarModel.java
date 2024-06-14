@@ -14,7 +14,7 @@ import software.bernie.geckolib.model.GeoModel;
  */
 public class RaceCarModel extends DefaultedEntityGeoModel<RaceCarEntity> {
 	public RaceCarModel() {
-		super(new ResourceLocation(ExampleModCommon.MODID, "race_car"));
+		super(ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, "race_car"));
 	}
 
 	// We want our model to render using the translucent render type

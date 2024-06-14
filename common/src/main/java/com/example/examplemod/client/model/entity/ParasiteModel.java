@@ -14,7 +14,7 @@ import software.bernie.geckolib.model.GeoModel;
  */
 public class ParasiteModel extends DefaultedEntityGeoModel<ParasiteEntity> {
 	public ParasiteModel() {
-		super(new ResourceLocation(ExampleModCommon.MODID, "parasite"));
+		super(ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, "parasite"));
 	}
 
 	// We want our model to render using the translucent render type

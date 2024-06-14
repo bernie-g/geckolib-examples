@@ -40,7 +40,7 @@ public class GremlinRenderer extends DynamicGeoEntityRenderer<DynamicExampleEnti
 	private static final String LEFT_SLEEVE = "armorBipedLeftArm";
 	private static final String HELMET = "armorBipedHead";
 
-	protected final ResourceLocation CAPE_TEXTURE = new ResourceLocation(ExampleModCommon.MODID, "textures/entity/dynamic_entity_cape.png");
+	protected final ResourceLocation CAPE_TEXTURE = ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, "textures/entity/dynamic_entity_cape.png");
 
 	protected ItemStack mainHandItem;
 	protected ItemStack offhandItem;
@@ -150,8 +150,8 @@ public class GremlinRenderer extends DynamicGeoEntityRenderer<DynamicExampleEnti
 	}
 
 	@Override
-	public void preRender(PoseStack poseStack, DynamicExampleEntity animatable, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
+	public void preRender(PoseStack poseStack, DynamicExampleEntity animatable, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, int colour) {
+		super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, colour);
 
 		this.mainHandItem = animatable.getMainHandItem();
 		this.offhandItem = animatable.getOffhandItem();

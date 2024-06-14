@@ -14,6 +14,6 @@ import software.bernie.geckolib.model.DefaultedEntityGeoModel;
  */
 public class ReplacedCreeperModel extends DefaultedEntityGeoModel<ReplacedCreeperEntity> {
 	public ReplacedCreeperModel() {
-		super(new ResourceLocation(ExampleModCommon.MODID, "creeper"));
+		super(ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, "creeper"));
 	}
 }

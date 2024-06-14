@@ -12,6 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
+import software.bernie.geckolib.util.Color;
 
 /**
  * Example implementation of a {@link GeoRenderLayer}.<br>
@@ -19,7 +20,7 @@ import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
  * @see CoolKidRenderer CoolKidRenderer
  */
 public class CoolKidGlassesLayer extends GeoRenderLayer<CoolKidEntity> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(ExampleModCommon.MODID, "textures/entity/cool_kid_glasses.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, "textures/entity/cool_kid_glasses.png");
 
 	public CoolKidGlassesLayer(GeoRenderer<CoolKidEntity> entityRenderer) {
         super(entityRenderer);
@@ -32,6 +33,6 @@ public class CoolKidGlassesLayer extends GeoRenderLayer<CoolKidEntity> {
 
         getRenderer().reRender(getDefaultBakedModel(animatable), poseStack, bufferSource, animatable, armorRenderType,
                 bufferSource.getBuffer(armorRenderType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-                1, 1, 1, 1);
+                Color.WHITE.argbInt());
     }
 }

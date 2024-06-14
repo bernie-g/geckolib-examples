@@ -13,6 +13,6 @@ import software.bernie.geckolib.model.GeoModel;
  */
 public class MutantZombieModel extends DefaultedEntityGeoModel<DynamicExampleEntity> {
 	public MutantZombieModel() {
-		super(new ResourceLocation(ExampleModCommon.MODID, "mutant_zombie"));
+		super(ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, "mutant_zombie"));
 	}
 }

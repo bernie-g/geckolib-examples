@@ -12,6 +12,6 @@ import software.bernie.geckolib.renderer.GeoRenderer;
  */
 public final class WolfArmorRenderer extends GeoArmorRenderer<WolfArmorItem> {
 	public WolfArmorRenderer() {
-		super(new DefaultedItemGeoModel<>(new ResourceLocation(ExampleModCommon.MODID, "armor/wolf_armor")));
+		super(new DefaultedItemGeoModel<>(ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, "armor/wolf_armor")));
 	}
 }
