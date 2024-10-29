@@ -9,6 +9,9 @@ displayName = "${mod_name}"
 authors = "${mod_author}"
 description = '''${description}'''
 
+[[accessTransformers]]
+file = "META-INF/accesstransformer-nf.cfg"
+
 [[dependencies.${mod_id}]]
 modId = "neoforge"
 type="required"

@@ -1,90 +1,38 @@
 plugins {
-    id 'java'
-    id 'idea'
-    id 'maven-publish'
-    id 'fabric-loom' version '1.8-SNAPSHOT'
+    id 'multiloader-loader'
+    id 'fabric-loom'
 }
-
-base {
-    archivesName = "geckolib-examples-ml-fabric-${minecraft_version}"
-}
-
 dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"
-	mappings loom.layered() {
-		officialMojangMappings()
-		parchment("org.parchmentmc.data:parchment-${parchment_mc_version}:${parchment_version}@zip")
-	}
+    mappings loom.layered {
+        officialMojangMappings()
+        parchment("org.parchmentmc.data:parchment-${parchment_minecraft}:${parchment_version}@zip")
+    }
+    modImplementation "software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}"
     modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
-    modImplementation "software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}"
-    compileOnly project(":common")
 }
 
 loom {
+    def aw = file("src/main/resources/${mod_id}.accesswidener")
+    if (aw.exists()) {
+        accessWidenerPath.set(aw)
+    }
     mixin {
         defaultRefmapName.set("${mod_id}.refmap.json")
     }
-	
     runs {
         client {
             client()
-            setConfigName("Fabric Client")
+            setConfigName('Fabric Client')
             ideConfigGenerated(true)
-            runDir("run")
+            runDir('runs/client')
         }
         server {
             server()
-            setConfigName("Fabric Server")
+            setConfigName('Fabric Server')
             ideConfigGenerated(true)
-            runDir("run")
-        }
-    }
-}
-
-tasks.withType(JavaCompile).configureEach {
-    source(project(":common").sourceSets.main.allSource)
-}
-tasks.withType(Javadoc).configureEach {
-    source(project(":common").sourceSets.main.allJava)
-}
-tasks.named("sourcesJar", Jar) {
-    from(project(":common").sourceSets.main.allSource)
-}
-
-processResources {
-    from project(":common").sourceSets.main.resources
-}
-
-// Don't copy this for your mod, this is for GeckoLib internal handling only
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            groupId "software.bernie.geckolib"
-            artifactId base.archivesName.get()
-
-            pom.withXml {
-                asNode().dependencies.'*'.findAll() {
-                    it.artifactId.text() == "geckolib-fabric-${minecraft_version}"
-                }.each() {
-                    it.parent().remove(it)
-                }
-            }
-        }
-    }
-
-    repositories {
-        if (System.getenv("cloudUsername") == null && System.getenv("cloudPassword") == null) {
-            mavenLocal()
-        }
-        else maven {
-            name = "cloudsmith"
-            url = "https://maven.cloudsmith.io/geckolib3/geckolib/"
-            credentials {
-                username = System.getenv("cloudUsername")
-                password = System.getenv("cloudPassword")
-            }
+            runDir('runs/server')
         }
     }
 }

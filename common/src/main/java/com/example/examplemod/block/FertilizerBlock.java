@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import org.jetbrains.annotations.Nullable;
@@ -30,8 +31,8 @@ import java.util.List;
  * @see com.example.examplemod.client.renderer.block.FertilizerBlockRenderer FertilizerBlockRenderer
  */
 public class FertilizerBlock extends DirectionalBlock implements EntityBlock {
-	public FertilizerBlock() {
-		super(Properties.of().noOcclusion());
+	public FertilizerBlock(BlockBehaviour.Properties properties) {
+		super(properties);
 	}
 
 	@Override

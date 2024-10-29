@@ -1,7 +1,7 @@
 # Information
-## GeckoLib Example Mod - Multiloader - 1.21.1
+## GeckoLib Example Mod - Multiloader - 1.21.3
 
-This is an example of a mod using <a href="https://github.com/bernie-g/geckolib">GeckoLib</a> for <a href="https://github.com/jaredlll08/MultiLoader-Template">Multiloader</a> 1.21.1
+This is an example of a mod using <a href="https://github.com/bernie-g/geckolib">GeckoLib</a> for <a href="https://github.com/jaredlll08/MultiLoader-Template">Multiloader</a> 1.21.3
 
 This template is created on the following basis:
 1. Start with a clean Multiloader MDK

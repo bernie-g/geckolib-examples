@@ -1,55 +1,42 @@
 plugins {
-    id 'idea'
-    id 'java'
-    id 'maven-publish'
-    id 'org.spongepowered.gradle.vanilla' version '0.2.1-SNAPSHOT'
+    id 'multiloader-common'
+    id 'net.neoforged.moddev'
 }
 
-base {
-    archivesName = "geckolib-examples-ml-common-${minecraft_version}"
-}
-
-minecraft {
-    version(minecraft_version)
-
-    // Because Minecraft makes BlockEntities impossible to register in common without it
-    accessWideners(file("src/main/resources/${mod_id}.accesswidener"))
+neoForge {
+    neoFormVersion = neo_form_version
+    // Automatically enable AccessTransformers if the file exists
+    def at = file('src/main/resources/META-INF/accesstransformer-nf.cfg')
+    if (at.exists()) {
+        accessTransformers = [at.absolutePath]
+    }
+    parchment {
+        minecraftVersion = parchment_minecraft
+        mappingsVersion = parchment_version
+    }
 }
 
 dependencies {
-    compileOnly group:'org.spongepowered', name:'mixin', version:'0.8.5'
+    compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
     implementation "software.bernie.geckolib:geckolib-common-${minecraft_version}:${geckolib_version}"
+    // fabric and neoforge both bundle mixinextras, so it is safe to use it in common
+    compileOnly group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.3.5'
+    annotationProcessor group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.3.5'
 }
 
-// Don't copy this for your mod, this is for GeckoLib internal handling only
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            groupId "software.bernie.geckolib"
-            artifactId base.archivesName.get()
-
-            pom.withXml {
-                asNode().dependencies.'*'.findAll() {
-                    it.artifactId.text() == "geckolib-common-${minecraft_version}"
-                }.each() {
-                    it.parent().remove(it)
-                }
-            }
-        }
+configurations {
+    commonJava {
+        canBeResolved = false
+        canBeConsumed = true
     }
-
-    repositories {
-        if (System.getenv("cloudUsername") == null && System.getenv("cloudPassword") == null) {
-            mavenLocal()
-        }
-        else maven {
-            name = "cloudsmith"
-            url = "https://maven.cloudsmith.io/geckolib3/geckolib/"
-            credentials {
-                username = System.getenv("cloudUsername")
-                password = System.getenv("cloudPassword")
-            }
-        }
+    commonResources {
+        canBeResolved = false
+        canBeConsumed = true
     }
 }
+
+artifacts {
+    commonJava sourceSets.main.java.sourceDirectories.singleFile
+    commonResources sourceSets.main.resources.sourceDirectories.singleFile
+}
+

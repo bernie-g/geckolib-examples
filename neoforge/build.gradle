@@ -1,89 +1,43 @@
 plugins {
-    id 'idea'
-    id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.165'
-    id 'java-library'
+    id 'multiloader-loader'
+    id 'net.neoforged.moddev'
 }
 
-base {
-    archivesName = "geckolib-examples-ml-neoforge-${minecraft_version}"
-}
-
-subsystems {
+neoForge {
+    version = neoforge_version
+    // Automatically enable neoforge AccessTransformers if the file exists
+    def at = project(':common').file('src/main/resources/META-INF/accesstransformer-nf.cfg')
+    if (at.exists()) {
+        accessTransformers = [at.absolutePath]
+    }
     parchment {
-        minecraftVersion = project.parchment_mc_version
-        mappingsVersion = project.parchment_version
+        minecraftVersion = parchment_minecraft
+        mappingsVersion = parchment_version
+    }
+    runs {
+        configureEach {
+            systemProperty('neoforge.enabledGameTestNamespaces', mod_id)
+            ideName = "NeoForge ${it.name.capitalize()} (${project.path})" // Unify the run config names with fabric
+        }
+        client {
+            client()
+        }
+        data {
+            data()
+        }
+        server {
+            server()
+        }
+    }
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+        }
     }
 }
 
-runs {
-    configureEach {
-        modSource project.sourceSets.main
-    }
-    client {
-        systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
-    }
-    server {
-        systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
-        programArgument '--nogui'
-    }
+dependencies {
+    implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
-
-dependencies {
-    implementation "net.neoforged:neoforge:${neoforge_version}"
-    implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
-    compileOnly project(":common")
-}
-
-Spec<Task> notNeoTask = { Task it -> !it.name.startsWith("neo") } as Spec<Task>
-
-tasks.withType(JavaCompile).matching(notNeoTask).configureEach {
-    source(project(":common").sourceSets.main.allSource)
-}
-
-tasks.withType(Javadoc).matching(notNeoTask).configureEach {
-    source(project(":common").sourceSets.main.allJava)
-}
-
-tasks.named("sourcesJar", Jar) {
-    from(project(":common").sourceSets.main.allSource)
-}
-
-tasks.withType(ProcessResources).matching(notNeoTask).configureEach {
-    from project(":common").sourceSets.main.resources
-}
-
-// Don't copy this for your mod, this is for GeckoLib internal handling only
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            groupId "software.bernie.geckolib"
-            artifactId base.archivesName.get()
-
-            pom.withXml {
-                asNode().dependencies.'*'.findAll() {
-                    it.artifactId.text() == "geckolib-neoforge-${minecraft_version}"
-                }.each() {
-                    it.parent().remove(it)
-                }
-            }
-        }
-    }
-
-    repositories {
-        if (System.getenv("cloudUsername") == null && System.getenv("cloudPassword") == null) {
-            mavenLocal()
-        }
-        else maven {
-            name = "cloudsmith"
-            url = "https://maven.cloudsmith.io/geckolib3/geckolib/"
-            credentials {
-                username = System.getenv("cloudUsername")
-                password = System.getenv("cloudPassword")
-            }
-        }
-    }
-}

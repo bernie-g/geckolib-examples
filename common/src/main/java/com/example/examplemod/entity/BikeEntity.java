@@ -31,8 +31,6 @@ public class BikeEntity extends Animal implements GeoEntity {
 
 	public BikeEntity(EntityType<? extends Animal> type, Level level) {
 		super(type, level);
-
-		this.noCulling = true;
 	}
 
 	// Let the player ride the entity

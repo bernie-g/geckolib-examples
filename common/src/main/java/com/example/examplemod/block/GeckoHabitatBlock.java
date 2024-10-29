@@ -6,6 +6,7 @@ import com.example.examplemod.client.renderer.block.GeckoHabitatBlockRenderer;
 import com.example.examplemod.registry.BlockEntityRegistry;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
@@ -14,10 +15,11 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
@@ -30,10 +32,10 @@ import org.jetbrains.annotations.Nullable;
  * @see GeckoHabitatBlockRenderer
  */
 public class GeckoHabitatBlock extends BaseEntityBlock implements EntityBlock {
-	public static final DirectionProperty FACING = BlockStateProperties.FACING;
+	public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
 
-	public GeckoHabitatBlock() {
-		super(Properties.of().noOcclusion());
+	public GeckoHabitatBlock(BlockBehaviour.Properties properties) {
+		super(properties);
 	}
 
 	@Override

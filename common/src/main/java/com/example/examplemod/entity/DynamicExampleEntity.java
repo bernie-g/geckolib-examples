@@ -2,6 +2,7 @@ package com.example.examplemod.entity;
 
 import com.example.examplemod.ExampleModCommon;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
@@ -87,7 +88,7 @@ public class DynamicExampleEntity extends PathfinderMob implements GeoEntity {
 
 		Item handItem = heldStack.getItem();
 
-		if (isBlocking() && (handItem instanceof ShieldItem || handItem.getUseAnimation(heldStack) == UseAnim.BLOCK))
+		if (isBlocking() && (handItem instanceof ShieldItem || handItem.getUseAnimation(heldStack) == ItemUseAnimation.BLOCK))
 			return state.setAndContinue(getLeftHand() == hand ? BLOCK_LEFT : BLOCK_RIGHT);
 
 		return PlayState.STOP;
@@ -99,12 +100,12 @@ public class DynamicExampleEntity extends PathfinderMob implements GeoEntity {
 			return PlayState.STOP;
 
 		for (ItemStack heldStack : getHandSlots()) {
-			UseAnim useAnim = heldStack.getItem().getUseAnimation(heldStack);
+			ItemUseAnimation useAnim = heldStack.getItem().getUseAnimation(heldStack);
 
-			if (useAnim == UseAnim.BOW || useAnim == UseAnim.CROSSBOW) {
+			if (useAnim == ItemUseAnimation.BOW || useAnim == ItemUseAnimation.CROSSBOW) {
 				return state.setAndContinue(isLeftHanded() ? AIM_LEFT_HAND : AIM_RIGHT_HAND);
 			}
-			else if (useAnim == UseAnim.SPEAR) {
+			else if (useAnim == ItemUseAnimation.SPEAR) {
 				return state.setAndContinue(isLeftHanded() ? SPEAR_LEFT_HAND : SPEAR_RIGHT_HAND);
 			}
 		}
@@ -118,7 +119,7 @@ public class DynamicExampleEntity extends PathfinderMob implements GeoEntity {
 			return PlayState.STOP;
 
 		for (ItemStack heldStack : getHandSlots()) {
-			if (heldStack.getItem().getUseAnimation(heldStack) == UseAnim.SPEAR)
+			if (heldStack.getItem().getUseAnimation(heldStack) == ItemUseAnimation.SPEAR)
 				return state.setAndContinue(SPEAR_SWING);
 		}
 
@@ -134,14 +135,14 @@ public class DynamicExampleEntity extends PathfinderMob implements GeoEntity {
 				offhandStack.getItem() instanceof ProjectileWeaponItem)
 			return true;
 
-		UseAnim anim = mainHandStack.getUseAnimation();
+		ItemUseAnimation anim = mainHandStack.getUseAnimation();
 
-		if (anim == UseAnim.BOW || anim == UseAnim.CROSSBOW || anim == UseAnim.SPEAR)
+		if (anim == ItemUseAnimation.BOW || anim == ItemUseAnimation.CROSSBOW || anim == ItemUseAnimation.SPEAR)
 			return true;
 
 		anim = offhandStack.getUseAnimation();
 
-		return anim == UseAnim.BOW || anim == UseAnim.CROSSBOW || anim == UseAnim.SPEAR;
+		return anim == ItemUseAnimation.BOW || anim == ItemUseAnimation.CROSSBOW || anim == ItemUseAnimation.SPEAR;
 	}
 
 	// Helper method to get the left hand in an ambidextrous entity
@@ -165,7 +166,8 @@ public class DynamicExampleEntity extends PathfinderMob implements GeoEntity {
 		EquipmentSlot slot = getEquipmentSlotForItem(stack);
 
 		setItemSlot(slot, stack.copy());
-		player.sendSystemMessage(Component.translatable("entity." + ExampleModCommon.MODID + ".mutant_zombie.equip", stack.getDisplayName()));
+		if (player instanceof ServerPlayer serverPlayer)
+			serverPlayer.sendSystemMessage(Component.translatable("entity." + ExampleModCommon.MODID + ".mutant_zombie.equip", stack.getDisplayName()));
 
 		if (slot == EquipmentSlot.MAINHAND || slot == EquipmentSlot.OFFHAND)
 			triggerAnim(getLeftHand() == hand ? "Left Hand" : "Right Hand", "interact");
