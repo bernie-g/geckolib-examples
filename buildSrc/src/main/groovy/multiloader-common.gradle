@@ -50,9 +50,9 @@ repositories {
 
 ['apiElements', 'runtimeElements', 'sourcesElements', 'javadocElements'].each { variant ->
     configurations."$variant".outgoing {
-        capability("$group:${base.archivesName.get()}:$version")
-        capability("$group:$mod_id-${project.name}-${minecraft_version}:$version")
-        capability("$group:$mod_id:$version")
+        capability("software.bernie.geckolib:${base.archivesName.get()}:$version")
+        capability("software.bernie.geckolib:$mod_id-${project.name}-${minecraft_version}:$version")
+        capability("software.bernie.geckolib:$mod_id:$version")
     }
     publishing.publications.configureEach {
         suppressPomMetadataWarningsFor(variant)
