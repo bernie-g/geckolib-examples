@@ -5,8 +5,10 @@ import com.example.examplemod.client.renderer.entity.FakeGlassRenderer;
 import com.example.examplemod.entity.FakeGlassEntity;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.model.GeoModel;
+import software.bernie.geckolib.renderer.GeoRenderer;
 
 /**
  * Example {@link GeoModel} for the {@link FakeGlassEntity}
@@ -22,7 +24,7 @@ public class FakeGlassModel extends DefaultedEntityGeoModel<FakeGlassEntity> {
 
 	// We just want our texture to be the Redstone Block texture
 	@Override
-	public ResourceLocation getTextureResource(FakeGlassEntity animatable) {
+	public ResourceLocation getTextureResource(FakeGlassEntity animatable, @Nullable GeoRenderer<FakeGlassEntity> renderer) {
 		return REDSTONE_BLOCK_TEXTURE;
 	}
 

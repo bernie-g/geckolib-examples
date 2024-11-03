@@ -20,6 +20,6 @@ public class ParasiteModel extends DefaultedEntityGeoModel<ParasiteEntity> {
 	// We want our model to render using the translucent render type
 	@Override
 	public RenderType getRenderType(ParasiteEntity animatable, ResourceLocation texture) {
-		return RenderType.entityTranslucent(getTextureResource(animatable));
+		return RenderType.entityTranslucent(texture);
 	}
 }

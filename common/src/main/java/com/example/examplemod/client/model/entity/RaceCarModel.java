@@ -20,6 +20,6 @@ public class RaceCarModel extends DefaultedEntityGeoModel<RaceCarEntity> {
 	// We want our model to render using the translucent render type
 	@Override
 	public RenderType getRenderType(RaceCarEntity animatable, ResourceLocation texture) {
-		return RenderType.entityTranslucent(getTextureResource(animatable));
+		return RenderType.entityTranslucent(texture);
 	}
 }

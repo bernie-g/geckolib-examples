@@ -20,6 +20,6 @@ public class GeckoHabitatModel extends DefaultedBlockGeoModel<GeckoHabitatBlockE
 
 	@Override
 	public RenderType getRenderType(GeckoHabitatBlockEntity animatable, ResourceLocation texture) {
-		return RenderType.entityTranslucent(getTextureResource(animatable));
+		return RenderType.entityTranslucent(texture);
 	}
 }

@@ -5,8 +5,10 @@ import com.example.examplemod.block.entity.FertilizerBlockEntity;
 import com.example.examplemod.client.renderer.block.FertilizerBlockRenderer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.model.DefaultedBlockGeoModel;
 import software.bernie.geckolib.model.GeoModel;
+import software.bernie.geckolib.renderer.GeoRenderer;
 
 /**
  * Example {@link GeoModel} for the {@link FertilizerBlockEntity}
@@ -39,9 +41,9 @@ public class FertilizerModel extends DefaultedBlockGeoModel<FertilizerBlockEntit
 	 * Return the fertilizer model path if it's raining, or the botarium model path if not.
 	 */
 	@Override
-	public ResourceLocation getModelResource(FertilizerBlockEntity animatable) {
+	public ResourceLocation getModelResource(FertilizerBlockEntity animatable, @Nullable GeoRenderer<FertilizerBlockEntity> renderer) {
 		if (animatable.getLevel().isRaining()) {
-			return super.getModelResource(animatable);
+			return super.getModelResource(animatable, renderer);
 		}
 		else {
 			return BOTARIUM_MODEL;
@@ -52,9 +54,9 @@ public class FertilizerModel extends DefaultedBlockGeoModel<FertilizerBlockEntit
 	 * Return the fertilizer texture path if it's raining, or the botarium texture path if not.
 	 */
 	@Override
-	public ResourceLocation getTextureResource(FertilizerBlockEntity animatable) {
+	public ResourceLocation getTextureResource(FertilizerBlockEntity animatable, @Nullable GeoRenderer<FertilizerBlockEntity> renderer) {
 		if (animatable.getLevel().isRaining()) {
-			return super.getTextureResource(animatable);
+			return super.getTextureResource(animatable, renderer);
 		}
 		else {
 			return BOTARIUM_TEXTURE;
@@ -63,6 +65,6 @@ public class FertilizerModel extends DefaultedBlockGeoModel<FertilizerBlockEntit
 
 	@Override
 	public RenderType getRenderType(FertilizerBlockEntity animatable, ResourceLocation texture) {
-		return RenderType.entityTranslucent(getTextureResource(animatable));
+		return RenderType.entityTranslucent(texture);
 	}
 }

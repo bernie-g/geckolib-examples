@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.object.Color;
 import software.bernie.geckolib.renderer.GeoRenderer;
@@ -28,10 +29,11 @@ public class CoolKidGlassesLayer extends GeoRenderLayer<CoolKidEntity> {
 
     // Apply the glasses texture layer to the existing geo model, and render it over the top of the existing model
     @Override
-    public void render(PoseStack poseStack, CoolKidEntity animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
+    public void render(PoseStack poseStack, CoolKidEntity animatable, BakedGeoModel bakedModel, @Nullable RenderType renderType,
+                       MultiBufferSource bufferSource, @Nullable VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay, int renderColor) {
         RenderType armorRenderType = RenderType.armorCutoutNoCull(TEXTURE);
 
-        getRenderer().reRender(getDefaultBakedModel(animatable), poseStack, bufferSource, animatable, armorRenderType,
+        getRenderer().reRender(getDefaultBakedModel(animatable, getRenderer()), poseStack, bufferSource, animatable, armorRenderType,
                 bufferSource.getBuffer(armorRenderType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
                 Color.WHITE.argbInt());
     }

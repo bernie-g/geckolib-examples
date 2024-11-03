@@ -20,6 +20,6 @@ public class BikeModel extends DefaultedEntityGeoModel<BikeEntity> {
 	// We want this entity to have a translucent render
 	@Override
 	public RenderType getRenderType(BikeEntity animatable, ResourceLocation texture) {
-		return RenderType.entityTranslucent(getTextureResource(animatable));
+		return RenderType.entityTranslucent(texture);
 	}
 }

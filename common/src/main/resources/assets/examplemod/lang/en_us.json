@@ -1,7 +1,9 @@
 {
   "block.examplemod.fertilizer": "Fertilizer",
-  "block.examplemod.fertilizer.tooltip": "Turn on rain to see the fertilizer model!",
+  "item.examplemod.fertilizer": "Fertilizer",
+  "item.examplemod.fertilizer.tooltip": "Turn on rain to see the fertilizer model!",
   "block.examplemod.gecko_habitat": "Gecko Habitat",
+  "item.examplemod.gecko_habitat": "Fertilizer",
   "entity.examplemod.bat": "Bat",
   "entity.examplemod.bike": "Bike",
   "entity.examplemod.cool_kid": "Cool Kid",
