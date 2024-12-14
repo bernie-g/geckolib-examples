@@ -30,14 +30,14 @@ public final class ItemRegistry {
 	public static final Supplier<GeckoArmorItem> GECKO_ARMOR_LEGGINGS = registerItem("gecko_armor_leggings", properties -> new GeckoArmorItem(ArmorMaterialRegistry.GECKO_ARMOR_MATERIAL, ArmorType.LEGGINGS, properties));
 	public static final Supplier<GeckoArmorItem> GECKO_ARMOR_BOOTS = registerItem("gecko_armor_boots", properties -> new GeckoArmorItem(ArmorMaterialRegistry.GECKO_ARMOR_MATERIAL, ArmorType.BOOTS, properties));
     
-    public static final Supplier<SpawnEggItem> BAT_SPAWN_EGG = registerItem("bat_spawn_egg", properties -> ExampleModCommon.COMMON_PLATFORM.makeSpawnEggFor(EntityRegistry.BAT, 0x1F1F1F, 0x0D0D0D, properties));
-    public static final Supplier<SpawnEggItem> BIKE_SPAWN_EGG = registerItem("bike_spawn_egg", properties -> ExampleModCommon.COMMON_PLATFORM.makeSpawnEggFor(EntityRegistry.BIKE, 0xD3E3E6, 0xE9F1F5, properties));
-    public static final Supplier<SpawnEggItem> RACE_CAR_SPAWN_EGG = registerItem("race_car_spawn_egg", properties -> ExampleModCommon.COMMON_PLATFORM.makeSpawnEggFor(EntityRegistry.RACE_CAR, 0x9E1616, 0x595959, properties));
-    public static final Supplier<SpawnEggItem> PARASITE_SPAWN_EGG = registerItem("parasite_spawn_egg", properties -> ExampleModCommon.COMMON_PLATFORM.makeSpawnEggFor(EntityRegistry.PARASITE, 0x302219, 0xACACAC, properties));
-    public static final Supplier<SpawnEggItem> MUTANT_ZOMBIE_SPAWN_EGG = registerItem("mutant_zombie_spawn_egg", properties -> ExampleModCommon.COMMON_PLATFORM.makeSpawnEggFor(EntityRegistry.MUTANT_ZOMBIE, 0x3C6236, 0x579989, properties));
-    public static final Supplier<SpawnEggItem> FAKE_GLASS_SPAWN_EGG = registerItem("fake_glass_spawn_egg", properties -> ExampleModCommon.COMMON_PLATFORM.makeSpawnEggFor(EntityRegistry.FAKE_GLASS, 0xDD0000, 0xD8FFF7, properties));
-    public static final Supplier<SpawnEggItem> COOL_KID_SPAWN_EGG = registerItem("cool_kid_spawn_egg", properties -> ExampleModCommon.COMMON_PLATFORM.makeSpawnEggFor(EntityRegistry.COOL_KID, 0x5F2A31, 0x6F363E, properties));
-    public static final Supplier<SpawnEggItem> GREMLIN_SPAWN_EGG = registerItem("gremlin_spawn_egg", properties -> ExampleModCommon.COMMON_PLATFORM.makeSpawnEggFor(EntityRegistry.GREMLIN, 0x505050, 0x606060, properties));
+    public static final Supplier<SpawnEggItem> BAT_SPAWN_EGG = registerItem("bat_spawn_egg", properties -> new SpawnEggItem(EntityRegistry.BAT.get(), properties));
+    public static final Supplier<SpawnEggItem> BIKE_SPAWN_EGG = registerItem("bike_spawn_egg", properties -> new SpawnEggItem(EntityRegistry.BIKE.get(), properties));
+	public static final Supplier<SpawnEggItem> COOL_KID_SPAWN_EGG = registerItem("cool_kid_spawn_egg", properties -> new SpawnEggItem(EntityRegistry.COOL_KID.get(), properties));
+	public static final Supplier<SpawnEggItem> FAKE_GLASS_SPAWN_EGG = registerItem("fake_glass_spawn_egg", properties -> new SpawnEggItem(EntityRegistry.FAKE_GLASS.get(), properties));
+	public static final Supplier<SpawnEggItem> GREMLIN_SPAWN_EGG = registerItem("gremlin_spawn_egg", properties -> new SpawnEggItem(EntityRegistry.GREMLIN.get(), properties));
+	public static final Supplier<SpawnEggItem> MUTANT_ZOMBIE_SPAWN_EGG = registerItem("mutant_zombie_spawn_egg", properties -> new SpawnEggItem(EntityRegistry.MUTANT_ZOMBIE.get(), properties));
+	public static final Supplier<SpawnEggItem> PARASITE_SPAWN_EGG = registerItem("parasite_spawn_egg", properties -> new SpawnEggItem(EntityRegistry.PARASITE.get(), properties));
+	public static final Supplier<SpawnEggItem> RACE_CAR_SPAWN_EGG = registerItem("race_car_spawn_egg", properties -> new SpawnEggItem(EntityRegistry.RACE_CAR.get(), properties));
 
 	private static <T extends Item> Supplier<T> registerItem(String id, Function<Item.Properties, T> item) {
 		return ExampleModCommon.COMMON_PLATFORM.registerItem(id, item);

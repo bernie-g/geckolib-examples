@@ -49,11 +49,11 @@ public class MutantZombieRenderer extends DynamicGeoEntityRenderer<DynamicExampl
 	protected ItemStack mainHandItem;
 	protected ItemStack offhandItem;
 
-	public MutantZombieRenderer(EntityRendererProvider.Context renderManager) {
-		super(renderManager, new MutantZombieModel());
+	public MutantZombieRenderer(EntityRendererProvider.Context context) {
+		super(context, new MutantZombieModel());
 
 		// Add some armor rendering
-		addRenderLayer(new ItemArmorGeoLayer<>(this) {
+		addRenderLayer(new ItemArmorGeoLayer<>(this, context.getEquipmentRenderer()) {
 			@Nullable
 			@Override
 			protected ItemStack getArmorItemForBone(GeoBone bone, DynamicExampleEntity animatable) {

@@ -45,11 +45,11 @@ public class GremlinRenderer extends DynamicGeoEntityRenderer<DynamicExampleEnti
 	protected ItemStack mainHandItem;
 	protected ItemStack offhandItem;
 
-	public GremlinRenderer(EntityRendererProvider.Context renderManager) {
-		super(renderManager, new GremlinModel());
+	public GremlinRenderer(EntityRendererProvider.Context context) {
+		super(context, new GremlinModel());
 
 		// Add some armor rendering
-		addRenderLayer(new ItemArmorGeoLayer<>(this) {
+		addRenderLayer(new ItemArmorGeoLayer<>(this, context.getEquipmentRenderer()) {
 			@Nullable
 			@Override
 			protected ItemStack getArmorItemForBone(GeoBone bone, DynamicExampleEntity animatable) {

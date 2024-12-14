@@ -2,7 +2,6 @@ package com.example.examplemod.item;
 
 import com.example.examplemod.client.renderer.item.JackInTheBoxRenderer;
 import com.example.examplemod.registry.SoundRegistry;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -18,6 +17,7 @@ import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.animation.RawAnimation;
+import software.bernie.geckolib.renderer.GeoItemRenderer;
 import software.bernie.geckolib.util.ClientUtil;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
@@ -46,7 +46,7 @@ public final class JackInTheBoxItem extends Item implements GeoItem {
 
 			@Override
 			@Nullable
-			public BlockEntityWithoutLevelRenderer getGeoItemRenderer() {
+			public GeoItemRenderer<JackInTheBoxItem> getGeoItemRenderer() {
 				if (this.renderer == null)
 					this.renderer = new JackInTheBoxRenderer();
 				// Defer creation of our renderer then cache it so that it doesn't get instantiated too early

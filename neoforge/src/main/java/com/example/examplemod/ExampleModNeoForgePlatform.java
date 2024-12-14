@@ -7,15 +7,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -49,11 +46,6 @@ public class ExampleModNeoForgePlatform implements ExampleModPlatform {
     @Override
     public <T extends CreativeModeTab> Supplier<T> registerCreativeModeTab(String id, Supplier<T> tab) {
         return ExampleModNeoForge.CREATIVE_TABS.register(id, tab);
-    }
-
-    @Override
-    public <E extends Mob> SpawnEggItem makeSpawnEggFor(Supplier<EntityType<E>> entityType, int primaryEggColour, int secondaryEggColour, Item.Properties itemProperties) {
-        return new DeferredSpawnEggItem(entityType, primaryEggColour, secondaryEggColour, itemProperties);
     }
 
     @Override

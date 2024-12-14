@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "examplemod:item/jack_in_the_box",
+    "model": {
+      "type": "geckolib:geckolib"
+    }
+  }
+}

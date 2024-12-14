@@ -2,27 +2,27 @@
   "variants": {
     "facing=north": {
       "y": 0,
-      "model": "examplemod:block/box"
+      "model": "examplemod:block/gecko_habitat"
     },
     "facing=south": {
       "y": 180,
-      "model": "examplemod:block/box"
+      "model": "examplemod:block/gecko_habitat"
     },
     "facing=east": {
       "y": 180,
-      "model": "examplemod:block/box"
+      "model": "examplemod:block/gecko_habitat"
     },
     "facing=west": {
       "y": 180,
-      "model": "examplemod:block/box"
+      "model": "examplemod:block/gecko_habitat"
     },
     "facing=up": {
       "y": 0,
-      "model": "examplemod:block/box"
+      "model": "examplemod:block/gecko_habitat"
     },
     "facing=down": {
       "y": 0,
-      "model": "examplemod:block/box"
+      "model": "examplemod:block/gecko_habitat"
     }
   }
 }
