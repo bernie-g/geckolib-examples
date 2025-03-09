@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "examplemod:item/wolf_armor_chestplate"
+    "model": "examplemod:item/wolf_armor_boots"
   }
 }
