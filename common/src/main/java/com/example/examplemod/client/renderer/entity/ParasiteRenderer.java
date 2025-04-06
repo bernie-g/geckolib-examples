@@ -3,14 +3,16 @@ package com.example.examplemod.client.renderer.entity;
 import com.example.examplemod.client.model.entity.ParasiteModel;
 import com.example.examplemod.entity.ParasiteEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
+import software.bernie.geckolib.renderer.base.GeoRenderState;
 
 /**
- * Example {@link software.bernie.geckolib.renderer.GeoRenderer} implementation of an entity
+ * Example {@link GeoEntityRenderer} implementation of an entity
  * @see ParasiteModel
  * @see ParasiteEntity
  */
-public class ParasiteRenderer extends GeoEntityRenderer<ParasiteEntity> {
+public class ParasiteRenderer<R extends LivingEntityRenderState & GeoRenderState> extends GeoEntityRenderer<ParasiteEntity, R> {
 	public ParasiteRenderer(EntityRendererProvider.Context renderManager) {
 		super(renderManager, new ParasiteModel());
 	}

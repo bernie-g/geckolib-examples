@@ -12,8 +12,8 @@ import net.minecraft.world.phys.Vec3;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimatableManager;
-import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
+import software.bernie.geckolib.animatable.processing.AnimationController;
 import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.util.ClientUtil;
 import software.bernie.geckolib.util.GeckoLibUtil;
@@ -52,16 +52,16 @@ public class BatEntity extends PathfinderMob implements GeoEntity {
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
 		controllers.add(
 				// Add our flying animation controller
-				new AnimationController<>(this, 10, state -> state.setAndContinue(this.isFlying ? DefaultAnimations.FLY : DefaultAnimations.IDLE))
+				new AnimationController<>(10, state -> state.setAndContinue(this.isFlying ? DefaultAnimations.FLY : DefaultAnimations.IDLE))
 						// Handle the custom instruction keyframe that is part of our animation json
-						.setCustomInstructionKeyframeHandler(state -> {
+						.setCustomInstructionKeyframeHandler(animTest -> {
 							Player player = ClientUtil.getClientPlayer();
 
 							if (player != null)
 								player.displayClientMessage(Component.literal("KeyFraming"), true);
 						}),
 				// Add our generic living animation controller
-				DefaultAnimations.genericLivingController(this)
+				DefaultAnimations.genericLivingController()
 		);
 	}
 

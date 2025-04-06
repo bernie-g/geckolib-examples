@@ -8,8 +8,8 @@ import net.minecraft.world.level.Level;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimatableManager;
-import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
+import software.bernie.geckolib.animatable.processing.AnimationController;
 import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
@@ -33,7 +33,7 @@ public class CoolKidEntity extends PathfinderMob implements GeoEntity {
     // Add a generic idle controller, with a 5-tick transition time
 	@Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "idle", 5, state -> state.setAndContinue(DefaultAnimations.IDLE)));
+        controllers.add(new AnimationController<>("idle", 5, animTest -> animTest.setAndContinue(DefaultAnimations.IDLE)));
     }
 
     @Override

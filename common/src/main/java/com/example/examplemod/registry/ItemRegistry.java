@@ -1,10 +1,7 @@
 package com.example.examplemod.registry;
 
 import com.example.examplemod.ExampleModCommon;
-import com.example.examplemod.item.GeckoArmorItem;
-import com.example.examplemod.item.GeckoHabitatItem;
-import com.example.examplemod.item.JackInTheBoxItem;
-import com.example.examplemod.item.WolfArmorItem;
+import com.example.examplemod.item.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.equipment.ArmorType;
@@ -16,7 +13,7 @@ public final class ItemRegistry {
 	public static void init() {}
 
 	public static final Supplier<BlockItem> GECKO_HABITAT = registerItem("gecko_habitat", properties -> new GeckoHabitatItem(BlockRegistry.GECKO_HABITAT.get(), properties));
-	public static final Supplier<BlockItem> FERTILIZER = registerItem("fertilizer", properties -> new BlockItem(BlockRegistry.FERTILIZER.get(), properties));
+	public static final Supplier<BlockItem> FERTILIZER = registerItem("fertilizer", properties -> new FertilizerItem(BlockRegistry.FERTILIZER.get(), properties));
 
 	public static final Supplier<JackInTheBoxItem> JACK_IN_THE_BOX = registerItem("jack_in_the_box", JackInTheBoxItem::new);
 

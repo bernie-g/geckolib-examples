@@ -1,14 +1,9 @@
 package com.example.examplemod.block;
 
-import com.example.examplemod.ExampleModCommon;
 import com.example.examplemod.block.entity.FertilizerBlockEntity;
 import com.example.examplemod.registry.BlockEntityRegistry;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DirectionalBlock;
@@ -18,8 +13,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 /**
  * Example animated block using GeckoLib animations.<br>
@@ -53,12 +46,5 @@ public class FertilizerBlock extends DirectionalBlock implements EntityBlock {
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		return defaultBlockState().setValue(FACING, context.getNearestLookingDirection().getOpposite());
-	}
-
-	@Override
-	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
-		tooltip.add(Component.translatable("item." + ExampleModCommon.MODID + ".fertilizer.tooltip"));
-
-		super.appendHoverText(stack, context, tooltip, tooltipFlag);
 	}
 }

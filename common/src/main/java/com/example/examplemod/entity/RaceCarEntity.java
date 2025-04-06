@@ -4,7 +4,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -15,8 +18,8 @@ import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimatableManager;
-import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
+import software.bernie.geckolib.animatable.processing.AnimationController;
 import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
@@ -81,7 +84,7 @@ public class RaceCarEntity extends Animal implements GeoEntity {
 	}
 
 	@Override
-	public boolean isControlledByLocalInstance() {
+	public boolean canSimulateMovement() {
 		return true;
 	}
 
@@ -98,12 +101,12 @@ public class RaceCarEntity extends Animal implements GeoEntity {
 	// Add our idle/moving animation controller
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-		controllers.add(new AnimationController<>(this, "controller", 2, state -> {
-			if (state.isMoving() && getControllingPassenger() != null) {
-				return state.setAndContinue(DefaultAnimations.DRIVE);
+		controllers.add(new AnimationController<>("controller", 2, animTest -> {
+			if (animTest.isMoving() && getControllingPassenger() != null) {
+				return animTest.setAndContinue(DefaultAnimations.DRIVE);
 			}
 			else {
-				return state.setAndContinue(DefaultAnimations.IDLE);
+				return animTest.setAndContinue(DefaultAnimations.IDLE);
 			}
 			// Handle the sound keyframe that is part of our animation json
 		}).setSoundKeyframeHandler(event -> {

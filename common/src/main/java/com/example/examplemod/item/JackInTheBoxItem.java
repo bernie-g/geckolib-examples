@@ -13,8 +13,8 @@ import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
 import software.bernie.geckolib.animatable.client.GeoRenderProvider;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimatableManager;
-import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
+import software.bernie.geckolib.animatable.processing.AnimationController;
 import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.renderer.GeoItemRenderer;
@@ -59,7 +59,7 @@ public final class JackInTheBoxItem extends Item implements GeoItem {
 	// Let's add our animation controller
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-		controllers.add(new AnimationController<>(this, "popup_controller", 20, state -> PlayState.STOP)
+		controllers.add(new AnimationController<>("popup_controller", 20, animTest -> PlayState.STOP)
 				.triggerableAnim("box_open", POPUP_ANIM)
 				// We've marked the "box_open" animation as being triggerable from the server
 				.setSoundKeyframeHandler(state -> {

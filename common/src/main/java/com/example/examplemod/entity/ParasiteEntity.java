@@ -10,7 +10,7 @@ import net.minecraft.world.level.Level;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
 import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
@@ -38,8 +38,8 @@ public class ParasiteEntity extends Monster implements GeoEntity {
 	// Add our animations
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-		controllers.add(DefaultAnimations.genericWalkIdleController(this));
-		controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_STRIKE));
+		controllers.add(DefaultAnimations.genericWalkIdleController());
+		controllers.add(DefaultAnimations.genericAttackAnimation(DefaultAnimations.ATTACK_STRIKE));
 	}
 
 	@Override

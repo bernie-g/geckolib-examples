@@ -17,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
 import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
@@ -84,14 +84,14 @@ public class BikeEntity extends Animal implements GeoEntity {
 	}
 
 	@Override
-	public boolean isControlledByLocalInstance() {
+	public boolean canSimulateMovement() {
 		return true;
 	}
 
 	// Add our generic idle animation controller
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-		controllers.add(DefaultAnimations.genericIdleController(this));
+		controllers.add(DefaultAnimations.genericIdleController());
 	}
 
 	@Override

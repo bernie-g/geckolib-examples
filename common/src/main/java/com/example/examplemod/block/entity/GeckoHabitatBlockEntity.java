@@ -8,9 +8,10 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimatableManager;
-import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
+import software.bernie.geckolib.animatable.processing.AnimationController;
 import software.bernie.geckolib.constant.DefaultAnimations;
+import software.bernie.geckolib.constant.dataticket.DataTicket;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 /**
@@ -21,6 +22,9 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 public class GeckoHabitatBlockEntity extends BlockEntity implements GeoBlockEntity {
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
+	// We register a new DataTicket under our modid to use for holding the daytime predicate for later
+	public static final DataTicket<Long> DAY_TIME = DataTicket.create("examplemod_day_time", Long.class);
+
 	public GeckoHabitatBlockEntity(BlockPos pos, BlockState state) {
 		super(BlockEntityRegistry.GECKO_HABITAT.get(), pos, state);
 	}
@@ -29,12 +33,14 @@ public class GeckoHabitatBlockEntity extends BlockEntity implements GeoBlockEnti
 	// But if it's day time we want him to take a nap
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-		controllers.add(new AnimationController<>(this, state -> {
-			if (getLevel().getDayTime() > 23000 || getLevel().getDayTime() < 13000) {
-				return state.setAndContinue(DefaultAnimations.REST);
+		controllers.add(new AnimationController<>(animTest -> {
+			long dayTime = animTest.getData(DAY_TIME);
+
+			if (dayTime > 23000 || dayTime < 13000) {
+				return animTest.setAndContinue(DefaultAnimations.REST);
 			}
 			else {
-				return state.setAndContinue(DefaultAnimations.IDLE);
+				return animTest.setAndContinue(DefaultAnimations.IDLE);
 			}
 		}));
 	}

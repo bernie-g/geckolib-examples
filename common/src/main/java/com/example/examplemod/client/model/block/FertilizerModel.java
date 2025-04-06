@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.model.DefaultedBlockGeoModel;
 import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.renderer.GeoRenderer;
+import software.bernie.geckolib.renderer.base.GeoRenderState;
 
 /**
  * Example {@link GeoModel} for the {@link FertilizerBlockEntity}
@@ -22,6 +22,12 @@ public class FertilizerModel extends DefaultedBlockGeoModel<FertilizerBlockEntit
 
 	public FertilizerModel() {
 		super(ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, "fertilizer"));
+	}
+
+	// We add the `examplemod_is_raining` DataTicket so it can be used later
+	@Override
+	public void addAdditionalStateData(FertilizerBlockEntity animatable, GeoRenderState renderState) {
+		renderState.addGeckolibData(FertilizerBlockEntity.IS_RAINING, animatable.getLevel().isRaining());
 	}
 
 	/**
@@ -41,9 +47,9 @@ public class FertilizerModel extends DefaultedBlockGeoModel<FertilizerBlockEntit
 	 * Return the fertilizer model path if it's raining, or the botarium model path if not.
 	 */
 	@Override
-	public ResourceLocation getModelResource(FertilizerBlockEntity animatable, @Nullable GeoRenderer<FertilizerBlockEntity> renderer) {
-		if (animatable.getLevel().isRaining()) {
-			return super.getModelResource(animatable, renderer);
+	public ResourceLocation getModelResource(GeoRenderState renderState) {
+		if (renderState.getGeckolibData(FertilizerBlockEntity.IS_RAINING)) {
+			return super.getModelResource(renderState);
 		}
 		else {
 			return BOTARIUM_MODEL;
@@ -54,9 +60,9 @@ public class FertilizerModel extends DefaultedBlockGeoModel<FertilizerBlockEntit
 	 * Return the fertilizer texture path if it's raining, or the botarium texture path if not.
 	 */
 	@Override
-	public ResourceLocation getTextureResource(FertilizerBlockEntity animatable, @Nullable GeoRenderer<FertilizerBlockEntity> renderer) {
-		if (animatable.getLevel().isRaining()) {
-			return super.getTextureResource(animatable, renderer);
+	public ResourceLocation getTextureResource(GeoRenderState renderState) {
+		if (renderState.getGeckolibData(FertilizerBlockEntity.IS_RAINING)) {
+			return super.getTextureResource(renderState);
 		}
 		else {
 			return BOTARIUM_TEXTURE;
@@ -64,7 +70,7 @@ public class FertilizerModel extends DefaultedBlockGeoModel<FertilizerBlockEntit
 	}
 
 	@Override
-	public RenderType getRenderType(FertilizerBlockEntity animatable, ResourceLocation texture) {
+	public @Nullable RenderType getRenderType(GeoRenderState renderState, ResourceLocation texture) {
 		return RenderType.entityTranslucent(texture);
 	}
 }

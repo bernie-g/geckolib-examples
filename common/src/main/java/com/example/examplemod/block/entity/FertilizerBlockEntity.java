@@ -8,9 +8,10 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimatableManager;
-import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
+import software.bernie.geckolib.animatable.processing.AnimationController;
 import software.bernie.geckolib.animation.RawAnimation;
+import software.bernie.geckolib.constant.dataticket.DataTicket;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 /**
@@ -20,6 +21,9 @@ import software.bernie.geckolib.util.GeckoLibUtil;
  */
 public class FertilizerBlockEntity extends BlockEntity implements GeoBlockEntity {
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+	// We register a new DataTicket under our modid to use for holding the raining predicate for later
+	public static final DataTicket<Boolean> IS_RAINING = DataTicket.create("examplemod_is_raining", Boolean.class);
 
 	// We statically instantiate our RawAnimations for efficiency, consistency, and error-proofing
 	private static final RawAnimation FERTILIZER_ANIMS = RawAnimation.begin().thenPlay("fertilizer.deploy").thenLoop("fertilizer.idle");
@@ -34,11 +38,11 @@ public class FertilizerBlockEntity extends BlockEntity implements GeoBlockEntity
 	// or switch to a botarium if it's not.
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-		controllers.add(new AnimationController<>(this, state -> {
-			if (state.getAnimatable().getLevel().isRaining())
-				return state.setAndContinue(FERTILIZER_ANIMS);
+		controllers.add(new AnimationController<>(animTest -> {
+			if (animTest.getData(IS_RAINING))
+				return animTest.setAndContinue(FERTILIZER_ANIMS);
 
-			return state.setAndContinue(BOTARIUM_ANIMS);
+			return animTest.setAndContinue(BOTARIUM_ANIMS);
 		}));
 	}
 

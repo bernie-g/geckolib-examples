@@ -15,14 +15,18 @@ import net.minecraft.world.level.Level;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.*;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
+import software.bernie.geckolib.animatable.processing.AnimationController;
+import software.bernie.geckolib.animatable.processing.AnimationTest;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.constant.DefaultAnimations;
+import software.bernie.geckolib.constant.dataticket.DataTicket;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 /**
  * Example extended-support entity for GeckoLib advanced rendering
  *
- * @see software.bernie.geckolib.renderer.specialty.DynamicGeoEntityRenderer DynamicGeoEntityRenderer
  * @see com.example.examplemod.client.renderer.entity.MutantZombieRenderer MutantZombieRenderer
  * @see com.example.examplemod.client.renderer.entity.GremlinRenderer GremlinRenderer
  */
@@ -37,6 +41,10 @@ public class DynamicExampleEntity extends PathfinderMob implements GeoEntity {
 	private static final RawAnimation INTERACT_LEFT = RawAnimation.begin().thenPlay("misc.interact.right");
 	private static final RawAnimation INTERACT_RIGHT = RawAnimation.begin().thenPlay("misc.interact.right");
 	private static final RawAnimation SPEAR_SWING = RawAnimation.begin().thenPlay("attack.spear");
+
+	public static final DataTicket<ItemStack> MAINHAND_ITEM = DataTicket.create("examplemod_mainhand_item", ItemStack.class);
+	public static final DataTicket<ItemStack> OFFHAND_ITEM = DataTicket.create("offhand_mainhand_item", ItemStack.class);
+	public static final DataTicket<Boolean> LEFT_HANDED = DataTicket.create("offhand_left_handed", Boolean.class);
 
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
@@ -53,34 +61,33 @@ public class DynamicExampleEntity extends PathfinderMob implements GeoEntity {
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
 		controllers.add(
-				DefaultAnimations.genericIdleController(this),
-				new AnimationController<>(this, "Body", 20, this::poseBody),
-				new AnimationController<>(this, "Left Hand", 10, state -> predicateHandPose(getLeftHand(), state))
+				DefaultAnimations.genericIdleController(),
+				new AnimationController<>("Body", 20, this::poseBody),
+				new AnimationController<DynamicExampleEntity>("Left Hand", 10, animTest -> predicateHandPose(getLeftHand(), animTest))
 						.triggerableAnim("interact", INTERACT_LEFT),
-				new AnimationController<>(this, "Right Hand", 10, state -> predicateHandPose(getRightHand(), state))
+				new AnimationController<DynamicExampleEntity>("Right Hand", 10, animTest -> predicateHandPose(getRightHand(), animTest))
 						.triggerableAnim("interact", INTERACT_RIGHT),
-				new AnimationController<>(this, "Dual Wield Pose", 10, this::poseDualWield),
-				new AnimationController<>(this, "Dual Wield Attack", 10, this::attackDualWield)
+				new AnimationController<>("Dual Wield Pose", 10, this::poseDualWield),
+				new AnimationController<>("Dual Wield Attack", 10, this::attackDualWield)
 		);
 	}
 
 	// Create the animation handler for the body segment
-	protected PlayState poseBody(AnimationState<DynamicExampleEntity> state) {
+	protected PlayState poseBody(AnimationTest<DynamicExampleEntity> state) {
 		if (isWieldingTwoHandedWeapon())
 			return PlayState.STOP;
 
-		if (isPassenger()) {
-			state.setAnimation(DefaultAnimations.SIT);
-		}
-		else if (isCrouching()) {
-			state.setAnimation(DefaultAnimations.SNEAK);
-		}
+		if (isPassenger())
+			return state.setAndContinue(DefaultAnimations.SIT);
 
-		return PlayState.CONTINUE;
+		if (isCrouching())
+			return state.setAndContinue(DefaultAnimations.SNEAK);
+
+		return PlayState.STOP;
 	}
 
 	// Create the animation handler for each hand
-	protected PlayState predicateHandPose(InteractionHand hand, AnimationState<DynamicExampleEntity> state) {
+	protected PlayState predicateHandPose(InteractionHand hand, AnimationTest<DynamicExampleEntity> state) {
 		ItemStack heldStack = getItemInHand(hand);
 
 		if (heldStack.isEmpty() || isWieldingTwoHandedWeapon())
@@ -95,30 +102,32 @@ public class DynamicExampleEntity extends PathfinderMob implements GeoEntity {
 	}
 
 	// Create the animation handler for posing with a dual-wielded weapon
-	private  PlayState poseDualWield(AnimationState<DynamicExampleEntity> state) {
+	private PlayState poseDualWield(AnimationTest<DynamicExampleEntity> state) {
 		if (!isWieldingTwoHandedWeapon())
 			return PlayState.STOP;
 
-		for (ItemStack heldStack : getHandSlots()) {
+		for (InteractionHand hand : new InteractionHand[] {InteractionHand.MAIN_HAND, InteractionHand.OFF_HAND}) {
+			ItemStack heldStack = getItemInHand(hand);
 			ItemUseAnimation useAnim = heldStack.getItem().getUseAnimation(heldStack);
 
-			if (useAnim == ItemUseAnimation.BOW || useAnim == ItemUseAnimation.CROSSBOW) {
+			if (useAnim == ItemUseAnimation.BOW || useAnim == ItemUseAnimation.CROSSBOW)
 				return state.setAndContinue(isLeftHanded() ? AIM_LEFT_HAND : AIM_RIGHT_HAND);
-			}
-			else if (useAnim == ItemUseAnimation.SPEAR) {
+
+			if (useAnim == ItemUseAnimation.SPEAR)
 				return state.setAndContinue(isLeftHanded() ? SPEAR_LEFT_HAND : SPEAR_RIGHT_HAND);
-			}
 		}
 
 		return PlayState.STOP;
 	}
 
 	// Create the animation handler for attacking with a dual-wielded weapon
-	private <E extends GeoAnimatable> PlayState attackDualWield(AnimationState<E> state) {
+	private <E extends GeoAnimatable> PlayState attackDualWield(AnimationTest<E> state) {
 		if (!this.swinging || !isWieldingTwoHandedWeapon())
 			return PlayState.STOP;
 
-		for (ItemStack heldStack : getHandSlots()) {
+		for (InteractionHand hand : new InteractionHand[] {InteractionHand.MAIN_HAND, InteractionHand.OFF_HAND}) {
+			ItemStack heldStack = getItemInHand(hand);
+
 			if (heldStack.getItem().getUseAnimation(heldStack) == ItemUseAnimation.SPEAR)
 				return state.setAndContinue(SPEAR_SWING);
 		}

@@ -12,7 +12,7 @@
 			},
 			"bones": [
 				{
-					"name": "inner_glass",
+					"name": "inner_cube",
 					"pivot": [0, 0, 0],
 					"cubes": [
 						{
@@ -31,7 +31,7 @@
 				},
 				{
 					"name": "outer_glass",
-					"parent": "inner_glass",
+					"parent": "inner_cube",
 					"pivot": [0, 0, 0],
 					"cubes": [
 						{

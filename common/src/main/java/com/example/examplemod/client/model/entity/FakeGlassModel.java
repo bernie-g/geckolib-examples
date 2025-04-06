@@ -3,12 +3,10 @@ package com.example.examplemod.client.model.entity;
 import com.example.examplemod.ExampleModCommon;
 import com.example.examplemod.client.renderer.entity.FakeGlassRenderer;
 import com.example.examplemod.entity.FakeGlassEntity;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.renderer.GeoRenderer;
+import software.bernie.geckolib.renderer.base.GeoRenderState;
 
 /**
  * Example {@link GeoModel} for the {@link FakeGlassEntity}
@@ -24,13 +22,7 @@ public class FakeGlassModel extends DefaultedEntityGeoModel<FakeGlassEntity> {
 
 	// We just want our texture to be the Redstone Block texture
 	@Override
-	public ResourceLocation getTextureResource(FakeGlassEntity animatable, @Nullable GeoRenderer<FakeGlassEntity> renderer) {
+	public ResourceLocation getTextureResource(GeoRenderState renderState) {
 		return REDSTONE_BLOCK_TEXTURE;
-	}
-
-	// We want our entity to be translucent
-	@Override
-	public RenderType getRenderType(FakeGlassEntity animatable, ResourceLocation texture) {
-		return RenderType.entityTranslucent(texture);
 	}
 }
