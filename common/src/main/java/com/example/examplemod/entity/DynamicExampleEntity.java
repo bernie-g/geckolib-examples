@@ -21,7 +21,6 @@ import software.bernie.geckolib.animatable.processing.AnimationTest;
 import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.constant.DefaultAnimations;
-import software.bernie.geckolib.constant.dataticket.DataTicket;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 /**
@@ -41,10 +40,6 @@ public class DynamicExampleEntity extends PathfinderMob implements GeoEntity {
 	private static final RawAnimation INTERACT_LEFT = RawAnimation.begin().thenPlay("misc.interact.right");
 	private static final RawAnimation INTERACT_RIGHT = RawAnimation.begin().thenPlay("misc.interact.right");
 	private static final RawAnimation SPEAR_SWING = RawAnimation.begin().thenPlay("attack.spear");
-
-	public static final DataTicket<ItemStack> MAINHAND_ITEM = DataTicket.create("examplemod_mainhand_item", ItemStack.class);
-	public static final DataTicket<ItemStack> OFFHAND_ITEM = DataTicket.create("offhand_mainhand_item", ItemStack.class);
-	public static final DataTicket<Boolean> LEFT_HANDED = DataTicket.create("offhand_left_handed", Boolean.class);
 
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
