@@ -10,7 +10,7 @@ import software.bernie.geckolib.animatable.manager.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 /**
- * Example {@link GeoAnimatable} implementation of an entity that uses the texture-per-bone feature of {@link software.bernie.geckolib.renderer.specialty.DynamicGeoEntityRenderer DynamicGeoEntityRenderer}
+ * Example {@link GeoAnimatable} implementation
  *
  * @see com.example.examplemod.client.model.entity.FakeGlassModel FakeGlassModel
  * @see com.example.examplemod.client.renderer.entity.FakeGlassRenderer FakeGlassRenderer
