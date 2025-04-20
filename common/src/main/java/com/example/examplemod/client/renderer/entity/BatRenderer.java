@@ -35,7 +35,8 @@ public class BatRenderer<R extends LivingEntityRenderState & GeoRenderState> ext
 	// Add some particles around the ear when rendering
 	// Normally you would do this properly via the entity's tick, but for the sake of brevity in this example I've done it here
 	@Override
-	public void renderFinal(R renderState, PoseStack poseStack, BakedGeoModel model, MultiBufferSource bufferSource, @Nullable VertexConsumer buffer) {
+	public void renderFinal(R renderState, PoseStack poseStack, BakedGeoModel model, MultiBufferSource bufferSource, @Nullable VertexConsumer buffer,
+							int packedLight, int packedOverlay, int renderColor) {
 		if (this.lastParticleTick < 0 || this.lastParticleTick < renderState.ageInTicks - 1) {
 			this.lastParticleTick = (int)renderState.ageInTicks;
 
@@ -54,6 +55,6 @@ public class BatRenderer<R extends LivingEntityRenderState & GeoRenderState> ext
 			});
 		}
 
-		super.renderFinal(renderState, poseStack, model, bufferSource, buffer);
+		super.renderFinal(renderState, poseStack, model, bufferSource, buffer, packedLight, packedOverlay, renderColor);
 	}
 }

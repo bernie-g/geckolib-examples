@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 import software.bernie.geckolib.renderer.base.GeoRenderState;
+import software.bernie.geckolib.renderer.layer.CustomBoneTextureGeoLayer;
 import software.bernie.geckolib.renderer.layer.ItemArmorGeoLayer;
 import software.bernie.geckolib.renderer.layer.ItemInHandGeoLayer;
 
@@ -51,5 +52,8 @@ public class GremlinRenderer<R extends LivingEntityRenderState & GeoRenderState>
 
 		// Add some held item rendering
 		addRenderLayer(new ItemInHandGeoLayer<>(this, RIGHT_HAND, LEFT_HAND));
+
+		// Add a custom texture for the cape
+		addRenderLayer(new CustomBoneTextureGeoLayer<>(this, "bipedCape", CAPE_TEXTURE));
 	}
 }

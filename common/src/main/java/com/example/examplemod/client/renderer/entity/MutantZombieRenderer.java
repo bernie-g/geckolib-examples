@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 import software.bernie.geckolib.renderer.base.GeoRenderState;
+import software.bernie.geckolib.renderer.layer.CustomBoneTextureGeoLayer;
 import software.bernie.geckolib.renderer.layer.ItemArmorGeoLayer;
 import software.bernie.geckolib.renderer.layer.ItemInHandGeoLayer;
 
@@ -59,24 +60,7 @@ public class MutantZombieRenderer<R extends LivingEntityRenderState & GeoRenderS
 		// Add some held item rendering
 		addRenderLayer(new ItemInHandGeoLayer<>(this, RIGHT_HAND, LEFT_HAND));
 
-		// TODO per-bone texture
-		/*
-
-		addRenderLayer(new GeoRenderLayer<>(this) {
-			@Override
-			public void preRender(R renderState, PoseStack poseStack, BakedGeoModel bakedModel, @Nullable RenderType renderType, MultiBufferSource bufferSource, @Nullable VertexConsumer buffer, int packedLight, int packedOverlay, int renderColor) {
-				bakedModel.getBone("biped_cape").ifPresent(bone -> bone.setHidden(true));
-			}
-
-			@Override
-			public void render(R renderState, PoseStack poseStack, BakedGeoModel bakedModel, @Nullable RenderType renderType, MultiBufferSource bufferSource, @Nullable VertexConsumer buffer, int packedLight, int packedOverlay, int renderColor) {
-				renderType = RenderType.entityCutout(CAPE_TEXTURE);
-
-				bakedModel.getBone("inner_cube").ifPresent(bone -> bone.setHidden(true));
-				bakedModel.getBone("biped_cape").ifPresent(bone -> bone.setHidden(false));
-				getRenderer().reRender(renderState, poseStack, bakedModel, bufferSource, renderType, bufferSource.getBuffer(renderType), 15728640, packedOverlay, renderColor);
-				bakedModel.getBone("inner_cube").ifPresent(bone -> bone.setHidden(false));
-			}
-		});*/
+		// Add a custom texture for the cape
+		addRenderLayer(new CustomBoneTextureGeoLayer<>(this, "bipedCape", CAPE_TEXTURE));
 	}
 }
