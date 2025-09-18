@@ -48,7 +48,7 @@ public class BatEntity extends PathfinderMob implements GeoEntity {
 		return super.interactAt(player, hitPos, hand);
 	}
 
-	@Override
+    @Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
 		controllers.add(
 				// Add our flying animation controller
