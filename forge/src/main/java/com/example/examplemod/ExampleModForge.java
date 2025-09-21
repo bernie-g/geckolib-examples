@@ -9,7 +9,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.bus.BusGroup;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -24,15 +24,16 @@ public final class ExampleModForge {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registries.ITEM, ExampleModCommon.MODID);
 
     public ExampleModForge(FMLJavaModLoadingContext context) {
-        final IEventBus modEventBus = context.getModEventBus();
+        final BusGroup eventBusGroup = context.getModBusGroup();
 
-        SOUND_EVENTS.register(modEventBus);
-        BLOCKS.register(modEventBus);
-        BLOCK_ENTITIES.register(modEventBus);
-        ENTITIES.register(modEventBus);
-        CREATIVE_TABS.register(modEventBus);
-        ITEMS.register(modEventBus);
-        modEventBus.<EntityAttributeCreationEvent>addListener(event -> EntityRegistry.registerEntityAttributes(event::put));
+        SOUND_EVENTS.register(eventBusGroup);
+        BLOCKS.register(eventBusGroup);
+        BLOCK_ENTITIES.register(eventBusGroup);
+        ENTITIES.register(eventBusGroup);
+        CREATIVE_TABS.register(eventBusGroup);
+        ITEMS.register(eventBusGroup);
+
+        EntityAttributeCreationEvent.getBus(eventBusGroup).addListener(event -> EntityRegistry.registerEntityAttributes(event::put));
 
         ExampleModCommon.doRegistrations();
     }
