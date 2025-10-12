@@ -26,12 +26,12 @@ public final class GeckoArmorRenderer<R extends HumanoidRenderState & GeoRenderS
 	public GeckoArmorRenderer() {
 		super(new DefaultedItemGeoModel<>(ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, "armor/gecko_armor")));
 
-		addRenderLayer(new AutoGlowingGeoLayer<>(this));
+		withRenderLayer(AutoGlowingGeoLayer::new);
 	}
 
 	// Capture the worn stack data for later
 	@Override
-	public void addRenderData(GeckoArmorItem animatable, RenderData relatedObject, R renderState) {
+    public void addRenderData(GeckoArmorItem animatable, RenderData relatedObject, R renderState, float partialTick) {
 		Set<Item> wornArmor = new ObjectOpenHashSet<>(4);
 
 		boolean fullSetEffect = false;

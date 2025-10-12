@@ -1,16 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "minecraft:item/template_spawn_egg",
-    "tints": [
-      {
-        "type": "minecraft:constant",
-        "value": -13622759
-      },
-      {
-        "type": "minecraft:constant",
-        "value": -5460820
-      }
-    ]
+    "model": "examplemod:item/parasite_spawn_egg"
   }
 }

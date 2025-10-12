@@ -1,16 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "minecraft:item/template_spawn_egg",
-    "tints": [
-      {
-        "type": "minecraft:constant",
-        "value": -2890778
-      },
-      {
-        "type": "minecraft:constant",
-        "value": -1445387
-      }
-    ]
+    "model": "examplemod:item/bike_spawn_egg"
   }
 }

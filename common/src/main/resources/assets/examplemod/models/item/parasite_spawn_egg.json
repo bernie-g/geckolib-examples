@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "examplemod:item/parasite_spawn_egg"
+  }
+}

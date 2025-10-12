@@ -1,9 +1,6 @@
 package com.example.examplemod.item;
 
 import com.example.examplemod.client.renderer.armor.GeckoArmorRenderer;
-import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
-import net.minecraft.client.resources.model.EquipmentClientInfo;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -46,8 +43,7 @@ public final class GeckoArmorItem extends Item implements GeoItem {
 
 			@Nullable
 			@Override
-			public <S extends HumanoidRenderState> GeoArmorRenderer<?, ?> getGeoArmorRenderer(@Nullable S renderState, ItemStack itemStack, EquipmentSlot equipmentSlot,
-																							  EquipmentClientInfo.LayerType type, @Nullable HumanoidModel<S> original) {
+            public GeoArmorRenderer<?, ?> getGeoArmorRenderer(ItemStack itemStack, EquipmentSlot equipmentSlot) {
 				if (this.renderer == null)
 					this.renderer = new GeckoArmorRenderer<>();
 				// Defer creation of our renderer then cache it so that it doesn't get instantiated too early

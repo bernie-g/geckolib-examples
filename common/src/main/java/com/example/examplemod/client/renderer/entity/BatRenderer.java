@@ -3,13 +3,12 @@ package com.example.examplemod.client.renderer.entity;
 import com.example.examplemod.client.model.entity.BatModel;
 import com.example.examplemod.entity.BatEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
-import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3d;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
@@ -29,14 +28,14 @@ public class BatRenderer<R extends LivingEntityRenderState & GeoRenderState> ext
 		super(context, new BatModel());
 
 		// Add the glow layer to the bat so that it can live out its dreams of being rudolph
-		addRenderLayer(new AutoGlowingGeoLayer<>(this));
+		withRenderLayer(AutoGlowingGeoLayer::new);
 	}
 
-	// Add some particles around the ear when rendering
+    // Add some particles around the ear when rendering
 	// Normally you would do this properly via the entity's tick, but for the sake of brevity in this example I've done it here
 	@Override
-	public void renderFinal(R renderState, PoseStack poseStack, BakedGeoModel model, MultiBufferSource bufferSource, @Nullable VertexConsumer buffer,
-							int packedLight, int packedOverlay, int renderColor) {
+    public void renderFinal(R renderState, PoseStack poseStack, BakedGeoModel model, SubmitNodeCollector renderTasks, CameraRenderState cameraState,
+                            int packedLight, int packedOverlay, int renderColor) {
 		if (this.lastParticleTick < 0 || this.lastParticleTick < renderState.ageInTicks - 1) {
 			this.lastParticleTick = (int)renderState.ageInTicks;
 
@@ -55,6 +54,6 @@ public class BatRenderer<R extends LivingEntityRenderState & GeoRenderState> ext
 			});
 		}
 
-		super.renderFinal(renderState, poseStack, model, bufferSource, buffer, packedLight, packedOverlay, renderColor);
+		super.renderFinal(renderState, poseStack, model, renderTasks, cameraState, packedLight, packedOverlay, renderColor);
 	}
 }

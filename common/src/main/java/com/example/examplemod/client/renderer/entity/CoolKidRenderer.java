@@ -24,7 +24,7 @@ public class CoolKidRenderer<R extends LivingEntityRenderState & GeoRenderState>
 		this.shadowRadius = 0.25f;
 
 		// Add our render layer
-		addRenderLayer(new TextureLayerGeoLayer<>(this,
+		withRenderLayer(new TextureLayerGeoLayer<>(this,
 												  ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, "textures/entity/cool_kid_glasses.png"),
 												  RenderType::armorCutoutNoCull));
     }

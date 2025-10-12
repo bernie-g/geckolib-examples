@@ -22,7 +22,7 @@ public class FakeGlassRenderer<R extends LivingEntityRenderState & GeoRenderStat
 	public FakeGlassRenderer(EntityRendererProvider.Context renderManager) {
 		super(renderManager, new FakeGlassModel());
 
-		addRenderLayer(new CustomBoneTextureGeoLayer<>(this, "outer_glass", WHITE_STAINED_GLASS_TEXTURE) {
+		withRenderLayer(new CustomBoneTextureGeoLayer<>(this, "outer_glass", WHITE_STAINED_GLASS_TEXTURE) {
 			@Override
 			protected RenderType getRenderType(R renderState, ResourceLocation texture) {
 				return RenderType.entityTranslucent(texture);

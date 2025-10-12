@@ -5,6 +5,7 @@ import com.example.examplemod.entity.ReplacedCreeperEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.CreeperRenderState;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.monster.Creeper;
 import org.jetbrains.annotations.ApiStatus;
@@ -24,8 +25,8 @@ public class ReplacedCreeperRenderer<R extends CreeperRenderState & GeoRenderSta
 	}
 
 	@Override
-	public void scaleModelForRender(R renderState, float widthScale, float heightScale, PoseStack poseStack, BakedGeoModel model, boolean isReRender) {
-		super.scaleModelForRender(renderState, widthScale, heightScale, poseStack, model, isReRender);
+    public void scaleModelForRender(R renderState, float widthScale, float heightScale, PoseStack poseStack, BakedGeoModel model, CameraRenderState cameraState) {
+		super.scaleModelForRender(renderState, widthScale, heightScale, poseStack, model, cameraState);
 
 		float swellFactor = renderState.swelling;
 		float swellMod = 1 + Mth.sin(swellFactor * 100f) * swellFactor * 0.01f;
@@ -47,10 +48,10 @@ public class ReplacedCreeperRenderer<R extends CreeperRenderState & GeoRenderSta
 		return (int) (swell * 10.0F) % 2 == 0 ? 0.0F : Mth.clamp(swell, 0.5F, 1.0F);
 	}
 
-	@Override
-	protected R createBaseRenderState(Creeper entity) {
-		return (R)new CreeperRenderState();
-	}
+    @Override
+    public R createRenderState(ReplacedCreeperEntity animatable, Creeper relatedObject) {
+        return (R)new CreeperRenderState();
+    }
 
 	@ApiStatus.Internal
 	@Override

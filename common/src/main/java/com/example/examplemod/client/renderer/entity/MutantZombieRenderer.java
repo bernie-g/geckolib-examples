@@ -43,7 +43,7 @@ public class MutantZombieRenderer<R extends LivingEntityRenderState & GeoRenderS
 		super(context, new MutantZombieModel());
 
 		// Add some armor rendering
-		addRenderLayer(new ItemArmorGeoLayer<>(this, context) {
+		withRenderLayer(new ItemArmorGeoLayer<>(this, context) {
 			private final List<RenderData> BONES = List.of(RenderData.head(HELMET), RenderData.body(CHESTPLATE),
 														   RenderData.leftArm(LEFT_SLEEVE), RenderData.rightArm(RIGHT_SLEEVE),
 														   RenderData.leftLeg(LEFT_ARMOR_LEG), RenderData.rightLeg(RIGHT_ARMOR_LEG),
@@ -58,9 +58,9 @@ public class MutantZombieRenderer<R extends LivingEntityRenderState & GeoRenderS
 		});
 
 		// Add some held item rendering
-		addRenderLayer(new ItemInHandGeoLayer<>(this, RIGHT_HAND, LEFT_HAND));
+		withRenderLayer(new ItemInHandGeoLayer<>(this, RIGHT_HAND, LEFT_HAND));
 
 		// Add a custom texture for the cape
-		addRenderLayer(new CustomBoneTextureGeoLayer<>(this, "bipedCape", CAPE_TEXTURE));
+		withRenderLayer(new CustomBoneTextureGeoLayer<>(this, "bipedCape", CAPE_TEXTURE));
 	}
 }

@@ -27,7 +27,7 @@ public final class WolfArmorRenderer<R extends HumanoidRenderState & GeoRenderSt
 
 	// Capture the worn stack data for later
 	@Override
-	public void addRenderData(WolfArmorItem animatable, RenderData relatedObject, R renderState) {
+    public void addRenderData(WolfArmorItem animatable, RenderData relatedObject, R renderState, float partialTick) {
 		Set<Item> wornArmor = new ObjectOpenHashSet<>(4);
 
 		boolean fullSetEffect = false;
