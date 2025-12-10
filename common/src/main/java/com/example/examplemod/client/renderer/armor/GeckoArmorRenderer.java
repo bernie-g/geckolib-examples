@@ -7,7 +7,7 @@ import com.example.examplemod.registry.ItemRegistry;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.item.Item;
@@ -24,7 +24,7 @@ import java.util.Set;
  */
 public final class GeckoArmorRenderer<R extends HumanoidRenderState & GeoRenderState> extends GeoArmorRenderer<GeckoArmorItem, R> {
 	public GeckoArmorRenderer() {
-		super(new DefaultedItemGeoModel<>(ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, "armor/gecko_armor")));
+		super(new DefaultedItemGeoModel<>(Identifier.fromNamespaceAndPath(ExampleModCommon.MODID, "armor/gecko_armor")));
 
 		withRenderLayer(AutoGlowingGeoLayer::new);
 	}

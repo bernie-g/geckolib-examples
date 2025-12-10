@@ -3,7 +3,7 @@ package com.example.examplemod.client.model.entity;
 import com.example.examplemod.ExampleModCommon;
 import com.example.examplemod.client.renderer.entity.ReplacedCreeperRenderer;
 import com.example.examplemod.entity.ReplacedCreeperEntity;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 
 /**
@@ -14,6 +14,6 @@ import software.bernie.geckolib.model.DefaultedEntityGeoModel;
  */
 public class ReplacedCreeperModel extends DefaultedEntityGeoModel<ReplacedCreeperEntity> {
 	public ReplacedCreeperModel() {
-		super(ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, "creeper"));
+		super(Identifier.fromNamespaceAndPath(ExampleModCommon.MODID, "creeper"));
 	}
 }

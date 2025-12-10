@@ -2,7 +2,7 @@ package com.example.examplemod.client.model.entity;
 
 import com.example.examplemod.ExampleModCommon;
 import com.example.examplemod.entity.BatEntity;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.model.GeoModel;
 
@@ -13,6 +13,6 @@ import software.bernie.geckolib.model.GeoModel;
 public class BatModel extends DefaultedEntityGeoModel<BatEntity> {
 	// We use the alternate super-constructor here to tell the model it should handle head-turning for us
 	public BatModel() {
-		super(ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, "bat"), "head");
+		super(Identifier.fromNamespaceAndPath(ExampleModCommon.MODID, "bat"), "head");
 	}
 }

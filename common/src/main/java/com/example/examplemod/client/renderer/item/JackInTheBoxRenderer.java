@@ -2,7 +2,7 @@ package com.example.examplemod.client.renderer.item;
 
 import com.example.examplemod.ExampleModCommon;
 import com.example.examplemod.item.JackInTheBoxItem;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import software.bernie.geckolib.model.DefaultedItemGeoModel;
 import software.bernie.geckolib.renderer.GeoItemRenderer;
 
@@ -11,6 +11,6 @@ import software.bernie.geckolib.renderer.GeoItemRenderer;
  */
 public class JackInTheBoxRenderer extends GeoItemRenderer<JackInTheBoxItem> {
 	public JackInTheBoxRenderer() {
-		super(new DefaultedItemGeoModel<>(ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, "jack_in_the_box")));
+		super(new DefaultedItemGeoModel<>(Identifier.fromNamespaceAndPath(ExampleModCommon.MODID, "jack_in_the_box")));
 	}
 }

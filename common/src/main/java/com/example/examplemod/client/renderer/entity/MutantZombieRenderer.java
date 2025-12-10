@@ -4,11 +4,11 @@ import com.example.examplemod.ExampleModCommon;
 import com.example.examplemod.client.model.entity.MutantZombieModel;
 import com.example.examplemod.entity.DynamicExampleEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
-import net.minecraft.resources.ResourceLocation;
-import software.bernie.geckolib.cache.object.BakedGeoModel;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
+import net.minecraft.resources.Identifier;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 import software.bernie.geckolib.renderer.base.GeoRenderState;
+import software.bernie.geckolib.renderer.internal.RenderPassInfo;
 import software.bernie.geckolib.renderer.layer.CustomBoneTextureGeoLayer;
 import software.bernie.geckolib.renderer.layer.ItemArmorGeoLayer;
 import software.bernie.geckolib.renderer.layer.ItemInHandGeoLayer;
@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @see DynamicExampleEntity
  */
-public class MutantZombieRenderer<R extends LivingEntityRenderState & GeoRenderState> extends GeoEntityRenderer<DynamicExampleEntity, R> {
+public class MutantZombieRenderer<R extends HumanoidRenderState & GeoRenderState> extends GeoEntityRenderer<DynamicExampleEntity, R> {
 	// Pre-define our bone names for easy and consistent reference later
 	private static final String LEFT_HAND = "bipedHandLeft";
 	private static final String RIGHT_HAND = "bipedHandRight";
@@ -37,7 +37,7 @@ public class MutantZombieRenderer<R extends LivingEntityRenderState & GeoRenderS
 	private static final String LEFT_SLEEVE = "armorBipedLeftArm";
 	private static final String HELMET = "armorBipedHead";
 
-	protected final ResourceLocation CAPE_TEXTURE = ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, "textures/entity/dynamic_entity_cape.png");
+	protected final Identifier CAPE_TEXTURE = Identifier.fromNamespaceAndPath(ExampleModCommon.MODID, "textures/entity/dynamic_entity_cape.png");
 
 	public MutantZombieRenderer(EntityRendererProvider.Context context) {
 		super(context, new MutantZombieModel());
@@ -51,8 +51,8 @@ public class MutantZombieRenderer<R extends LivingEntityRenderState & GeoRenderS
 														   RenderData.leftFoot(LEFT_BOOT), RenderData.rightFoot(RIGHT_BOOT),
 														   RenderData.leftFoot(LEFT_BOOT_2), RenderData.rightFoot(RIGHT_BOOT_2));
 
-			@Override
-			protected List<RenderData> getRelevantBones(R renderState, BakedGeoModel model) {
+            @Override
+            protected List<RenderData> getRelevantBones(RenderPassInfo<R> renderPassInfo) {
 				return BONES;
 			}
 		});

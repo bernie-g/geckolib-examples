@@ -1,7 +1,7 @@
 package com.example.examplemod.item;
 
 import com.example.examplemod.ExampleModCommon;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
@@ -31,7 +31,7 @@ public class GeckoHabitatItem extends BlockItem implements GeoItem {
 			@Override
 			public GeoItemRenderer<GeckoHabitatItem> getGeoItemRenderer() {
 				if (this.renderer == null)
-					this.renderer = new GeoItemRenderer<>(new DefaultedBlockGeoModel<>(ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, "gecko_habitat")));
+					this.renderer = new GeoItemRenderer<>(new DefaultedBlockGeoModel<>(Identifier.fromNamespaceAndPath(ExampleModCommon.MODID, "gecko_habitat")));
 				// Defer creation of our renderer then cache it so that it doesn't get instantiated too early
 
 				return this.renderer;

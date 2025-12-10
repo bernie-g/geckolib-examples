@@ -12,8 +12,8 @@ import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.client.GeoRenderProvider;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animatable.manager.AnimatableManager;
-import software.bernie.geckolib.animatable.processing.AnimationController;
-import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.object.PlayState;
 import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.constant.dataticket.DataTicket;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
@@ -57,7 +57,7 @@ public final class WolfArmorItem extends Item implements GeoItem {
 	// Let's add our animation controller
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-		controllers.add(new AnimationController<>(20, animTest -> {
+		controllers.add(new AnimationController<>("Main", 20, animTest -> {
 			// Play the animation if the full set is being worn, otherwise stop
 			if (animTest.getData(HAS_FULL_SET_EFFECT))
 				return animTest.setAndContinue(DefaultAnimations.IDLE);

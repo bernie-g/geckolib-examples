@@ -2,16 +2,14 @@ package com.example.examplemod.client.renderer.entity;
 
 import com.example.examplemod.client.model.entity.ReplacedCreeperModel;
 import com.example.examplemod.entity.ReplacedCreeperEntity;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.CreeperRenderState;
-import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.monster.Creeper;
 import org.jetbrains.annotations.ApiStatus;
-import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoReplacedEntityRenderer;
 import software.bernie.geckolib.renderer.base.GeoRenderState;
+import software.bernie.geckolib.renderer.internal.RenderPassInfo;
 
 /**
  * Example replacement renderer for a {@link Creeper}.<br>
@@ -24,18 +22,18 @@ public class ReplacedCreeperRenderer<R extends CreeperRenderState & GeoRenderSta
 		super(renderManager, new ReplacedCreeperModel(), new ReplacedCreeperEntity());
 	}
 
-	@Override
-    public void scaleModelForRender(R renderState, float widthScale, float heightScale, PoseStack poseStack, BakedGeoModel model, CameraRenderState cameraState) {
-		super.scaleModelForRender(renderState, widthScale, heightScale, poseStack, model, cameraState);
+    @Override
+    public void scaleModelForRender(RenderPassInfo<R> renderPassInfo, float widthScale, float heightScale) {
+        super.scaleModelForRender(renderPassInfo, widthScale, heightScale);
 
-		float swellFactor = renderState.swelling;
-		float swellMod = 1 + Mth.sin(swellFactor * 100f) * swellFactor * 0.01f;
-		swellFactor = (float)Math.pow(Mth.clamp(swellFactor, 0f, 1f), 3);
-		float horizontalSwell = (1 + swellFactor * 0.4f) * swellMod;
-		float verticalSwell = (1 + swellFactor * 0.1f) / swellMod;
+        float swellFactor = renderPassInfo.renderState().swelling;
+        float swellMod = 1 + Mth.sin(swellFactor * 100f) * swellFactor * 0.01f;
+        swellFactor = (float)Math.pow(Mth.clamp(swellFactor, 0f, 1f), 3);
+        float horizontalSwell = (1 + swellFactor * 0.4f) * swellMod;
+        float verticalSwell = (1 + swellFactor * 0.1f) / swellMod;
 
-		poseStack.scale(horizontalSwell, verticalSwell, horizontalSwell);
-	}
+        renderPassInfo.poseStack().scale(horizontalSwell, verticalSwell, horizontalSwell);
+    }
 
 	@Override
 	public int getPackedOverlay(ReplacedCreeperEntity animatable, Creeper replacedEntity, float u, float partialTick) {

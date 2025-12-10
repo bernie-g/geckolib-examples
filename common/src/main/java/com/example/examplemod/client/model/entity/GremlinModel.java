@@ -2,7 +2,7 @@ package com.example.examplemod.client.model.entity;
 
 import com.example.examplemod.ExampleModCommon;
 import com.example.examplemod.entity.DynamicExampleEntity;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.model.GeoModel;
 
@@ -12,6 +12,6 @@ import software.bernie.geckolib.model.GeoModel;
  */
 public class GremlinModel extends DefaultedEntityGeoModel<DynamicExampleEntity> {
 	public GremlinModel() {
-		super(ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, "gremlin"));
+		super(Identifier.fromNamespaceAndPath(ExampleModCommon.MODID, "gremlin"), "bipedHead");
 	}
 }

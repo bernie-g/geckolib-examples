@@ -3,11 +3,9 @@ package com.example.examplemod.client.model.entity;
 import com.example.examplemod.ExampleModCommon;
 import com.example.examplemod.client.renderer.entity.RaceCarRenderer;
 import com.example.examplemod.entity.RaceCarEntity;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.renderer.base.GeoRenderState;
 
 /**
  * Example {@link GeoModel} for the {@link RaceCarEntity}
@@ -15,12 +13,6 @@ import software.bernie.geckolib.renderer.base.GeoRenderState;
  */
 public class RaceCarModel extends DefaultedEntityGeoModel<RaceCarEntity> {
 	public RaceCarModel() {
-		super(ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, "race_car"));
-	}
-
-	// We want our model to render using the translucent render type
-	@Override
-	public RenderType getRenderType(GeoRenderState renderState, ResourceLocation texture) {
-		return RenderType.entityTranslucent(texture);
+		super(Identifier.fromNamespaceAndPath(ExampleModCommon.MODID, "race_car"));
 	}
 }

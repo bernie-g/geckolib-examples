@@ -3,7 +3,7 @@ package com.example.examplemod;
 import com.example.examplemod.platform.ExampleModPlatform;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -25,7 +25,7 @@ public class ExampleModForgePlatform implements ExampleModPlatform {
 
     @Override
     public <T extends Block> Supplier<T> registerBlock(String id, Function<BlockBehaviour.Properties, T> block) {
-        return ExampleModForge.BLOCKS.register(id, () -> block.apply(BlockBehaviour.Properties.of().setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, id)))));
+        return ExampleModForge.BLOCKS.register(id, () -> block.apply(BlockBehaviour.Properties.of().setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(ExampleModCommon.MODID, id)))));
     }
 
     @Override
@@ -35,7 +35,7 @@ public class ExampleModForgePlatform implements ExampleModPlatform {
 
     @Override
     public <T extends Item> Supplier<T> registerItem(String id, Function<Item.Properties, T> item) {
-        return ExampleModForge.ITEMS.register(id, () -> item.apply(new Item.Properties().setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, id)))));
+        return ExampleModForge.ITEMS.register(id, () -> item.apply(new Item.Properties().setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(ExampleModCommon.MODID, id)))));
     }
 
     @Override

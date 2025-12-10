@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animatable.manager.AnimatableManager;
-import software.bernie.geckolib.animatable.processing.AnimationController;
+import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.constant.dataticket.DataTicket;
 import software.bernie.geckolib.util.GeckoLibUtil;
@@ -33,7 +33,7 @@ public class GeckoHabitatBlockEntity extends BlockEntity implements GeoBlockEnti
 	// But if it's day time we want him to take a nap
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-		controllers.add(new AnimationController<>(animTest -> {
+		controllers.add(new AnimationController<>("Main", animTest -> {
 			long dayTime = animTest.getData(DAY_TIME);
 
 			if (dayTime > 23000 || dayTime < 13000) {
@@ -45,8 +45,8 @@ public class GeckoHabitatBlockEntity extends BlockEntity implements GeoBlockEnti
 		}));
 	}
 
-	@Override
-	public AnimatableInstanceCache getAnimatableInstanceCache() {
-		return this.cache;
-	}
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return this.cache;
+    }
 }

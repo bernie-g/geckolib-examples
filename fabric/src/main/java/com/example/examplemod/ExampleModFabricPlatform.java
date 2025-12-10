@@ -6,7 +6,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -60,7 +60,7 @@ public class ExampleModFabricPlatform implements ExampleModPlatform {
      * Quick wrapper to make the individual registration lines cleaner but still return the multiloader-compatible supplier
      */
     private static <T, R extends Registry<? super T>> Supplier<T> registerSupplier(R registry, String id, Supplier<T> object) {
-        final T registeredObject = Registry.register((Registry<T>)registry, ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, id), object.get());
+        final T registeredObject = Registry.register((Registry<T>)registry, Identifier.fromNamespaceAndPath(ExampleModCommon.MODID, id), object.get());
 
         return () -> registeredObject;
     }
@@ -70,7 +70,7 @@ public class ExampleModFabricPlatform implements ExampleModPlatform {
      */
     private static <T, R extends Registry<? super T>> Supplier<T> registerKeyedSupplier(R registry, String id, Function<ResourceKey<T>, T> object) {
         final Registry<T> typedRegistry = (Registry<T>)registry;
-        final ResourceLocation registryId = ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, id);
+        final Identifier registryId = Identifier.fromNamespaceAndPath(ExampleModCommon.MODID, id);
         final T registeredObject = Registry.register(typedRegistry, registryId, object.apply(ResourceKey.create(typedRegistry.key(), registryId)));
 
         return () -> registeredObject;
@@ -80,6 +80,6 @@ public class ExampleModFabricPlatform implements ExampleModPlatform {
      * Quick wrapper to make the individual registration lines cleaner but still return the multiloader-compatible supplier
      */
     private static <T, R extends Registry<? super T>> Holder<T> registerHolder(R registry, String id, Supplier<T> object) {
-        return Registry.registerForHolder((Registry<T>)registry, ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, id), object.get());
+        return Registry.registerForHolder((Registry<T>)registry, Identifier.fromNamespaceAndPath(ExampleModCommon.MODID, id), object.get());
     }
 }

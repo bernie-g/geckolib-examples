@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animatable.manager.AnimatableManager;
-import software.bernie.geckolib.animatable.processing.AnimationController;
+import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.constant.dataticket.DataTicket;
 import software.bernie.geckolib.util.GeckoLibUtil;
@@ -38,12 +38,12 @@ public class FertilizerBlockEntity extends BlockEntity implements GeoBlockEntity
 	// or switch to a botarium if it's not.
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-		controllers.add(new AnimationController<>(animTest -> {
-			if (animTest.getData(IS_RAINING))
-				return animTest.setAndContinue(FERTILIZER_ANIMS);
+        controllers.add(new AnimationController<>("Main", test -> {
+            if (test.getData(IS_RAINING))
+                return test.setAndContinue(FERTILIZER_ANIMS);
 
-			return animTest.setAndContinue(BOTARIUM_ANIMS);
-		}));
+            return test.setAndContinue(BOTARIUM_ANIMS);
+        }));
 	}
 
 	@Override

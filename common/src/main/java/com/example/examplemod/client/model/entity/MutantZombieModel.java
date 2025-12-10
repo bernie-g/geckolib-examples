@@ -3,7 +3,7 @@ package com.example.examplemod.client.model.entity;
 import com.example.examplemod.ExampleModCommon;
 import com.example.examplemod.client.renderer.entity.MutantZombieRenderer;
 import com.example.examplemod.entity.DynamicExampleEntity;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.model.GeoModel;
 
@@ -13,6 +13,6 @@ import software.bernie.geckolib.model.GeoModel;
  */
 public class MutantZombieModel extends DefaultedEntityGeoModel<DynamicExampleEntity> {
 	public MutantZombieModel() {
-		super(ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, "mutant_zombie"));
+		super(Identifier.fromNamespaceAndPath(ExampleModCommon.MODID, "mutant_zombie"));
 	}
 }

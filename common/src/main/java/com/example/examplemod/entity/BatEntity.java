@@ -1,5 +1,6 @@
 package com.example.examplemod.entity;
 
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -13,8 +14,9 @@ import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animatable.manager.AnimatableManager;
-import software.bernie.geckolib.animatable.processing.AnimationController;
+import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.constant.DefaultAnimations;
+import software.bernie.geckolib.constant.dataticket.DataTicket;
 import software.bernie.geckolib.util.ClientUtil;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
@@ -24,7 +26,8 @@ import software.bernie.geckolib.util.GeckoLibUtil;
  * @see com.example.examplemod.client.model.entity.BatModel BatModel
  */
 public class BatEntity extends PathfinderMob implements GeoEntity {
-	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    public static final DataTicket<Vec3> EAR_POS_TICKET = DataTicket.create("examplemod_bat_ear_pos", Vec3.class);
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
 	private boolean isFlying = false;
 
@@ -48,11 +51,31 @@ public class BatEntity extends PathfinderMob implements GeoEntity {
 		return super.interactAt(player, hitPos, hand);
 	}
 
-	@Override
+    @Override
+    public void tick() {
+        super.tick();
+
+        if (level().isClientSide()) {
+            // We retrieve the ear position ticket we stored in BatRenderer and use it here for particles
+            Vec3 earPos = getAnimatableInstanceCache().getManagerForId(getId()).getAnimatableData(EAR_POS_TICKET);
+
+            if (earPos != null) {
+                level().addParticle(ParticleTypes.PORTAL,
+                                    earPos.x(),
+                                    earPos.y(),
+                                    earPos.z(),
+                                    this.random.nextDouble() - 0.5D,
+                                    -this.random.nextDouble(),
+                                    this.random.nextDouble() - 0.5D);
+            }
+        }
+    }
+
+    @Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
 		controllers.add(
 				// Add our flying animation controller
-				new AnimationController<>(10, state -> state.setAndContinue(this.isFlying ? DefaultAnimations.FLY : DefaultAnimations.IDLE))
+				new AnimationController<>("Main", 10, state -> state.setAndContinue(this.isFlying ? DefaultAnimations.FLY : DefaultAnimations.IDLE))
 						// Handle the custom instruction keyframe that is part of our animation json
 						.setCustomInstructionKeyframeHandler(animTest -> {
 							Player player = ClientUtil.getClientPlayer();

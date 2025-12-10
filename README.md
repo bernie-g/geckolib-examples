@@ -1,5 +1,5 @@
 # Information
-## GeckoLib Example Mod - Multiloader - 1.21.5
+## GeckoLib Example Mod - Multiloader - 1.21.10
 
 This is an example of a mod using <a href="https://github.com/bernie-g/geckolib">GeckoLib</a> for <a href="https://github.com/jaredlll08/MultiLoader-Template">Multiloader</a> 1.21.5
 

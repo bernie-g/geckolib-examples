@@ -2,20 +2,15 @@ package com.example.examplemod.client.renderer.entity;
 
 import com.example.examplemod.client.model.entity.BatModel;
 import com.example.examplemod.entity.BatEntity;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
-import net.minecraft.client.renderer.state.CameraRenderState;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.util.RandomSource;
-import org.joml.Vector3d;
-import software.bernie.geckolib.cache.object.BakedGeoModel;
+import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 import software.bernie.geckolib.renderer.base.GeoRenderState;
 import software.bernie.geckolib.renderer.base.GeoRenderer;
+import software.bernie.geckolib.renderer.internal.RenderPassInfo;
 import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer;
-import software.bernie.geckolib.util.ClientUtil;
 
 /**
  * Example {@link GeoRenderer} for {@link BatEntity}
@@ -31,29 +26,16 @@ public class BatRenderer<R extends LivingEntityRenderState & GeoRenderState> ext
 		withRenderLayer(AutoGlowingGeoLayer::new);
 	}
 
-    // Add some particles around the ear when rendering
-	// Normally you would do this properly via the entity's tick, but for the sake of brevity in this example I've done it here
-	@Override
-    public void renderFinal(R renderState, PoseStack poseStack, BakedGeoModel model, SubmitNodeCollector renderTasks, CameraRenderState cameraState,
-                            int packedLight, int packedOverlay, int renderColor) {
-		if (this.lastParticleTick < 0 || this.lastParticleTick < renderState.ageInTicks - 1) {
-			this.lastParticleTick = (int)renderState.ageInTicks;
+    @Override
+    public void preRenderPass(RenderPassInfo<R> renderPassInfo, SubmitNodeCollector renderTasks) {
+        super.preRenderPass(renderPassInfo, renderTasks);
 
-			// Find the earbone and use it as the point of reference
-			this.model.getBone("leftear").ifPresent(ear -> {
-				RandomSource rand = ClientUtil.getLevel().getRandom();
-				Vector3d earPos = ear.getWorldPosition();
-
-				ClientUtil.getLevel().addParticle(ParticleTypes.PORTAL,
-															   earPos.x(),
-															   earPos.y(),
-															   earPos.z(),
-															   rand.nextDouble() - 0.5D,
-															   -rand.nextDouble(),
-															   rand.nextDouble() - 0.5D);
-			});
-		}
-
-		super.renderFinal(renderState, poseStack, model, renderTasks, cameraState, packedLight, packedOverlay, renderColor);
-	}
+        // We're going to capture the ear bone's position and store it in the bat's animatable data
+        renderPassInfo.model().getBone("leftear").ifPresent(bone -> {
+            renderPassInfo.addBonePositionListener(bone, (worldPos, modelPos, localPos) -> {
+                if (worldPos != null)
+                    renderPassInfo.getGeckolibData(DataTickets.ANIMATABLE_MANAGER).setAnimatableData(BatEntity.EAR_POS_TICKET, worldPos);
+            });
+        });
+    }
 }

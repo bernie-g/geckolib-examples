@@ -5,10 +5,10 @@ import com.example.examplemod.client.model.entity.GremlinModel;
 import com.example.examplemod.entity.DynamicExampleEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
-import net.minecraft.resources.ResourceLocation;
-import software.bernie.geckolib.cache.object.BakedGeoModel;
+import net.minecraft.resources.Identifier;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 import software.bernie.geckolib.renderer.base.GeoRenderState;
+import software.bernie.geckolib.renderer.internal.RenderPassInfo;
 import software.bernie.geckolib.renderer.layer.CustomBoneTextureGeoLayer;
 import software.bernie.geckolib.renderer.layer.ItemArmorGeoLayer;
 import software.bernie.geckolib.renderer.layer.ItemInHandGeoLayer;
@@ -32,7 +32,7 @@ public class GremlinRenderer<R extends LivingEntityRenderState & GeoRenderState>
 	private static final String LEFT_SLEEVE = "armorBipedLeftArm";
 	private static final String HELMET = "armorBipedHead";
 
-	protected final ResourceLocation CAPE_TEXTURE = ResourceLocation.fromNamespaceAndPath(ExampleModCommon.MODID, "textures/entity/dynamic_entity_cape.png");
+	protected final Identifier CAPE_TEXTURE = Identifier.fromNamespaceAndPath(ExampleModCommon.MODID, "textures/entity/dynamic_entity_cape.png");
 
 	public GremlinRenderer(EntityRendererProvider.Context context) {
 		super(context, new GremlinModel());
@@ -45,7 +45,7 @@ public class GremlinRenderer<R extends LivingEntityRenderState & GeoRenderState>
 														   RenderData.leftFoot(LEFT_BOOT), RenderData.rightFoot(RIGHT_BOOT));
 
             @Override
-            protected List<RenderData> getRelevantBones(R renderState, BakedGeoModel model) {
+            protected List<RenderData> getRelevantBones(RenderPassInfo<R> renderPassInfo) {
                 return BONES;
             }
         });
