@@ -11,7 +11,7 @@ import software.bernie.geckolib.renderer.GeoEntityRenderer;
 import software.bernie.geckolib.renderer.base.GeoRenderState;
 import software.bernie.geckolib.renderer.base.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
-import software.bernie.geckolib.renderer.layer.TextureLayerGeoLayer;
+import software.bernie.geckolib.renderer.layer.builtin.TextureLayerGeoLayer;
 
 /**
  * Example {@link GeoRenderer} implementation of an entity that uses a {@link GeoRenderLayer render layer}

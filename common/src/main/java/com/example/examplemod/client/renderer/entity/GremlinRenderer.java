@@ -8,10 +8,10 @@ import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.Identifier;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 import software.bernie.geckolib.renderer.base.GeoRenderState;
-import software.bernie.geckolib.renderer.internal.RenderPassInfo;
-import software.bernie.geckolib.renderer.layer.CustomBoneTextureGeoLayer;
-import software.bernie.geckolib.renderer.layer.ItemArmorGeoLayer;
-import software.bernie.geckolib.renderer.layer.ItemInHandGeoLayer;
+import software.bernie.geckolib.renderer.base.RenderPassInfo;
+import software.bernie.geckolib.renderer.layer.builtin.CustomBoneTextureGeoLayer;
+import software.bernie.geckolib.renderer.layer.builtin.ItemArmorGeoLayer;
+import software.bernie.geckolib.renderer.layer.builtin.ItemInHandGeoLayer;
 
 import java.util.List;
 
