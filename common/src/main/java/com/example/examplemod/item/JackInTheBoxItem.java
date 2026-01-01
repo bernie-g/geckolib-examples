@@ -3,10 +3,14 @@ package com.example.examplemod.item;
 import com.example.examplemod.client.renderer.item.JackInTheBoxRenderer;
 import com.example.examplemod.registry.SoundRegistry;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoItem;
@@ -69,6 +73,14 @@ public final class JackInTheBoxItem extends Item implements GeoItem {
 					if (player != null)
 						player.playSound(SoundRegistry.JACK_MUSIC.get(), 1, 1);
 				}));
+	}
+
+	@Override
+	public void inventoryTick(ItemStack stack, ServerLevel level, Entity entity, @org.jspecify.annotations.Nullable EquipmentSlot slot) {
+		if (entity instanceof ServerPlayer player && player.isCrouching())
+			stopTriggeredAnim(entity, GeoItem.getOrAssignId(stack, level), "popup_controller", "box_open");
+
+		super.inventoryTick(stack, level, entity, slot);
 	}
 
 	// Let's handle our use method so that we activate the animation when right-clicking while holding the box
