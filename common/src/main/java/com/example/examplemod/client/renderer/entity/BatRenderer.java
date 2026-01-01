@@ -17,8 +17,6 @@ import software.bernie.geckolib.renderer.layer.builtin.AutoGlowingGeoLayer;
  * @see BatModel
  */
 public class BatRenderer<R extends LivingEntityRenderState & GeoRenderState> extends GeoEntityRenderer<BatEntity, R> {
-	private int lastParticleTick = -1;
-
 	public BatRenderer(EntityRendererProvider.Context context) {
 		super(context, new BatModel());
 
