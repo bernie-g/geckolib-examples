@@ -2,6 +2,7 @@ package com.example.examplemod.item;
 
 import com.example.examplemod.client.renderer.item.JackInTheBoxRenderer;
 import com.example.examplemod.registry.SoundRegistry;
+import com.google.common.base.Suppliers;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -28,6 +29,7 @@ import software.bernie.geckolib.util.ClientUtil;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 /**
  * Example {@link GeoItem} implementation in the form of a Jack-in-the-Box.<br>
@@ -48,16 +50,13 @@ public final class JackInTheBoxItem extends Item implements GeoItem {
 	@Override
 	public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
 		consumer.accept(new GeoRenderProvider() {
-			private JackInTheBoxRenderer renderer;
+			// Defer creation of our renderer then cache it so that it doesn't get instantiated too early
+			private final Supplier<JackInTheBoxRenderer> renderer = Suppliers.memoize(JackInTheBoxRenderer::new);
 
 			@Override
 			@Nullable
 			public GeoItemRenderer<JackInTheBoxItem> getGeoItemRenderer() {
-				if (this.renderer == null)
-					this.renderer = new JackInTheBoxRenderer();
-				// Defer creation of our renderer then cache it so that it doesn't get instantiated too early
-
-				return this.renderer;
+				return this.renderer.get();
 			}
 		});
 	}

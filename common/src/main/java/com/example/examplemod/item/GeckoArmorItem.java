@@ -1,6 +1,7 @@
 package com.example.examplemod.item;
 
 import com.example.examplemod.client.renderer.armor.GeckoArmorRenderer;
+import com.google.common.base.Suppliers;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -20,6 +21,7 @@ import software.bernie.geckolib.renderer.GeoArmorRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 /**
  * Example {@link GeoAnimatable GeoAnimatable} armor item implementation
@@ -39,16 +41,13 @@ public final class GeckoArmorItem extends Item implements GeoItem {
 	@Override
 	public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
 		consumer.accept(new GeoRenderProvider() {
-			private GeckoArmorRenderer<?> renderer;
+			// Defer creation of our renderer then cache it so that it doesn't get instantiated too early
+			private final Supplier<GeckoArmorRenderer<?>> renderer = Suppliers.memoize(GeckoArmorRenderer::new);
 
 			@Nullable
 			@Override
             public GeoArmorRenderer<?, ?> getGeoArmorRenderer(ItemStack itemStack, EquipmentSlot equipmentSlot) {
-				if (this.renderer == null)
-					this.renderer = new GeckoArmorRenderer<>();
-				// Defer creation of our renderer then cache it so that it doesn't get instantiated too early
-
-				return this.renderer;
+				return this.renderer.get();
 			}
 		});
 	}

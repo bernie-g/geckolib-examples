@@ -1,6 +1,7 @@
 package com.example.examplemod.item;
 
 import com.example.examplemod.ExampleModCommon;
+import com.google.common.base.Suppliers;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
@@ -14,6 +15,7 @@ import software.bernie.geckolib.renderer.GeoItemRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class GeckoHabitatItem extends BlockItem implements GeoItem {
 	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
@@ -25,16 +27,14 @@ public class GeckoHabitatItem extends BlockItem implements GeoItem {
 	@Override
 	public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
 		consumer.accept(new GeoRenderProvider() {
-			private GeoItemRenderer<GeckoHabitatItem> renderer = null;
+			// Defer creation of our renderer then cache it so that it doesn't get instantiated too early
+			private final Supplier<GeoItemRenderer<GeckoHabitatItem>> renderer = Suppliers.memoize(
+					() -> new GeoItemRenderer<GeckoHabitatItem>(new DefaultedBlockGeoModel<>(Identifier.fromNamespaceAndPath(ExampleModCommon.MODID, "gecko_habitat"))));
 
 			@Nullable
 			@Override
 			public GeoItemRenderer<GeckoHabitatItem> getGeoItemRenderer() {
-				if (this.renderer == null)
-					this.renderer = new GeoItemRenderer<>(new DefaultedBlockGeoModel<>(Identifier.fromNamespaceAndPath(ExampleModCommon.MODID, "gecko_habitat")));
-				// Defer creation of our renderer then cache it so that it doesn't get instantiated too early
-
-				return this.renderer;
+				return this.renderer.get();
 			}
 		});
 	}
