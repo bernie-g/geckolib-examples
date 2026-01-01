@@ -10,6 +10,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
@@ -21,6 +22,7 @@ import software.bernie.geckolib.animatable.manager.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.animation.object.PlayState;
+import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.renderer.GeoItemRenderer;
 import software.bernie.geckolib.util.ClientUtil;
 import software.bernie.geckolib.util.GeckoLibUtil;
@@ -80,16 +82,30 @@ public final class JackInTheBoxItem extends Item implements GeoItem {
 	// Let's add our animation controller
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-		controllers.add(new AnimationController<>("popup_controller", 20, animTest -> PlayState.STOP)
-								.triggerableAnim("box_open", POPUP_ANIM)
-								// We've marked the "box_open" animation as being triggerable from the server
-								.setSoundKeyframeHandler(state -> {
-									// Use helper method to avoid client-code in common class
-									Player player = ClientUtil.getClientPlayer();
+		controllers.add(new AnimationController<>("popup_controller", 20, animTest -> {
+			final ItemDisplayContext context = animTest.getData(DataTickets.ITEM_RENDER_PERSPECTIVE);
 
-									if (player != null)
-										player.playSound(SoundRegistry.JACK_MUSIC.get(), 1, 1);
-								}));
+			// We only want our triggered animation to happen if it's in-hand
+			if (context.firstPerson() || context == ItemDisplayContext.THIRD_PERSON_LEFT_HAND || context == ItemDisplayContext.THIRD_PERSON_RIGHT_HAND)
+				return PlayState.CONTINUE;
+
+			return PlayState.STOP;
+		}).receiveTriggeredAnimations()
+		  .triggerableAnim("box_open", POPUP_ANIM)
+		  // We've marked the "box_open" animation as being triggerable from the server
+		  .setSoundKeyframeHandler(state -> {
+			  // Use helper method to avoid client-code in common class
+			  Player player = ClientUtil.getClientPlayer();
+
+		  	  if (player != null)
+					player.playSound(SoundRegistry.JACK_MUSIC.get(), 1, 1);
+		  }));
+	}
+
+	// We don't want our animation to happen in non-hand perspectives
+	@Override
+	public boolean isPerspectiveAware() {
+		return true;
 	}
 
 	@Override
