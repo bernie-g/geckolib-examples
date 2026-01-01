@@ -60,19 +60,13 @@ public final class JackInTheBoxItem extends Item implements GeoItem {
 		});
 	}
 
-	// Let's add our animation controller
+	// Let's handle our use method so that we activate the animation when right-clicking while holding the box
 	@Override
-	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-		controllers.add(new AnimationController<>("popup_controller", 20, animTest -> PlayState.STOP)
-				.triggerableAnim("box_open", POPUP_ANIM)
-				// We've marked the "box_open" animation as being triggerable from the server
-				.setSoundKeyframeHandler(state -> {
-					// Use helper method to avoid client-code in common class
-					Player player = ClientUtil.getClientPlayer();
+	public InteractionResult use(Level level, Player player, InteractionHand hand) {
+		if (level instanceof ServerLevel serverLevel)
+			triggerAnim(player, GeoItem.getOrAssignId(player.getItemInHand(hand), serverLevel), "popup_controller", "box_open");
 
-					if (player != null)
-						player.playSound(SoundRegistry.JACK_MUSIC.get(), 1, 1);
-				}));
+		return super.use(level, player, hand);
 	}
 
 	@Override
@@ -83,13 +77,19 @@ public final class JackInTheBoxItem extends Item implements GeoItem {
 		super.inventoryTick(stack, level, entity, slot);
 	}
 
-	// Let's handle our use method so that we activate the animation when right-clicking while holding the box
+	// Let's add our animation controller
 	@Override
-	public InteractionResult use(Level level, Player player, InteractionHand hand) {
-		if (level instanceof ServerLevel serverLevel)
-			triggerAnim(player, GeoItem.getOrAssignId(player.getItemInHand(hand), serverLevel), "popup_controller", "box_open");
+	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+		controllers.add(new AnimationController<>("popup_controller", 20, animTest -> PlayState.STOP)
+								.triggerableAnim("box_open", POPUP_ANIM)
+								// We've marked the "box_open" animation as being triggerable from the server
+								.setSoundKeyframeHandler(state -> {
+									// Use helper method to avoid client-code in common class
+									Player player = ClientUtil.getClientPlayer();
 
-		return super.use(level, player, hand);
+									if (player != null)
+										player.playSound(SoundRegistry.JACK_MUSIC.get(), 1, 1);
+								}));
 	}
 
 	@Override
