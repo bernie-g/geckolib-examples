@@ -1,0 +1,21 @@
+package com.geckolib.example.examplemod.registry;
+
+import com.geckolib.example.examplemod.ModConstants;
+import com.geckolib.example.examplemod.block.entity.FertilizerBlockEntity;
+import com.geckolib.example.examplemod.block.entity.GeckoHabitatBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+
+import java.util.Set;
+import java.util.function.Supplier;
+
+public final class BlockEntityRegistry {
+	public static void init() {}
+
+	public static final Supplier<BlockEntityType<GeckoHabitatBlockEntity>> GECKO_HABITAT = registerBlockEntity("gecko_habitat", () -> new BlockEntityType<>(GeckoHabitatBlockEntity::new, Set.of(BlockRegistry.GECKO_HABITAT.get())));
+	public static final Supplier<BlockEntityType<FertilizerBlockEntity>> FERTILIZER_BLOCK = registerBlockEntity("fertilizer", () -> new BlockEntityType<>(FertilizerBlockEntity::new, Set.of(BlockRegistry.FERTILIZER.get())));
+
+	private static <T extends BlockEntity> Supplier<BlockEntityType<T>> registerBlockEntity(String id, Supplier<BlockEntityType<T>> blockEntity) {
+		return ModConstants.PLATFORM.registerBlockEntity(id, blockEntity);
+	}
+}

@@ -1,0 +1,52 @@
+package com.geckolib.example.examplemod.block.entity;
+
+import com.geckolib.animatable.GeoBlockEntity;
+import com.geckolib.animatable.instance.AnimatableInstanceCache;
+import com.geckolib.animatable.manager.AnimatableManager;
+import com.geckolib.animation.AnimationController;
+import com.geckolib.constant.DefaultAnimations;
+import com.geckolib.constant.dataticket.DataTicket;
+import com.geckolib.example.examplemod.client.model.block.GeckoHabitatModel;
+import com.geckolib.example.examplemod.client.renderer.block.GeckoHabitatBlockRenderer;
+import com.geckolib.example.examplemod.registry.BlockEntityRegistry;
+import com.geckolib.util.GeckoLibUtil;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+
+/**
+ * Example {@link BlockEntity} implementation using a GeckoLib model.
+ * @see GeckoHabitatModel
+ * @see GeckoHabitatBlockRenderer
+ */
+public class GeckoHabitatBlockEntity extends BlockEntity implements GeoBlockEntity {
+	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+	// We register a new DataTicket under our modid to use for holding the daytime predicate for later
+	public static final DataTicket<Long> DAY_TIME = DataTicket.create("examplemod_day_time", Long.class);
+
+	public GeckoHabitatBlockEntity(BlockPos pos, BlockState state) {
+		super(BlockEntityRegistry.GECKO_HABITAT.get(), pos, state);
+	}
+
+	// We just want a permanent idle animation happening here
+	// But if it's day time we want him to take a nap
+	@Override
+	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+		controllers.add(new AnimationController<>("Main", animTest -> {
+			long dayTime = animTest.getData(DAY_TIME);
+
+			if (dayTime > 23000 || dayTime < 13000) {
+				return animTest.setAndContinue(DefaultAnimations.REST);
+			}
+			else {
+				return animTest.setAndContinue(DefaultAnimations.IDLE);
+			}
+		}));
+	}
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return this.cache;
+    }
+}

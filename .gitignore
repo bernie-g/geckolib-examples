@@ -17,8 +17,19 @@ out
 # gradle
 build
 .gradle
+logs
 
 # other
 eclipse
 run
 runs
+
+# Errors
+hs_err_pid*
+replay_pid*
+
+# allow gradlew
+!core/gradle/wrapper
+!core/gradlew.bat
+!gradle/wrapper
+!gradlew.bat
