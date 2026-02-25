@@ -2,15 +2,17 @@ package com.example.examplemod.client.renderer.entity;
 
 import com.example.examplemod.client.model.entity.BatModel;
 import com.example.examplemod.entity.BatEntity;
+import com.geckolib.constant.DefaultAnimations;
+import com.geckolib.renderer.base.BoneSnapshots;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
-import software.bernie.geckolib.constant.DataTickets;
-import software.bernie.geckolib.renderer.GeoEntityRenderer;
-import software.bernie.geckolib.renderer.base.GeoRenderState;
-import software.bernie.geckolib.renderer.base.GeoRenderer;
-import software.bernie.geckolib.renderer.base.RenderPassInfo;
-import software.bernie.geckolib.renderer.layer.builtin.AutoGlowingGeoLayer;
+import com.geckolib.constant.DataTickets;
+import com.geckolib.renderer.GeoEntityRenderer;
+import com.geckolib.renderer.base.GeoRenderState;
+import com.geckolib.renderer.base.GeoRenderer;
+import com.geckolib.renderer.base.RenderPassInfo;
+import com.geckolib.renderer.layer.builtin.AutoGlowingGeoLayer;
 
 /**
  * Example {@link GeoRenderer} for {@link BatEntity}
@@ -23,6 +25,13 @@ public class BatRenderer<R extends LivingEntityRenderState & GeoRenderState> ext
 		// Add the glow layer to the bat so that it can live out its dreams of being rudolph
 		withRenderLayer(AutoGlowingGeoLayer::new);
 	}
+
+    @Override
+    public void adjustModelBonesForRender(RenderPassInfo<R> renderPassInfo, BoneSnapshots snapshots) {
+        // Add in a hardcoded head rotation animation
+        // Really you should be doing this as an animation in your animation.json (see the javadoc on #hardcodedHeadRotation
+        DefaultAnimations.hardcodedHeadRotation(renderPassInfo, snapshots, "head");
+    }
 
     @Override
     public void preRenderPass(RenderPassInfo<R> renderPassInfo, SubmitNodeCollector renderTasks) {

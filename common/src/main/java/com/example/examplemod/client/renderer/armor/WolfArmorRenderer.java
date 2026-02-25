@@ -10,10 +10,10 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.item.Item;
-import software.bernie.geckolib.model.DefaultedItemGeoModel;
-import software.bernie.geckolib.renderer.GeoArmorRenderer;
-import software.bernie.geckolib.renderer.base.GeoRenderState;
-import software.bernie.geckolib.renderer.base.GeoRenderer;
+import com.geckolib.model.DefaultedItemGeoModel;
+import com.geckolib.renderer.GeoArmorRenderer;
+import com.geckolib.renderer.base.GeoRenderState;
+import com.geckolib.renderer.base.GeoRenderer;
 
 import java.util.Set;
 

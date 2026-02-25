@@ -4,8 +4,8 @@ import com.example.examplemod.ExampleModCommon;
 import com.example.examplemod.client.renderer.entity.BikeRenderer;
 import com.example.examplemod.entity.BikeEntity;
 import net.minecraft.resources.Identifier;
-import software.bernie.geckolib.model.DefaultedEntityGeoModel;
-import software.bernie.geckolib.model.GeoModel;
+import com.geckolib.model.DefaultedEntityGeoModel;
+import com.geckolib.model.GeoModel;
 
 /**
  * Example {@link GeoModel} for the {@link BikeEntity}

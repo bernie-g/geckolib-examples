@@ -7,8 +7,8 @@ import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.renderer.GeoBlockRenderer;
-import software.bernie.geckolib.renderer.base.GeoRenderState;
+import com.geckolib.renderer.GeoBlockRenderer;
+import com.geckolib.renderer.base.GeoRenderState;
 
 /**
  * Example {@link net.minecraft.world.level.block.entity.BlockEntity BlockEntity} renderer for {@link GeckoHabitatBlockEntity}

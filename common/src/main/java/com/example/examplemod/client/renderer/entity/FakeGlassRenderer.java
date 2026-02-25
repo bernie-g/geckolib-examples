@@ -7,9 +7,9 @@ import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.resources.Identifier;
-import software.bernie.geckolib.renderer.GeoEntityRenderer;
-import software.bernie.geckolib.renderer.base.GeoRenderState;
-import software.bernie.geckolib.renderer.layer.builtin.CustomBoneTextureGeoLayer;
+import com.geckolib.renderer.GeoEntityRenderer;
+import com.geckolib.renderer.base.GeoRenderState;
+import com.geckolib.renderer.layer.builtin.CustomBoneTextureGeoLayer;
 
 /**
  * Example multi-layered {@link GeoEntityRenderer} implementation that handles per-bone texturing

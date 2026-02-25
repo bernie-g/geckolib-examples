@@ -4,9 +4,9 @@ import com.example.examplemod.ExampleModCommon;
 import com.example.examplemod.block.entity.FertilizerBlockEntity;
 import com.example.examplemod.client.renderer.block.FertilizerBlockRenderer;
 import net.minecraft.resources.Identifier;
-import software.bernie.geckolib.model.DefaultedBlockGeoModel;
-import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.renderer.base.GeoRenderState;
+import com.geckolib.model.DefaultedBlockGeoModel;
+import com.geckolib.model.GeoModel;
+import com.geckolib.renderer.base.GeoRenderState;
 
 /**
  * Example {@link GeoModel} for the {@link FertilizerBlockEntity}

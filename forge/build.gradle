@@ -1,6 +1,6 @@
 plugins {
     id 'multiloader-loader'
-    id 'net.minecraftforge.gradle' version '[7.0.0-rc.2,)'
+    id 'net.minecraftforge.gradle' version '[7.0.0,)'
     id 'net.minecraftforge.accesstransformers' version '[5.0.1,)'
 }
 base {
@@ -18,7 +18,7 @@ minecraft {
             //args "--mixin.config=${modId}.mixins.json"
         }
 
-        register("client") {
+        register("client") {qw
             args "--username", "Dev"
         }
 
@@ -53,7 +53,7 @@ sourceSets.main.resources.srcDir 'src/generated/resources'
 
 dependencies {
     implementation minecraft.dependency("net.minecraftforge:forge:${minecraft_version}-${forge_version}")
-    implementation minecraft.dependency("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
+    implementation minecraft.dependency("com.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
     annotationProcessor "net.minecraftforge:eventbus-validator:${forge_eventbus_validator_version}"
 }
 sourceSets.each {

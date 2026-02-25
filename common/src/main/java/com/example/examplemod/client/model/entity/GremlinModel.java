@@ -3,8 +3,8 @@ package com.example.examplemod.client.model.entity;
 import com.example.examplemod.ExampleModCommon;
 import com.example.examplemod.entity.DynamicExampleEntity;
 import net.minecraft.resources.Identifier;
-import software.bernie.geckolib.model.DefaultedEntityGeoModel;
-import software.bernie.geckolib.model.GeoModel;
+import com.geckolib.model.DefaultedEntityGeoModel;
+import com.geckolib.model.GeoModel;
 
 /**
  * Example {@link GeoModel} for the {@link DynamicExampleEntity}

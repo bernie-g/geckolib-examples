@@ -6,12 +6,12 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.resources.Identifier;
-import software.bernie.geckolib.model.DefaultedEntityGeoModel;
-import software.bernie.geckolib.renderer.GeoEntityRenderer;
-import software.bernie.geckolib.renderer.base.GeoRenderState;
-import software.bernie.geckolib.renderer.base.GeoRenderer;
-import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
-import software.bernie.geckolib.renderer.layer.builtin.TextureLayerGeoLayer;
+import com.geckolib.model.DefaultedEntityGeoModel;
+import com.geckolib.renderer.GeoEntityRenderer;
+import com.geckolib.renderer.base.GeoRenderState;
+import com.geckolib.renderer.base.GeoRenderer;
+import com.geckolib.renderer.layer.GeoRenderLayer;
+import com.geckolib.renderer.layer.builtin.TextureLayerGeoLayer;
 
 /**
  * Example {@link GeoRenderer} implementation of an entity that uses a {@link GeoRenderLayer render layer}

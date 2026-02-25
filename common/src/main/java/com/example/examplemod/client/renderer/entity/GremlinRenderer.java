@@ -6,12 +6,12 @@ import com.example.examplemod.entity.DynamicExampleEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.Identifier;
-import software.bernie.geckolib.renderer.GeoEntityRenderer;
-import software.bernie.geckolib.renderer.base.GeoRenderState;
-import software.bernie.geckolib.renderer.base.RenderPassInfo;
-import software.bernie.geckolib.renderer.layer.builtin.CustomBoneTextureGeoLayer;
-import software.bernie.geckolib.renderer.layer.builtin.ItemArmorGeoLayer;
-import software.bernie.geckolib.renderer.layer.builtin.ItemInHandGeoLayer;
+import com.geckolib.renderer.GeoEntityRenderer;
+import com.geckolib.renderer.base.GeoRenderState;
+import com.geckolib.renderer.base.RenderPassInfo;
+import com.geckolib.renderer.layer.builtin.CustomBoneTextureGeoLayer;
+import com.geckolib.renderer.layer.builtin.ItemArmorGeoLayer;
+import com.geckolib.renderer.layer.builtin.ItemInHandGeoLayer;
 
 import java.util.List;
 

@@ -25,19 +25,6 @@ repositories {
         }
         filter { includeGroupAndSubgroups('org.spongepowered') }
     }
-    exclusiveContent {
-        forRepositories(
-                maven {
-                    name = 'ParchmentMC'
-                    url = 'https://maven.parchmentmc.org/'
-                },
-                maven {
-                    name = "NeoForge"
-                    url = 'https://maven.neoforged.net/releases'
-                }
-        )
-        filter { includeGroup('org.parchmentmc.data') }
-    }
     maven {
         name = 'GeckoLib'
         url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
@@ -46,13 +33,17 @@ repositories {
         name = 'BlameJared'
         url = 'https://maven.blamejared.com'
     }
+    flatDir {
+        dir("libs")
+    }
 }
 
 ['apiElements', 'runtimeElements', 'sourcesElements', 'javadocElements'].each { variant ->
     configurations."$variant".outgoing {
-        capability("software.bernie.geckolib:${base.archivesName.get()}:$version")
-        capability("software.bernie.geckolib:$mod_id-${project.name}-${minecraft_version}:$version")
-        capability("software.bernie.geckolib:$mod_id:$version")
+        capability("com.geckolib:${base.archivesName.get()}:$version")
+        capability("com.geckolib:${base.archivesName.get()}:$version")
+        capability("com.geckolib:$mod_id-${project.name}-${minecraft_version}:$version")
+        capability("com.geckolib:$mod_id:$version")
     }
     publishing.publications.configureEach {
         suppressPomMetadataWarningsFor(variant)
@@ -116,7 +107,7 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             from components.java
-            groupId "software.bernie.geckolib"
+            groupId "com.geckolib.example"
             artifactId base.archivesName.get()
 
             pom.withXml {

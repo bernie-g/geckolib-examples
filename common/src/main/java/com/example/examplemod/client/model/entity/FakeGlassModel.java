@@ -4,9 +4,9 @@ import com.example.examplemod.ExampleModCommon;
 import com.example.examplemod.client.renderer.entity.FakeGlassRenderer;
 import com.example.examplemod.entity.FakeGlassEntity;
 import net.minecraft.resources.Identifier;
-import software.bernie.geckolib.model.DefaultedEntityGeoModel;
-import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.renderer.base.GeoRenderState;
+import com.geckolib.model.DefaultedEntityGeoModel;
+import com.geckolib.model.GeoModel;
+import com.geckolib.renderer.base.GeoRenderState;
 
 /**
  * Example {@link GeoModel} for the {@link FakeGlassEntity}

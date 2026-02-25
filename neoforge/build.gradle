@@ -6,14 +6,11 @@ plugins {
 neoForge {
     version = neoforge_version
     // Automatically enable neoforge AccessTransformers if the file exists
-    def at = project(':common').file('src/main/resources/META-INF/accesstransformer-nf.cfg')
-    if (at.exists()) {
+    def at = project(':common').file('src/main/resources/META-INF/accesstransformer.cfg')
+
+    if (at.exists())
         accessTransformers = [at.absolutePath]
-    }
-    parchment {
-        minecraftVersion = parchment_minecraft
-        mappingsVersion = parchment_version
-    }
+
     runs {
         configureEach {
             systemProperty('neoforge.enabledGameTestNamespaces', mod_id)
@@ -34,7 +31,7 @@ neoForge {
 }
 
 dependencies {
-    implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
+    implementation "com.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }

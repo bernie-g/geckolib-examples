@@ -14,7 +14,7 @@ configurations {
 dependencies {
     compileOnly(project(':common')) {
         capabilities {
-            requireCapability "software.bernie.geckolib:$mod_id"
+            requireCapability "com.geckolib:$mod_id"
         }
     }
     commonJava project(path: ':common', configuration: 'commonJava')

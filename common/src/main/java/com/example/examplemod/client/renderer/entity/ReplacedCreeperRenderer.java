@@ -7,9 +7,9 @@ import net.minecraft.client.renderer.entity.state.CreeperRenderState;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.monster.Creeper;
 import org.jetbrains.annotations.ApiStatus;
-import software.bernie.geckolib.renderer.GeoReplacedEntityRenderer;
-import software.bernie.geckolib.renderer.base.GeoRenderState;
-import software.bernie.geckolib.renderer.base.RenderPassInfo;
+import com.geckolib.renderer.GeoReplacedEntityRenderer;
+import com.geckolib.renderer.base.GeoRenderState;
+import com.geckolib.renderer.base.RenderPassInfo;
 
 /**
  * Example replacement renderer for a {@link Creeper}.<br>

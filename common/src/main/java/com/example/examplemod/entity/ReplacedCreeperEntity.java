@@ -1,18 +1,18 @@
 package com.example.examplemod.entity;
 
 import net.minecraft.world.entity.EntityType;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.animatable.GeoReplacedEntity;
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animatable.manager.AnimatableManager;
-import software.bernie.geckolib.constant.DefaultAnimations;
-import software.bernie.geckolib.util.GeckoLibUtil;
+import com.geckolib.animatable.GeoEntity;
+import com.geckolib.animatable.GeoReplacedEntity;
+import com.geckolib.animatable.instance.AnimatableInstanceCache;
+import com.geckolib.animatable.manager.AnimatableManager;
+import com.geckolib.constant.DefaultAnimations;
+import com.geckolib.util.GeckoLibUtil;
 
 /**
  * Replacement {@link net.minecraft.world.entity.monster.Creeper Creeper} {@link GeoEntity} to showcase
  * replacing the model and animations of an existing entity
  *
- * @see software.bernie.geckolib.renderer.GeoReplacedEntityRenderer GeoReplacedEntityRenderer
+ * @see com.geckolib.renderer.GeoReplacedEntityRenderer GeoReplacedEntityRenderer
  * @see com.example.examplemod.client.renderer.entity.ReplacedCreeperRenderer ReplacedCreeperRenderer
  * @see com.example.examplemod.client.model.entity.ReplacedCreeperModel ReplacedCreeperModel
  */

@@ -6,20 +6,16 @@ plugins {
 neoForge {
     neoFormVersion = neo_form_version
     // Automatically enable AccessTransformers if the file exists
-    def at = file('src/main/resources/META-INF/accesstransformer-nf.cfg')
+    def at = file('src/main/resources/META-INF/accesstransformer.cfg')
     if (at.exists()) {
         accessTransformers = [at.absolutePath]
-    }
-    parchment {
-        minecraftVersion = parchment_minecraft
-        mappingsVersion = parchment_version
     }
 }
 
 dependencies {
     compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.7'
-    implementation "software.bernie.geckolib:geckolib-common-${minecraft_version}:${geckolib_version}"
-    // fabric and neoforge both bundle mixinextras, so it is safe to use it in common
+    implementation "com.geckolib:geckolib-common-${minecraft_version}:${geckolib_version}"
+
     compileOnly group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.4.1'
     annotationProcessor group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.4.1'
 }
