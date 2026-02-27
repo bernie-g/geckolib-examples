@@ -29,7 +29,7 @@ public class BatRenderer<R extends LivingEntityRenderState & GeoRenderState> ext
     @Override
     public void adjustModelBonesForRender(RenderPassInfo<R> renderPassInfo, BoneSnapshots snapshots) {
         // Add in a hardcoded head rotation animation
-        // Really you should be doing this as an animation in your animation.json (see the javadoc on #hardcodedHeadRotation
+        // Really you should be doing this as an animation in your animation.json (see the javadoc on #hardcodedHeadRotation)
         DefaultAnimations.hardcodedHeadRotation(renderPassInfo, snapshots, "head");
     }
 
