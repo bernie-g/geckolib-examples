@@ -1,6 +1,5 @@
 package com.geckolib.example.examplemod.entity;
 
-import com.geckolib.example.examplemod.ModConstants;
 import com.geckolib.animatable.GeoAnimatable;
 import com.geckolib.animatable.GeoEntity;
 import com.geckolib.animatable.instance.AnimatableInstanceCache;
@@ -10,6 +9,7 @@ import com.geckolib.animation.RawAnimation;
 import com.geckolib.animation.object.PlayState;
 import com.geckolib.animation.state.AnimationTest;
 import com.geckolib.constant.DefaultAnimations;
+import com.geckolib.example.examplemod.ModConstants;
 import com.geckolib.util.GeckoLibUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
