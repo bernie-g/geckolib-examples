@@ -64,7 +64,7 @@ plugins {
 }
 
 // Keep this lowercase, without spaces or symbols
-rootProject.name = "mymod"
+rootProject.name = "geckolibexamples"
 
 include("common")
 //include("fabric")
