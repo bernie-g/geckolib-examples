@@ -1,6 +1,6 @@
 package com.geckolib.example.examplemod;
 
-import com.geckolib.example.examplemod.entity.ModEntities;
+import com.geckolib.example.examplemod.registry.EntityRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 

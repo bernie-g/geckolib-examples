@@ -58,7 +58,7 @@ public class MutantZombieRenderer<R extends HumanoidRenderState & GeoRenderState
 		});
 
 		// Add some held item rendering
-		withRenderLayer(new ItemInHandGeoLayer<>(this, RIGHT_HAND, LEFT_HAND));
+		withRenderLayer(new ItemInHandGeoLayer<>(context, this, RIGHT_HAND, LEFT_HAND));
 
 		// Add a custom texture for the cape
 		withRenderLayer(new CustomBoneTextureGeoLayer<>(this, "bipedCape", CAPE_TEXTURE));

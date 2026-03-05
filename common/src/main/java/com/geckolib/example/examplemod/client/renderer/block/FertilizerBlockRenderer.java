@@ -4,6 +4,7 @@ import com.geckolib.example.examplemod.block.entity.FertilizerBlockEntity;
 import com.geckolib.example.examplemod.client.model.block.FertilizerModel;
 import com.geckolib.renderer.GeoBlockRenderer;
 import com.geckolib.renderer.base.GeoRenderState;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
@@ -16,8 +17,8 @@ import org.jetbrains.annotations.Nullable;
  * @see FertilizerBlockEntity
  */
 public class FertilizerBlockRenderer<R extends BlockEntityRenderState & GeoRenderState> extends GeoBlockRenderer<FertilizerBlockEntity, R> {
-	public FertilizerBlockRenderer() {
-		super(new FertilizerModel());
+	public FertilizerBlockRenderer(BlockEntityRendererProvider.Context context) {
+		super(context, new FertilizerModel());
 	}
 
     @Nullable
