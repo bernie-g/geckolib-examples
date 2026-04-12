@@ -20,13 +20,13 @@ public final class ModMain {
     public ModMain(FMLJavaModLoadingContext context) {
         final BusGroup busGroup = context.getModBusGroup();
 
-        SOUND_EVENT_REGISTRY.register(modBus);
-        BLOCK_REGISTRY.register(modBus);
-        BLOCK_ENTITY_REGISTRY.register(modBus);
-        ENTITY_REGISTRY.register(modBus);
-        CREATIVE_TAB_REGISTRY.register(modBus);
-        ITEM_REGISTRY.register(modBus);
-        modBus.<EntityAttributeCreationEvent>addListener(event -> EntityRegistry.registerEntityAttributes(event::put));
+        SOUND_EVENT_REGISTRY.register(busGroup);
+        BLOCK_REGISTRY.register(busGroup);
+        BLOCK_ENTITY_REGISTRY.register(busGroup);
+        ENTITY_REGISTRY.register(busGroup);
+        CREATIVE_TAB_REGISTRY.register(busGroup);
+        ITEM_REGISTRY.register(busGroup);
+        busGroup.<EntityAttributeCreationEvent>addListener(event -> EntityRegistry.registerEntityAttributes(event::put));
 
         ModCommon.init();
     }

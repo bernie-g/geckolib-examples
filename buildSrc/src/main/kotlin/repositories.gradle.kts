@@ -3,8 +3,7 @@
 repositories {
     // Standard maven repository - this one for GeckoLib
     mavenRepo("Geckolib",
-        "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/",
-        "com.geckolib")
+        "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/")
 
     // CurseMaven repository, for artifacts posted on CurseForge that
     // DO NOT have an official maven repository.

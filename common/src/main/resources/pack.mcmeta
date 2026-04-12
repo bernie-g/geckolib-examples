@@ -2,11 +2,11 @@
     "pack": {
         "description": "${mod_display_name} Resources",
         "max_format": [
-            100,
+            101,
             1
         ],
         "min_format": [
-            100,
+            101,
             1
         ]
     }
