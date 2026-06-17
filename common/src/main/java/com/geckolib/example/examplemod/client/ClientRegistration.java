@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
@@ -31,7 +32,7 @@ public final class ClientRegistration {
         entityRenderers.accept(EntityRegistry.GREMLIN.get(), GremlinRenderer::new);
         entityRenderers.accept(EntityRegistry.FAKE_GLASS.get(), FakeGlassRenderer::new);
 
-        entityRenderers.accept(EntityType.CREEPER, ReplacedCreeperRenderer::new);
+        entityRenderers.accept(EntityTypes.CREEPER, ReplacedCreeperRenderer::new);
 
         blockEntityRenderers.accept(BlockEntityRegistry.GECKO_HABITAT.get(), GeckoHabitatBlockRenderer::new);
         blockEntityRenderers.accept(BlockEntityRegistry.FERTILIZER_BLOCK.get(), FertilizerBlockRenderer::new);
