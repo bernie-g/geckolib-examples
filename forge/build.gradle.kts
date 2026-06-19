@@ -1,4 +1,5 @@
 import net.minecraftforge.jarjar.gradle.JarJar
+import net.darkhax.curseforgegradle.TaskPublishCurseForge
 
 plugins {
     id("project-setup")
@@ -7,7 +8,6 @@ plugins {
     alias(libs.plugins.curseforgegradle)
     alias(libs.plugins.forgegradle)
     alias(libs.plugins.forge.jarjar)
-    alias(libs.plugins.forge.at)
 }
 
 val modId           : String by project
@@ -18,7 +18,9 @@ jarJar.register {
 }
 
 minecraft {
-    mappings("parchment", "${libs.versions.parchment.minecraft.get()}-${libs.versions.parchment.asProvider().get()}")
+    rootProject.file("common/src/main/resources/META-INF/accesstransformer.cfg").takeIf { it.exists() }?.let {
+        accessTransformers.setFrom(it)
+    }
 
     runs {
         configureEach {
@@ -61,16 +63,12 @@ repositories {
 
 dependencies {
     implementation(minecraft.dependency(libs.forge))
-    compileOnly(project(":common")) {
-        accessTransformers.configure(this) {
-            config.set(rootProject.file("common/src/main/resources/META-INF/accesstransformer.cfg"))
-        }
-    }
+    compileOnly(project(":common"))
 
     annotationProcessor(libs.forge.eventbusvalidator)
 
     // Mod Dependencies below
-    //implementation(libs.geckolib.forge)
+    implementation(libs.geckolib.forge)
 }
 
 tasks.named<Jar>("jar").configure {

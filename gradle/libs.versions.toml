@@ -3,7 +3,7 @@
     mod                             = "1.0.0"
 
 # Dependencies
-    geckolib                       = "5.5.1"
+    geckolib                       = "5.5.2"
 
 # Common
     minecraft-range                 = "[26.2,)"
@@ -18,10 +18,10 @@
     fabric-api-range                = "0.152.1+26.2"
 
 # Forge
-    forge                           = "64.0.0"
-    forge-mc                        = "26.1.2-64.0.0"
-    forge-fml-range                 = "[64.0.0,)"
-    forge-range                     = "[64.0.0,)"
+    forge                           = "65.0.0"
+    forge-mc                        = "26.2-65.0.0"
+    forge-fml-range                 = "[65,)"
+    forge-range                     = "[65.0.0,)"
     forge-eventbusvalidator         = "7.0.4"
 
 # Neoforge

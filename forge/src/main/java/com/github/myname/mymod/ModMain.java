@@ -1,7 +1,16 @@
 package com.github.myname.mymod;
 
+import com.geckolib.example.examplemod.ModCommon;
+import com.geckolib.example.examplemod.ModConstants;
+import com.geckolib.example.examplemod.registry.EntityRegistry;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.bus.BusGroup;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -26,7 +35,8 @@ public final class ModMain {
         ENTITY_REGISTRY.register(busGroup);
         CREATIVE_TAB_REGISTRY.register(busGroup);
         ITEM_REGISTRY.register(busGroup);
-        busGroup.<EntityAttributeCreationEvent>addListener(event -> EntityRegistry.registerEntityAttributes(event::put));
+        
+        EntityAttributeCreationEvent.BUS.addListener(event -> EntityRegistry.registerEntityAttributes(event::put));
 
         ModCommon.init();
     }
