@@ -1,4 +1,4 @@
-package com.github.myname.mymod;
+package com.geckolib.example.examplemod;
 
 import com.geckolib.example.examplemod.ModCommon;
 import com.geckolib.example.examplemod.ModConstants;

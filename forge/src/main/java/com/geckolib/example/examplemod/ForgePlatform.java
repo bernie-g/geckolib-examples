@@ -1,6 +1,5 @@
-package com.github.myname.mymod;
+package com.geckolib.example.examplemod;
 
-import com.geckolib.example.examplemod.ModConstants;
 import com.geckolib.example.examplemod.platform.PlatformHelper;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
