@@ -3,7 +3,7 @@
     mod                             = "1.0.0"
 
 # Dependencies
-    geckolib                       = "5.5.1"
+    geckolib                       = "5.5.2"
 
 # Common
     minecraft-range                 = "[26.1.2,)"
