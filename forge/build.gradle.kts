@@ -10,8 +10,8 @@ plugins {
     alias(libs.plugins.forge.jarjar)
 }
 
-val modId           : String by project
-val modDisplayName  : String by project
+val modId           = project.property("modId") as String
+val modDisplayName  = project.property("modDisplayName") as String
 
 jarJar.register {
     archiveClassifier.set("")
@@ -84,7 +84,7 @@ tasks.named<DefaultTask>("assemble").configure {
 modrinth {
     token = System.getenv("MODRINTH_TOKEN") ?: "Invalid/No API Token Found"
     uploadFile.set(tasks.named<JarJar>("jarJar"))
-    projectId.set(properties["modrinthProjectId"] as String)
+    projectId.set(project.property("modrinthProjectId") as String)
     versionName = "Forge ${libs.versions.minecraft.asProvider().get()}"
     versionType = "release"
     loaders.set(listOf("forge"))
@@ -105,7 +105,7 @@ tasks.register<TaskPublishCurseForge>("publishToCurseForge") {
     group = "publishing"
     apiToken = System.getenv("CURSEFORGE_TOKEN") ?: "Invalid/No API Token Found"
 
-    val mainFile = upload(properties["curseforgeProjectId"], tasks.named<JarJar>("jarJar"))
+    val mainFile = upload(project.property("curseforgeProjectId") as String, tasks.named<JarJar>("jarJar"))
     mainFile.displayName = "$modDisplayName Forge ${libs.versions.minecraft.asProvider().get()} ${project.version}"
     mainFile.releaseType = "release"
     mainFile.addModLoader("Forge")

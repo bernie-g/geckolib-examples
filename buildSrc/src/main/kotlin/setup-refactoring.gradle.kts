@@ -2,7 +2,7 @@ import org.gradle.internal.file.FileException
 import java.nio.file.DirectoryStream
 import java.nio.file.Files
 
-val modId: String by project
+val modId= project.property("modId") as String
 
 /**
  * Create a task for refactoring the project when initially created, automatically handling
@@ -22,7 +22,7 @@ tasks.register("refactorOnInitialSetup", Action<Task> {
         return@Action
     }
 
-    if (project.properties["group"] == "com.github.myname") {
+    if (project.project.property("group") as String == "com.github.myname") {
         logger.lifecycle("Skipping setup refactor, group hasn't been set in gradle.properties")
 
         return@Action
@@ -86,7 +86,7 @@ tasks.register("refactorOnInitialSetup", Action<Task> {
         // Remove newly created directories
         logger.error("Failed to perform setup refactor, cleaning up")
 
-        val group = project.properties["group"] as String
+        val group = project.project.property("group") as String
         val newPackage = group.replace(".", "/")
 
         for (module in arrayOf("common", "fabric", "forge", "neoforge")) {
@@ -122,7 +122,7 @@ tasks.register("refactorOnInitialSetup", Action<Task> {
  * Refactor a given module's contents using the new modId
  */
 private fun refactorModule(module: String): Boolean {
-    val group = project.properties["group"] as String
+    val group = project.project.property("group") as String
     val newPackage = group.replace(".", "/")
     val project = findProject(":$module")
 

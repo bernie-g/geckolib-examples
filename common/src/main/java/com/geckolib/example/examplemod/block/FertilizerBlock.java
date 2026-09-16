@@ -2,7 +2,6 @@ package com.geckolib.example.examplemod.block;
 
 import com.geckolib.example.examplemod.block.entity.FertilizerBlockEntity;
 import com.geckolib.example.examplemod.registry.BlockEntityRegistry;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
@@ -24,11 +23,6 @@ import org.jetbrains.annotations.Nullable;
 public class FertilizerBlock extends DirectionalBlock implements EntityBlock {
 	public FertilizerBlock(Properties properties) {
 		super(properties);
-	}
-
-	@Override
-	protected MapCodec<? extends DirectionalBlock> codec() {
-		return null;
 	}
 
 	@Nullable

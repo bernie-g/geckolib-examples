@@ -117,7 +117,7 @@ public class DynamicExampleEntity extends PathfinderMob implements GeoEntity {
 
 	// Create the animation handler for attacking with a dual-wielded weapon
 	private <E extends GeoAnimatable> PlayState attackDualWield(AnimationTest<E> state) {
-		if (!this.swinging || !isWieldingTwoHandedWeapon())
+		if (!isSwinging() || !isWieldingTwoHandedWeapon())
 			return PlayState.STOP;
 
 		for (InteractionHand hand : new InteractionHand[] {InteractionHand.MAIN_HAND, InteractionHand.OFF_HAND}) {

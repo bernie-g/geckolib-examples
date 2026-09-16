@@ -13,6 +13,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MoveSimulationType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -84,8 +85,8 @@ public class BikeEntity extends Animal implements GeoEntity {
 	}
 
 	@Override
-	public boolean canSimulateMovement() {
-		return true;
+	public MoveSimulationType getMoveSimulationType() {
+		return MoveSimulationType.SERVER_AND_CLIENT;
 	}
 
 	// Add our generic idle animation controller

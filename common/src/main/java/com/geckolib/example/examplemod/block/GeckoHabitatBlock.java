@@ -4,7 +4,6 @@ import com.geckolib.example.examplemod.block.entity.GeckoHabitatBlockEntity;
 import com.geckolib.example.examplemod.client.model.block.GeckoHabitatModel;
 import com.geckolib.example.examplemod.client.renderer.block.GeckoHabitatBlockRenderer;
 import com.geckolib.example.examplemod.registry.BlockEntityRegistry;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -34,11 +33,6 @@ public class GeckoHabitatBlock extends BaseEntityBlock implements EntityBlock {
 
 	public GeckoHabitatBlock(Properties properties) {
 		super(properties);
-	}
-
-	@Override
-	protected MapCodec<? extends BaseEntityBlock> codec() {
-		return null;
 	}
 
 	@Override
